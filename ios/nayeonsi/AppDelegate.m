@@ -7,6 +7,7 @@
 #import "RCCManager.h"
 
 #import <React/RCTRootView.h>
+#import "ReactNativeConfig.h"
 
 @implementation AppDelegate
 
@@ -14,8 +15,11 @@
 {
   NSURL *jsCodeLocation;
 
+  // then read individual keys like:
+  NSString *runEntry = [ReactNativeConfig envFor:@"RUN_ENTRY"];
+  
   #ifdef DEBUG
-    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:runEntry fallbackResource:nil];
   #else
     jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
   #endif
