@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TouchableNativeFeedback } from 'react-native';
 import Button from './Button';
-import { COLOR, DISABLED_COLOR } from 'atoms/styles';
+import { 
+  COLOR,
+  DISABLED_COLOR,
+} from 'constants/color';
 
 export default function FilledButton(props) {
   return (
@@ -12,6 +15,7 @@ export default function FilledButton(props) {
         color={props.color} 
         disabledColor={props.disabledColor} 
         enabled={props.enabled}
+        style={props.style}
       >
         {props.children}
       </Button>

@@ -6,7 +6,9 @@ import Button from './Button';
 export default function Switch(props) {
   return (
     <TouchableNativeFeedback onPress={props.onPress}>
-      <Button enabled={props.enabled} />
+      <Button 
+        enabled={props.enabled} 
+      />
     </TouchableNativeFeedback>
   );
 }

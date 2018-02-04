@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
-import styles, { BACKGROUND_COLOR } from 'atoms/styles';
+import styles from 'atoms/styles';
+import { BACKGROUND_COLOR } from 'constants/color';
 
 export default class Screen extends Component {
   render = () => {
@@ -10,7 +11,7 @@ export default class Screen extends Component {
     };
 
     return (
-      <View style={[styles.screen, screenStyle]}>
+      <View style={[styles.screen, screenStyle, this.props.style]}>
         {this.props.children}
       </View>
     );

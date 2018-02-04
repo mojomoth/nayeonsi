@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import PropTypes from 'prop-types';
-import styles, { FONT_WHITE_COLOR } from 'atoms/styles';
+import styles from 'atoms/styles';
+import { PixelRatio } from 'constants/size';
+import { FONT_WHITE_COLOR } from 'constants/color';
 
 export default class FilledButtonLabel extends Component {
   render = () => {
@@ -10,13 +12,17 @@ export default class FilledButtonLabel extends Component {
       fontSize: this.props.fontSize,
     };
 
-    return (<Text style={[styles.filledButtonLabel, labelStyle]}>{this.props.children}</Text>);
+    return (
+      <Text style={[styles.filledButtonLabel, labelStyle, this.props.style]}>
+        {this.props.children}
+      </Text>
+    );
   };
 }
 
 FilledButtonLabel.defaultProps = {
   color: FONT_WHITE_COLOR,
-  fontSize: 16.8,
+  fontSize: 16.8 * PixelRatio,
 };
 
 FilledButtonLabel.propTypes = {

@@ -1,47 +1,55 @@
-import { StyleSheet, PixelRatio } from 'react-native';
-
-export const FONT = 'Spoqa Han Sans Regular';
-export const FACEBOOK_COLOR = 'rgb(58, 88, 158)';
-export const COLOR = 'rgb(241, 34, 8)';
-export const DISABLED_COLOR = 'rgb(193, 193, 193)';
-export const FONT_BLACK_COLOR = 'rgb(50, 50, 50)';
-export const FONT_WHITE_COLOR = '#FFF';
-export const FONT_GRAY_COLOR = 'rgb(153, 153, 153)';
-export const FONT_TEXT_COLOR = 'rgb(102, 102, 102)';
-export const BACKGROUND_COLOR = '#FFF';
-export const BACKGROUND_GRAY_COLOR = 'rgb(240, 240, 240)';
-export const BACKGROUND_LIGHTGRAY_COLOR = 'rgb(248, 248, 248)';
+import { StyleSheet } from 'react-native';
+import { PixelRatio } from 'constants/size';
+import { DEFAULT_FONT as FONT } from 'constants/font';
+import { 
+  FACEBOOK_COLOR, 
+  COLOR,
+  DISABLED_COLOR,
+  FONT_BLACK_COLOR,
+  FONT_WHITE_COLOR,
+  FONT_GRAY_COLOR,
+  FONT_TEXT_COLOR,
+  BACKGROUND_COLOR,
+  BACKGROUND_GRAY_COLOR,
+  BACKGROUND_LIGHTGRAY_COLOR,
+  LINE_COLOR,
+  BORDER_COLOR,
+  INPUT_TEXT_COLOR, 
+} from 'constants/color';
 
 const styles = StyleSheet.create({
   label: {
     fontFamily: FONT,
     color: FONT_TEXT_COLOR,
-    fontSize: PixelRatio.getFontScale() * 16.7,
+    fontSize: PixelRatio * 16.7,
+    lineHeight: PixelRatio * 22,
   },
   subLabel: {
     fontFamily: FONT,
     color: FONT_GRAY_COLOR,
-    fontSize: PixelRatio.getFontScale() * 13.3,
+    fontSize: PixelRatio * 13.3,
   },
   titleLabel: {
     fontFamily: FONT,
     color: COLOR,
-    fontSize: PixelRatio.getFontScale() * 21.3,
+    fontSize: PixelRatio * 21.3,
+    textAlign: 'center',
   },
   subTitleLabel: {
     fontFamily: FONT,
     color: FONT_TEXT_COLOR,
-    fontSize: PixelRatio.getFontScale() * 15.3,
+    fontSize: PixelRatio * 15.3,
+    textAlign: 'center',
   },
   headLabel: {
     fontFamily: FONT,
     color: FONT_BLACK_COLOR,
-    fontSize: PixelRatio.getFontScale() * 22.8,
+    fontSize: PixelRatio * 22.8,
   },
   alarmLabel: {
     fontFamily: FONT,
     color: COLOR,
-    fontSize: PixelRatio.getFontScale() * 15.6,
+    fontSize: PixelRatio * 15.6,
   },
   filledButtonLabel: {
     fontFamily: FONT,
@@ -50,14 +58,20 @@ const styles = StyleSheet.create({
     fontFamily: FONT,
   },
   filledButton: {
+    paddingLeft: 10 * PixelRatio,
+    paddingRight: 10 * PixelRatio,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   outlineButton: {
+    paddingLeft: 10 * PixelRatio,
+    paddingRight: 10 * PixelRatio,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
     backgroundColor: BACKGROUND_COLOR,
-    borderWidth: PixelRatio.getFontScale() * 1,
+    borderWidth: PixelRatio * 1,
   },
   filledRoundButton: {
     justifyContent: 'space-around',
@@ -69,24 +83,57 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     backgroundColor: BACKGROUND_COLOR,
-    borderWidth: PixelRatio.getFontScale() * 1.3,
+    borderWidth: PixelRatio * 1.3,
   },
   panel: {
-    flexDirection: 'row',
+    flexDirection: 'column',
+    alignItems: 'center',
     backgroundColor: BACKGROUND_COLOR,
-    borderRadius: PixelRatio.getFontScale() * 6.7,
+    borderRadius: PixelRatio * 6.7,
+    overflow: 'hidden',
   },
   articlePanel: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: BACKGROUND_COLOR,
-    borderColor: 'rgb(225, 225,225)',
-    borderTopWidth: PixelRatio.getFontScale() * 0.7,
-    borderBottomWidth: PixelRatio.getFontScale() * 0.7,
+    borderColor: BORDER_COLOR,
+    borderTopWidth: PixelRatio * 0.7,
+    borderBottomWidth: PixelRatio * 0.7,
   },
   screen: {
     flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  inputWrapper: {
     flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: PixelRatio * 0.7,
+  },
+  textInput: {
+    fontFamily: FONT,
+    color: INPUT_TEXT_COLOR,
+    fontSize: PixelRatio * 16.7,
+  },
+  selectOption: {
+    height: PixelRatio * 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: BORDER_COLOR,
+    borderBottomWidth: PixelRatio * 0.7,
+  },
+  listOption: {
+    height: PixelRatio * 60,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: BORDER_COLOR,
+    borderBottomWidth: PixelRatio * 0.7,
+    backgroundColor: BACKGROUND_COLOR,
+  },
+  selectOptionText: {
+    fontFamily: FONT,
+    fontSize: PixelRatio * 16,
   },
 });
 

@@ -11,6 +11,10 @@ export default class Button extends Component {
       backgroundColor: this.props.enabled ? this.props.color : this.props.disabledColor,
     };
 
-    return (<View style={[styles.filledButton, buttonStyle]}>{this.props.children}</View>);
+    return (
+      <View style={[styles.filledButton, buttonStyle, this.props.style]}>
+        {this.props.children}
+      </View>
+    );
   };
 }

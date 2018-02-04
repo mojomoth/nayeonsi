@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { PixelRatio } from 'constants/size';
 import PropTypes from 'prop-types';
 import styles from 'atoms/styles';
 
@@ -11,7 +12,7 @@ export default class Panel extends Component {
     };
 
     return (
-      <View style={[styles.panel, panelStyle]}>
+      <View style={[styles.panel, panelStyle, this.props.style]}>
         {this.props.children}
       </View>
     );
@@ -19,8 +20,8 @@ export default class Panel extends Component {
 }
 
 Panel.defaultProps = {
-  width: 374,
-  height: 221,
+  width: 374 * PixelRatio,
+  height: 221 * PixelRatio,
 };
 
 Panel.propTypes = {

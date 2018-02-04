@@ -6,7 +6,9 @@ import Button from './Button';
 export default function Switch(props) {
   return (
     <TouchableHighlight onPress={props.onPress}>
-      <Button enabled={props.enabled} />
+      <Button 
+        enabled={props.enabled} 
+      />
     </TouchableHighlight>
   );
 }

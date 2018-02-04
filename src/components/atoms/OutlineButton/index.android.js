@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TouchableNativeFeedback } from 'react-native';
 import Button from './Button';
-import { COLOR, DISABLED_COLOR } from 'atoms/styles';
+import { 
+  COLOR,
+  DISABLED_COLOR,
+} from 'constants/color';
 
 export default function OutlineButton(props) {
   return (
@@ -13,6 +16,7 @@ export default function OutlineButton(props) {
         color={props.color}
         disabledColor={props.disabledColor} 
         enabled={props.enabled}
+        style={props.style}
       >
         {props.children}
       </Button>
@@ -21,7 +25,7 @@ export default function OutlineButton(props) {
 }
 
 Button.defaultProps = {
-  width: 320.7,
+  width: null,
   height: 45.3,
   color: COLOR,
   disabledColor: DISABLED_COLOR,

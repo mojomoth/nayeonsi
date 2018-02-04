@@ -10,7 +10,7 @@ export default class ArticlePanel extends Component {
     };
 
     return (
-      <View style={[styles.articlePanel, panelStyle]}>
+      <View style={[styles.articlePanel, panelStyle, this.props.style]}>
         {this.props.children}
       </View>
     );
