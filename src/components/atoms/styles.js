@@ -16,6 +16,9 @@ import {
   BORDER_COLOR,
   INPUT_TEXT_COLOR, 
 } from 'constants/color';
+import Dimensions from 'Dimensions';
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   label: {
@@ -104,6 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
+    width,
   },
   inputWrapper: {
     flexDirection: 'row',

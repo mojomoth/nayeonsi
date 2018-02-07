@@ -22,16 +22,24 @@ import InputWrapper from 'atoms/InputWrapper';
 import TextInput from 'atoms/TextInput';
 import MailIcon from 'icons/Mail';
 
-import BasicPopup from 'systems/BasicPopup';
-import SelectPopup from 'systems/SelectPopup';
-import TypeSearchPopup from 'systems/TypeSearchPopup';
-import AttractionSelectPopup from 'systems/AttractionSelectPopup';
-import MobileCheckPopup from 'systems/MobileCheckPopup';
-import MobileCertCheckPopup from 'systems/MobileCertCheckPopup';
-import PasswordChangePopup from 'systems/PasswordChangePopup';
-import PasswordSendPopup from 'systems/PasswordSendPopup';
-import PointUsePopup from 'systems/PointUsePopup';
-import AppealPopup from 'systems/AppealPopup';
+import BasicPopup from 'popups/BasicPopup';
+import SelectPopup from 'popups/SelectPopup';
+import TypeSearchPopup from 'popups/TypeSearchPopup';
+import AttractionSelectPopup from 'popups/AttractionSelectPopup';
+import MobileCheckPopup from 'popups/MobileCheckPopup';
+import MobileCertCheckPopup from 'popups/MobileCertCheckPopup';
+import PasswordChangePopup from 'popups/PasswordChangePopup';
+import PasswordSendPopup from 'popups/PasswordSendPopup';
+import PointUsePopup from 'popups/PointUsePopup';
+import AppealPopup from 'popups/AppealPopup';
+
+import Login from 'screens/Login';
+import Landing from 'screens/Landing';
+import EmailJoin from 'screens/EmailJoin';
+import MakeProfile from 'screens/MakeProfile';
+import MakeAppeal from 'screens/MakeAppeal';
+import MakeAlbum from 'screens/MakeAlbum';
+import JoinResult from 'screens/JoinResult';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Wrapper')} />);
 
@@ -40,11 +48,29 @@ storiesOf('Logo', module)
   .add('Image', () => (
     <Logo />
   ));
-
+  
 storiesOf('Sceen', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
-  .add('View', () => (
-    <Panel />
+  .add('JoinResult', () => (
+    <JoinResult />
+  ))
+  .add('MakeAlbum', () => (
+    <MakeAlbum />
+  ))
+  .add('MakeAppeal', () => (
+    <MakeAppeal />
+  ))
+  .add('MakeProfile', () => (
+    <MakeProfile />
+  ))
+  .add('EmailJoin', () => (
+    <EmailJoin />
+  ))
+  .add('Login', () => (
+    <Login />
+  ))
+  .add('Landing', () => (
+    <Landing />
   ));
 
 storiesOf('Popup', module)
