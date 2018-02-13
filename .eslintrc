@@ -8,6 +8,7 @@
       "react/prefer-stateless-function": "off",
       "import/no-extraneous-dependencies": "off",
       "import/extensions": "off",
-      "no-trailing-spaces": "off"
+      "no-trailing-spaces": "off",
+      "no-restricted-syntax": [2, "FunctionExpression", "WithStatement"]
   }
 }

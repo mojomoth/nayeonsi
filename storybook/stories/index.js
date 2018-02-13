@@ -21,6 +21,8 @@ import Panel from 'atoms/Panel';
 import InputWrapper from 'atoms/InputWrapper';
 import TextInput from 'atoms/TextInput';
 import MailIcon from 'icons/Mail';
+import Navigation from 'systems/MainNavigation';
+import MainContainer from 'systems/MainContainer';
 
 import BasicPopup from 'popups/BasicPopup';
 import SelectPopup from 'popups/SelectPopup';
@@ -40,17 +42,35 @@ import MakeProfile from 'screens/MakeProfile';
 import MakeAppeal from 'screens/MakeAppeal';
 import MakeAlbum from 'screens/MakeAlbum';
 import JoinResult from 'screens/JoinResult';
+import Main from 'screens/Main';
+import History from 'screens/History';
+import Appeal from 'screens/Appeal';
+import Message from 'screens/Message';
+import Chat from 'screens/Chat';
+import Profile from 'screens/Profile';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Wrapper')} />);
 
-storiesOf('Logo', module)
-  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
-  .add('Image', () => (
-    <Logo />
-  ));
-  
 storiesOf('Sceen', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .add('Profile', () => (
+    <Profile />
+  ))
+  .add('Chat', () => (
+    <Chat />
+  ))
+  .add('Message', () => (
+    <Message />
+  ))
+  .add('Appeal', () => (
+    <Appeal />
+  ))
+  .add('History', () => (
+    <History />
+  ))
+  .add('Main', () => (
+    <Main />
+  ))
   .add('JoinResult', () => (
     <JoinResult />
   ))
@@ -105,6 +125,21 @@ storiesOf('Popup', module)
   .add('- appeal popup', () => (
     <AppealPopup />
   ));
+  
+storiesOf('Logo', module)
+  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .add('Image', () => (
+    <Logo />
+  ));
+
+storiesOf('Navigation', module)
+  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .add('MainNavigation', () => (
+    <Navigation />
+  ))
+  .add('MainContainer', () => (
+    <MainContainer />
+  )); 
   
 storiesOf('Button', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)

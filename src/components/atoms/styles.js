@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   alarmLabel: {
     fontFamily: FONT,
-    color: COLOR,
+    color: FONT_WHITE_COLOR,
     fontSize: PixelRatio * 15.6,
   },
   filledButtonLabel: {

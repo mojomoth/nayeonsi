@@ -3,6 +3,7 @@ import { PixelRatio } from 'constants/size';
 import { 
   CONTENT_HEADER_BACKGROUND_COLOR,
   CONTENT_HEADER_BORDER_COLOR,
+  JOIN_HEADER_FONT_COLOR,
 } from 'constants/color';
 import Dimensions from 'Dimensions';
 
@@ -29,6 +30,8 @@ const styles = StyleSheet.create({
   },
   contentHeaderLabel: {
     textAlign: 'center',
+    fontSize: 15.6 * PixelRatio,
+    color: JOIN_HEADER_FONT_COLOR,
   },
   smallBoxes1: {
     marginLeft: 13 * PixelRatio,
