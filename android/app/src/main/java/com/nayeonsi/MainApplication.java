@@ -3,6 +3,9 @@ package com.nayeonsi;
 import android.support.annotation.Nullable;
 import com.facebook.react.ReactPackage;
 import com.reactnativenavigation.NavigationApplication;
+import com.imagepicker.ImagePickerPackage;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends NavigationApplication {
@@ -11,13 +14,13 @@ public class MainApplication extends NavigationApplication {
       return BuildConfig.DEBUG;
   }
 
-  @Nullable
   @Override
   public List<ReactPackage> createAdditionalReactPackages() {
-      return null;
+    return Arrays.<ReactPackage>asList(
+      new ImagePickerPackage()
+    );
   }
 
-  @Nullable
   @Override
   public String getJSMainModuleName() {
       return BuildConfig.RUN_ENTRY;

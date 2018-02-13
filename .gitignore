@@ -17,6 +17,7 @@ yarn-error.log*
 android/build/
 android/app/build/
 ios/build/
+android/.gradle
 
 # native
 android/keystores
