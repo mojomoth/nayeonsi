@@ -153,12 +153,13 @@ const styles = StyleSheet.create({
     fontFamily: LIGHT_FONT,
     fontSize: 15.6 * PixelRatio,
     color: BLACK_COLOR,
-    // fontWeight: '300',
+    fontWeight: '100',
   },
   aboutValue: {
     fontFamily: LIGHT_FONT,
     fontSize: 15.6 * PixelRatio,
     color: COLOR,
+    fontWeight: '100',
   },
   appeal: {
     paddingHorizontal: 19.7 * PixelRatio,

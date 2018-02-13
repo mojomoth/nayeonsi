@@ -11,15 +11,15 @@ Navigation.startTabBasedApp({
     {
       label: 'One',
       screen: 'example.FirstTabScreen', // this is a registered name for a screen
-      icon: require('../res/one.png'),
-      selectedIcon: require('../res/one_selected.png'), // iOS only
+      icon: require('../assets/images/icTabProfile.png'),
+      selectedIcon: require('../assets/images/icTabProfilePre.png'), // iOS only
       title: 'Screen One',
     },
     {
       label: 'Two',
       screen: 'example.SecondTabScreen',
-      icon: require('../res/two.png'),
-      selectedIcon: require('../res/two_selected.png'), // iOS only
+      icon: require('../assets/images/icTabSetting.png'),
+      selectedIcon: require('../assets/images/icTabSettingPre.png'), // iOS only
       title: 'Screen Two',
     },
   ],
