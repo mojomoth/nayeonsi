@@ -8,7 +8,7 @@ import MainContainer from 'systems/MainContainer';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
-const image = require('assets/images/temp.jpg');
+const image = require('assets/images/temp.png');
 
 export default class Menus extends Component {
   render = () => (
