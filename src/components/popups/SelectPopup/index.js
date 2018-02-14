@@ -3,25 +3,47 @@ import BasicPopup from 'popups/BasicPopup';
 import Panel from 'atoms/Panel';
 import Header from './Header';
 import Content from './Content';
+import { PixelRatio } from 'constants/size';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
 export default class SelectPopup extends BasicPopup {
-  header = () => <Header text={this.props.title} />;
-  content = () => <Content data={this.props.data} />;
+  header = () => (
+    <Header 
+      text={this.props.title} 
+      isCloseButton={this.props.isCloseButton} 
+      onClose={this.props.onClose} 
+    />
+  );
 
-  render() {
+  content = () => {
+    const contentStyle = {
+      height: this.props.contentHeight * PixelRatio,
+    };
+
     return (
-      <Panel style={styles.panel}>
-        {this.header()}
-        {this.content()}
-      </Panel>
+      <Content 
+        style={contentStyle}
+        data={this.props.data} 
+        onSelected={this.props.onSelected}
+      />
     );
   }
+
+  render = () => (
+    <Panel style={styles.panel}>
+      {this.header()}
+      {this.content()}
+    </Panel>
+  );
 }
 
 SelectPopup.defaultProps = {
   title: '선택팝업제목',
+  isCloseButton: false,
+  onClose: () => {},
+  onSelected: () => {},
+  contentHeight: 239,
   data: [
     { key: 'Devin', selected: false },
     { key: 'Jackson', selected: true },
@@ -36,5 +58,9 @@ SelectPopup.defaultProps = {
 
 SelectPopup.propTypes = {
   title: PropTypes.string,
+  isCloseButton: PropTypes.bool,
+  onClose: PropTypes.func,
+  onSelected: PropTypes.func,
+  contentHeight: PropTypes.number,
 };
 

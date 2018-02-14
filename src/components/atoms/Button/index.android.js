@@ -1,14 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TouchableNativeFeedback } from 'react-native';
+import { TouchableNativeFeedback, View } from 'react-native';
+import { PixelRatio } from 'constants/size';
 
 export default function Button(props) {
   return (
     <TouchableNativeFeedback 
-      style={props.style} 
       onPress={props.onPress}
     >
-      {props.children}
+      <View style={[
+        { 
+          width: props.width * PixelRatio, 
+          height: props.height * PixelRatio,
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        props.style]}
+      >
+        {props.children}
+      </View>
     </TouchableNativeFeedback>
   );
 }

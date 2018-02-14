@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TouchableHighlight } from 'react-native';
+import { TouchableHighlight, View } from 'react-native';
+import { PixelRatio } from 'constants/size';
 
 export default function Button(props) {
   return (
@@ -8,7 +9,17 @@ export default function Button(props) {
       style={props.style} 
       onPress={props.onPress}
     >
-      {props.children}
+      <View style={[
+        props.style,
+        { 
+          width: props.width * PixelRatio, 
+          height: props.height * PixelRatio,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }]}
+      >
+        {props.children}
+      </View>
     </TouchableHighlight>
   );
 }

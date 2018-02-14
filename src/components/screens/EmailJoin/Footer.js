@@ -4,13 +4,11 @@ import FilledButtonLabel from 'atoms/FilledButtonLabel';
 import styles from './styles';
 
 export default class Content extends Component {
-  render() {
-    return (
-      <FilledButton style={styles.loginButton} onPress={this.props.onLogin}>
-        <FilledButtonLabel style={styles.loginButtonLabel}>
-          {this.props.buttonLabel}
-        </FilledButtonLabel>
-      </FilledButton>
-    );
-  }
+  render = () => (
+    <FilledButton style={styles.loginButton} onPress={this.props.onPress}>
+      <FilledButtonLabel style={styles.loginButtonLabel}>
+        {this.props.buttonLabel}
+      </FilledButtonLabel>
+    </FilledButton>
+  );
 }

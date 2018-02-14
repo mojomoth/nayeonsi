@@ -2,17 +2,12 @@ import { StyleSheet } from 'react-native';
 import { PixelRatio } from 'constants/size';
 import { DEFAULT_FONT as FONT } from 'constants/font';
 import { 
-  FACEBOOK_COLOR, 
   COLOR,
-  DISABLED_COLOR,
   FONT_BLACK_COLOR,
   FONT_WHITE_COLOR,
   FONT_GRAY_COLOR,
   FONT_TEXT_COLOR,
   BACKGROUND_COLOR,
-  BACKGROUND_GRAY_COLOR,
-  BACKGROUND_LIGHTGRAY_COLOR,
-  LINE_COLOR,
   BORDER_COLOR,
   INPUT_TEXT_COLOR, 
 } from 'constants/color';
@@ -108,6 +103,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     width,
+    paddingTop: 10 * PixelRatio,
   },
   inputWrapper: {
     flexDirection: 'row',
@@ -126,6 +122,10 @@ const styles = StyleSheet.create({
     borderColor: BORDER_COLOR,
     borderBottomWidth: PixelRatio * 0.7,
   },
+  selectButton: {
+    flex: 1,
+    width: '100%',
+  },
   listOption: {
     height: PixelRatio * 60,
     flexDirection: 'row',
@@ -138,6 +138,10 @@ const styles = StyleSheet.create({
   selectOptionText: {
     fontFamily: FONT,
     fontSize: PixelRatio * 16,
+  },
+  backPanel: {
+    flex: 1,
+    width,
   },
 });
 

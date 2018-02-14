@@ -8,6 +8,15 @@ export default class MakeAppeal extends MakeProfile {
   content = () => (
     <Content 
       style={styles.content} 
+      location={this.props.location} 
+      school={this.props.school} 
+      job={this.props.job} 
+      attraction={this.props.attraction} 
+      character={this.props.character} 
+      like={this.props.like} 
+      want={this.props.want} 
+      play={this.props.play} 
+      message={this.props.message} 
     />
   );
 }
@@ -18,6 +27,7 @@ MakeAppeal.defaultProps = {
   step: '2/3',
   isBackButton: true,
   onPress: () => {},
+  onBack: () => {},
 };
 
 MakeAppeal.propTypes = {
@@ -26,5 +36,6 @@ MakeAppeal.propTypes = {
   step: PropTypes.string,
   isBackButton: PropTypes.bool,
   onPress: PropTypes.func,
+  onBack: PropTypes.func,
 };
 

@@ -31,7 +31,7 @@ export default class LoginSelect extends Component {
       </FilledButton>
 
       <View style={styles.fogotPassword}>
-        <Button onForgot={this.props.onForgot}>
+        <Button onPress={this.props.onForgot} style={styles.fogotPasswordButton}>
           <Label style={styles.fogotPasswordLabel} text={this.props.fogotPassword} />
         </Button>
       </View>

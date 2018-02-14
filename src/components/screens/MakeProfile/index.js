@@ -11,6 +11,16 @@ export default class MakeProfile extends Component {
   content = () => (
     <Content 
       style={styles.content} 
+      nickname={this.props.nickname} 
+      year={this.props.year} 
+      sex={this.props.sex} 
+      tall={this.props.tall} 
+      shape={this.props.shape} 
+      blood={this.props.blood} 
+      religion={this.props.religion} 
+      smoke={this.props.smoke} 
+      drink={this.props.drink} 
+      phone={this.props.phone} 
     />
   );
 
@@ -21,6 +31,7 @@ export default class MakeProfile extends Component {
         isBackButton={this.props.isBackButton} 
         title={this.props.title}
         step={this.props.step}
+        onBack={this.props.onBack}
       />
       <ScrollView contentContainerStyle={styles.scroll}>
         {this.content()}
@@ -35,11 +46,12 @@ export default class MakeProfile extends Component {
 }
 
 MakeProfile.defaultProps = {
-  title: '사진으로 프로필 완성',
+  title: '자기소개를 해주세요',
   buttonLabel: '다음',
-  step: '3/3',
+  step: '1/3',
   isBackButton: true,
   onPress: () => {},
+  onBack: () => {},
 };
 
 MakeProfile.propTypes = {
@@ -48,5 +60,6 @@ MakeProfile.propTypes = {
   step: PropTypes.string,
   isBackButton: PropTypes.bool,
   onPress: PropTypes.func,
+  onBack: PropTypes.func,
 };
 

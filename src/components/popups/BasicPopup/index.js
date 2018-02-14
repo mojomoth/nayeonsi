@@ -16,15 +16,13 @@ export default class BasicPopup extends Component {
       buttonText={this.props.buttonText} 
     />);
 
-  render() {
-    return (
-      <Panel style={styles.panel}>
-        {this.header()}
-        {this.content()}
-        {this.footer()}
-      </Panel>
-    );
-  }
+  render = () => (
+    <Panel style={styles.panel}>
+      {this.header()}
+      {this.content()}
+      {this.footer()}
+    </Panel>
+  );
 }
 
 BasicPopup.defaultProps = {

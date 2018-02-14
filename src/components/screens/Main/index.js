@@ -10,7 +10,7 @@ import styles from './styles';
 
 export default class Main extends Component {
   render = () => (
-    <View>
+    <View style={styles.root}>
       <MainContainer 
         title={this.props.title}
         alarm={this.props.alarm}
@@ -19,6 +19,8 @@ export default class Main extends Component {
         onAlarm={this.props.onAlarm}
         onPoint={this.props.onPoint}
         isUnderline={false}
+        navigator={this.props.navigator} 
+        menu={1}
       >
         <View style={styles.cards}>
           <MainCard style={styles.card} />
@@ -32,8 +34,8 @@ export default class Main extends Component {
         </View>
       </MainContainer>
 
-      <Button>
-        <FloatingPlus style={styles.floatingPlus} />
+      <Button style={styles.floatingPlus}>
+        <FloatingPlus />
       </Button>
     </View>
   );
@@ -41,7 +43,7 @@ export default class Main extends Component {
 
 Main.defaultProps = {
   title: '오늘의 연애',
-  alarm: '알람ㅋㅋㅋㅋ',
+  alarm: '',
   point: 2155,
   alarmCount: 10,
   onAlarm: () => {},

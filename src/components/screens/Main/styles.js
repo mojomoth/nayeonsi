@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import { PixelRatio } from 'constants/size';
 
 const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
   cards: {
     flex: 1,
     flexDirection: 'row',
@@ -16,7 +19,7 @@ const styles = StyleSheet.create({
   floatingPlus: {
     position: 'absolute',
     right: 15 * PixelRatio,
-    bottom: 90 * PixelRatio,
+    bottom: 70 * PixelRatio,
   },
 });
 

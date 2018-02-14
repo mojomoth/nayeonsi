@@ -11,15 +11,18 @@ import styles from './styles';
 export default class Login extends Component {
   render = () => (
     <Screen style={styles.screen}>
-      <CloseButton onPress={this.props.onClose} />
+      { 
+        this.props.isEntered ? 
+          null : <CloseButton style={styles.closeButton} onPress={this.props.onClose} /> 
+      }
       <View style={styles.head}>
         <Logo style={styles.logo} />
       </View>
       <View style={styles.contents}>
         {
-          false ? 
+          this.props.isEntered ? 
             <LoginSelect 
-              onEmail={this.props.onEmail}
+              onJoin={this.props.onJoin}
               onFacebook={this.props.onFacebook}
               onLogin={this.props.onLogin}
               emailButton={this.props.emailButton}
@@ -41,7 +44,7 @@ export default class Login extends Component {
 
 Login.defaultProps = {
   onClose: () => {},
-  onEmail: () => {},
+  onJoin: () => {},
   onFacebook: () => {},
   onLogin: () => {},
   onRequest: () => {},
@@ -51,11 +54,12 @@ Login.defaultProps = {
   loginButton: '이메일로 로그인',
   fogotPassword: '비밀번호를 잊어버렸어요.',
   requestButton: '로그인',
+  isEntered: true,
 };
 
 Login.propTypes = {
   onClose: PropTypes.func,
-  onEmail: PropTypes.func,
+  onJoin: PropTypes.func,
   onFacebook: PropTypes.func,
   onLogin: PropTypes.func,
   onRequest: PropTypes.func,
@@ -65,5 +69,6 @@ Login.propTypes = {
   loginButton: PropTypes.string,
   fogotPassword: PropTypes.string,
   requestButton: PropTypes.string,
+  isEntered: PropTypes.bool,
 };
 

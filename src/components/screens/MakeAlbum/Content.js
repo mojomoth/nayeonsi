@@ -10,45 +10,53 @@ const BIG_FONT_SIZE = 15.6;
 const SMALL_FONT_SIZE = 13.2;
 
 export default class Content extends Component {
-  mainPicture = () => (
+  mainPicture = (isFocus, label, picture, onPress, onDelete) => (
     <PictureBox 
       style={styles.pictureBox} 
       width={BIG_SIZE} 
       height={BIG_SIZE} 
       fontSize={BIG_FONT_SIZE} 
       type={0}
+      label={label}
+      picture={picture}
+      isFocus={isFocus}
+      onPress={onPress}
+      onDelete={onDelete}
     />
   );
 
-  subPicture = () => (
+  subPicture = (isFocus, label, picture, onPress, onDelete) => (
     <PictureBox 
       style={styles.pictureBox} 
       width={SMALL_SIZE} 
       height={SMALL_SIZE} 
       fontSize={SMALL_FONT_SIZE} 
-      type={1}
+      type={isFocus ? 1 : 2}
+      label={label}
+      picture={picture}
+      isFocus={isFocus}
+      onPress={onPress}
+      onDelete={onDelete}
     />
   );
 
-  render() {
-    return (
-      <View style={styles.content}>
-        <ContentHeader contentHeader={this.props.contentHeader} />
-        <View style={styles.boxes}>
-          {this.mainPicture()}
+  render = () => (
+    <View style={styles.content}>
+      <ContentHeader contentHeader={this.props.contentHeader} />
+      <View style={styles.boxes}>
+        {this.mainPicture(true, '대표사진', this.props.picture1, this.props.onPress1, this.props.onDelete1)}
 
-          <View style={styles.smallBoxes1}>
-            {this.subPicture()}
-            {this.subPicture()}
-          </View>
+        <View style={styles.smallBoxes1}>
+          {this.subPicture(true, '필수', this.props.picture2, this.props.onPress2, this.props.onDelete2)}
+          {this.subPicture(true, '필수', this.props.picture3, this.props.onPress3, this.props.onDelete3)}
+        </View>
 
-          <View style={styles.smallBoxes2}>
-            {this.subPicture()}
-            {this.subPicture()}
-            {this.subPicture()}
-          </View>
+        <View style={styles.smallBoxes2}>
+          {this.subPicture(false, '', this.props.picture4, this.props.onPress4, this.props.onDelete4)}
+          {this.subPicture(false, '', this.props.picture5, this.props.onPress5, this.props.onDelete5)}
+          {this.subPicture(false, '', this.props.picture6, this.props.onPress6, this.props.onDelete6)}
         </View>
       </View>
-    );
-  }
+    </View>
+  );
 }

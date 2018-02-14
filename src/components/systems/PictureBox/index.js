@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 import { PixelRatio } from 'constants/size';
 
-export default class BigImageBox extends Component {
+export default class PictureBox extends Component {
   empty = () => {
     const emptyStyle = [
       styles.emptyBox,
@@ -20,7 +20,7 @@ export default class BigImageBox extends Component {
       this.props.isFocus ? styles.focusLabel : styles.grayLabel];
 
     return (
-      <Button onPress={this.props.onPress}>
+      <Button onPress={(this.props.onPress)} style={styles.emptyButton}>
         <View style={emptyStyle}>
           <View style={styles.inner}>
             <PlusIcon type={this.props.type} />
@@ -42,10 +42,10 @@ export default class BigImageBox extends Component {
     return (
       <View>
         <View style={pictureStyle}>
-          <Image style={styles.picture} source={this.props.source} />
+          <Image style={styles.picture} source={this.props.picture} />
         </View>
-        <Button onPress={this.props.onDelete}>
-          <DeleteIcon style={styles.deleteButton} />
+        <Button onPress={this.props.onDelete} style={styles.deleteButton}>
+          <DeleteIcon />
         </Button>
       </View>
     );
@@ -61,31 +61,35 @@ export default class BigImageBox extends Component {
     return (
       <View style={boxStyle}>
         {
-          this.props.source !== null ? this.picture() : this.empty()
+          this.props.picture !== null ? this.picture() : this.empty()
         }
       </View>
     );
   };
 }
 
-BigImageBox.defaultProps = {
+PictureBox.defaultProps = {
   label: '사진등록',
   isFocus: true,
   width: 245,
   height: 245,
   fontSize: 15.6,
-  source: null,
+  picture: null,
   onPress: () => {},
   onDelete: () => {},
 };
 
-BigImageBox.propTypes = {
+PictureBox.propTypes = {
   label: PropTypes.string,
   isFocus: PropTypes.bool,
   width: PropTypes.number,
   height: PropTypes.number,
   fontSize: PropTypes.number,
-  source: PropTypes.node,
+  picture: PropTypes.oneOfType([
+    PropTypes.shape({
+      uri: PropTypes.string,
+    }), 
+    PropTypes.number]),
   onPress: PropTypes.func,
   onDelete: PropTypes.func,
 };

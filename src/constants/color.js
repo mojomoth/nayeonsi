@@ -53,3 +53,4 @@ export const ALBUM_DOT_BACKGROUND_COLOR = 'transparent';
 export const ALBUM_ACTIVE_DOT_BORDER_COLOR = '#FFFFFF';
 export const ALBUM_ACTIVE_DOT_BACKGROUND_COLOR = '#FFFFFF';
 export const ABOUT_BORDER_COLOR = '#E1E1E1';
+export const TAB_BAR_BACKGROUND_COLOR = '#FFFFFF';

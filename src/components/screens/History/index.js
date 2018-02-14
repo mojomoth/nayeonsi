@@ -16,6 +16,8 @@ export default class History extends Component {
       onAlarm={this.props.onAlarm}
       onPoint={this.props.onPoint}
       isUnderline={true}
+      navigator={this.props.navigator} 
+      menu={2}
     >
       <View style={styles.cards}>
         <Header label={'나를 좋아하는 사람'} />

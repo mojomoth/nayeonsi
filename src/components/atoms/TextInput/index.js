@@ -9,6 +9,7 @@ export default class TextInput extends Component {
       style={styles.textInput} 
       {...this.props} 
       placeholderTextColor={FONT_GRAY_COLOR} 
+      underlineColorAndroid={'transparent'}
     />
   );
 }

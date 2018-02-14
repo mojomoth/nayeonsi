@@ -21,15 +21,13 @@ export default class PasswordSendPopup extends BasicPopup {
     />
   );
 
-  render() {
-    return (
-      <Panel style={styles.panel}>
-        {this.header()}
-        {this.content()}
-        {this.footer()}
-      </Panel>
-    );
-  }
+  render = () => (
+    <Panel style={styles.panel}>
+      {this.header()}
+      {this.content()}
+      {this.footer()}
+    </Panel>
+  );
 }
 
 PasswordSendPopup.defaultProps = {

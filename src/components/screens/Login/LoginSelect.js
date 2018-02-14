@@ -10,7 +10,7 @@ import styles from './styles';
 export default class LoginSelect extends Component {
   render = () => (
     <View style={styles.loginSelect}>
-      <OutlineButton style={styles.emailButton} onPress={this.props.onEmail}>
+      <OutlineButton style={styles.emailButton} onPress={this.props.onJoin}>
         <OutlineButtonLabel style={styles.emailButtonLabel}>
           {this.props.emailButton}
         </OutlineButtonLabel>

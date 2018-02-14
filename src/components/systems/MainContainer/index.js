@@ -3,6 +3,7 @@ import { View, ScrollView } from 'react-native';
 import Screen from 'atoms/Screen';
 import Header from 'systems/MainHeader';
 import Alarm from 'systems/AlarmPanel';
+import Navigation from 'systems/MainNavigation';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
@@ -18,7 +19,10 @@ export default class MainContainer extends Component {
         onAlarm={this.props.onAlarm}
         onPoint={this.props.onPoint}
       />
-      <Alarm text={this.props.alarm} />
+      { this.props.alarm !== null && this.props.alarm !== '' ?
+        <Alarm text={this.props.alarm} />
+        : null
+      }
       { this.props.isScroll ? 
         <ScrollView contentContainerStyle={styles.scroll}>
           {this.props.children}
@@ -28,6 +32,11 @@ export default class MainContainer extends Component {
           {this.props.children}
         </View>
       }
+
+      <Navigation 
+        navigator={this.props.navigator} 
+        menu={this.props.menu}
+      />
     </Screen>
   );
 }

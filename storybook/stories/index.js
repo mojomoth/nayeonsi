@@ -27,7 +27,7 @@ import MainContainer from 'systems/MainContainer';
 import BasicPopup from 'popups/BasicPopup';
 import SelectPopup from 'popups/SelectPopup';
 import TypeSearchPopup from 'popups/TypeSearchPopup';
-import AttractionSelectPopup from 'popups/AttractionSelectPopup';
+import ItemSelectPopup from 'popups/ItemSelectPopup';
 import MobileCheckPopup from 'popups/MobileCheckPopup';
 import MobileCertCheckPopup from 'popups/MobileCertCheckPopup';
 import PasswordChangePopup from 'popups/PasswordChangePopup';
@@ -104,8 +104,8 @@ storiesOf('Popup', module)
   .add('- type search popup', () => (
     <TypeSearchPopup />
   ))
-  .add('- attraction select popup', () => (
-    <AttractionSelectPopup />
+  .add('- item select popup', () => (
+    <ItemSelectPopup />
   ))
   .add('- mobile check popup', () => (
     <MobileCheckPopup />

@@ -15,6 +15,8 @@ export default class Message extends Component {
       onAlarm={this.props.onAlarm}
       onPoint={this.props.onPoint}
       isUnderline={true}
+      navigator={this.props.navigator} 
+      menu={4}
     >
       <View style={styles.messages}>
         <FlatList

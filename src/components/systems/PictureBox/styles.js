@@ -10,6 +10,10 @@ import {
 const styles = StyleSheet.create({
   box: {
   },
+  emptyButton: {
+    width: '100%',
+    height: '100%',
+  },
   emptyBox: {
     width: '100%',
     height: '100%',
@@ -30,7 +34,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   picture: {
-
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   focusBox: {
     borderColor: COLOR,

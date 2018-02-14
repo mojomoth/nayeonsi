@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   contents: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
   },
   emailButton: {
     width: 374 * PixelRatio,
@@ -49,11 +49,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  fogotPasswordButton: {
+    marginTop: 13.7 * PixelRatio,
+  },
   fogotPasswordLabel: {
     fontSize: 15.6 * PixelRatio,
     color: COLOR,
     textDecorationLine: 'underline',
-    marginTop: 13.7 * PixelRatio,
+  },
+  closeButton: {
+    position: 'absolute',
+    right: 20 * PixelRatio,
+    top: 20 * PixelRatio,
+  },
+  loginSelect: {
+    paddingBottom: 60 * PixelRatio,
+  },
+  emailLogin: {
+    paddingBottom: 25 * PixelRatio,
   },
 });
 

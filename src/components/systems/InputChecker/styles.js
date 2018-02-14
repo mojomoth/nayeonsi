@@ -1,10 +1,18 @@
 import { StyleSheet } from 'react-native';
 import { PixelRatio } from 'constants/size';
-import { BORDER_HEADER_COLOR, JOIN_STEP_COLOR } from 'constants/color';
+import { COLOR } from 'constants/color';
 
 const styles = StyleSheet.create({
+  button: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   textInput: {
     flex: 1,
+  },
+  alarmLabel: {
+    color: COLOR,
+    fontSize: PixelRatio * 15.6,
   },
 });
 

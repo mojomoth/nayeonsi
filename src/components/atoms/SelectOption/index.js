@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import Button from 'atoms/Button';
 import styles from 'atoms/styles';
 import { 
   INPUT_TEXT_COLOR, 
@@ -22,9 +23,11 @@ export default class SelectOption extends Component {
 
     return (
       <View style={[styles.selectOption, selectOptionStyle]}>
-        <Text style={[styles.selectOptionText, selectOptionTextStyle]}>
-          {this.props.text}
-        </Text>
+        <Button onPress={this.props.onPress} style={styles.selectButton}>
+          <Text style={[styles.selectOptionText, selectOptionTextStyle]}>
+            {this.props.text}
+          </Text>
+        </Button>
       </View>
     );
   };
@@ -37,6 +40,7 @@ SelectOption.defaultProps = {
   selectedColor: INPUT_TEXT_COLOR,
   selected: false,
   text: null,
+  onPress: () => {},
 };
 
 SelectOption.propTypes = {
@@ -46,4 +50,5 @@ SelectOption.propTypes = {
   selectedColor: PropTypes.string,
   selected: PropTypes.bool,
   text: PropTypes.string,
+  onPress: PropTypes.func,
 };

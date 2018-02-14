@@ -14,6 +14,7 @@ export default class EmailJoin extends Component {
         isBackButton={this.props.isBackButton} 
         title={this.props.title}
         step={this.props.step}
+        onBack={this.props.onBack}
       />
       <Content 
         style={styles.content} 
@@ -36,6 +37,7 @@ EmailJoin.defaultProps = {
   passwordAlarm: '비밀번호를 입력하세요',
   step: '1/3',
   isBackButton: true,
+  onBack: () => {},
   onPress: () => {},
 };
 
@@ -46,6 +48,7 @@ EmailJoin.propTypes = {
   passwordAlarm: PropTypes.string,
   step: PropTypes.string,
   isBackButton: PropTypes.bool,
+  onBack: PropTypes.func,
   onPress: PropTypes.func,
 };
 

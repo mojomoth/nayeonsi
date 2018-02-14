@@ -30,7 +30,7 @@ export default class JoinResult extends Component {
 
 JoinResult.defaultProps = {
   title: '가입승인',
-  buttonLabel: '가입신청',
+  buttonLabel: '확인',
   step: '',
   resultText: '운영진의 심사 후 가입승인 됩니다.',
   isBackButton: false,
