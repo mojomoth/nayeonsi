@@ -3,6 +3,7 @@ import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 import Login from 'screens/Login';
 import PasswordSendPopup from 'popups/PasswordSendPopup';
+import { fetchTest } from 'store/actions/test';
 
 class Page extends Component {
   static navigatorStyle = {
@@ -38,23 +39,27 @@ class Page extends Component {
     },
   });
 
-  render = () => (
+  render = () => {console.log(this.props.test);
+    return(
     <Login 
       onClose={this.onClose}
       onJoin={this.onJoin}
-      onFacebook={this.onFacebook}
+      onFacebook={this.props.fetchTest}
       onLogin={this.onLogin}
       onRequest={this.onRequest}
       onForgot={this.onForgot}
       isEntered={this.state.isEntered}
     />
-  );
+  )};
 }
 
 const mapStateToProps = state => ({
+  test: state.test,
 });
 
 const mapDispatchToProps = dispatch => ({
+
+  fetchTest: () => dispatch(fetchTest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 import Landing, { ANIMATE_TIME } from 'screens/Landing';
+import { checkAuthStateChanged, loginUser } from 'store/actions/auth';
 
 class Page extends Component {
   static navigatorStyle = {
@@ -10,11 +11,21 @@ class Page extends Component {
 
   componentDidMount = () => {
     this.landing.fade(1, ANIMATE_TIME);
-    this.complete();
+
+    this.props.checkAuthStateChanged((user) => {
+      let isUser = false;
+      if (user) {
+        this.props.loginUser(user);
+        isUser = true;
+      }
+
+    });
+
+    this.complete(false);
   };
 
-  complete = () => (
-    this.props.isLogined ?
+  complete = isUser => (
+    isUser ?
       setTimeout(this.changeTabScreen, ANIMATE_TIME)
       :
       setTimeout(this.changeSingleScreen, ANIMATE_TIME, 'Login')
@@ -81,6 +92,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  loginUser: user => dispatch(loginUser(user)),
+  checkAuthStateChanged: callback => dispatch(checkAuthStateChanged(callback)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);
