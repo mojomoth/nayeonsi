@@ -1,8 +1,10 @@
 import { spawn } from 'redux-saga/effects';
-import authSagas from './auth';
-import testSagas from './test';
+import auth from './auth';
+import user from './user';
+import test from './test';
 
 export default function* root() {
-  yield spawn(authSagas);
-  yield spawn(testSagas);
+  yield spawn(auth);
+  yield spawn(user);
+  yield spawn(test);
 }

@@ -9,77 +9,29 @@ class Page extends Component {
     navBarHidden: true,
   };
 
+  constructor(props) {
+    super(props);
+    console.ignoredYellowBox = ['Setting a timer'];
+  }
+
   componentDidMount = () => {
-    this.landing.fade(1, ANIMATE_TIME);
+    // this.landing.fade(1, ANIMATE_TIME);
 
-    this.props.checkAuthStateChanged((user) => {
-      let isUser = false;
-      if (user) {
-        this.props.loginUser(user);
-        isUser = true;
-      }
-
-    });
-
-    this.complete(false);
+    this.complete(this.props.user);
   };
 
   complete = isUser => (
-    isUser ?
-      setTimeout(this.changeTabScreen, ANIMATE_TIME)
-      :
-      setTimeout(this.changeSingleScreen, ANIMATE_TIME, 'Login')
+    isUser ? this.moveMain() : this.moveLogin()
   );
 
-  changeSingleScreen = screenName => 
-    Navigation.startSingleScreenApp({
-      screen: {
-        screen: screenName,
-      },
-    });
+  moveMain = () => this.props.navigator.switchToTab({
+    tabIndex: 1,
+  });
 
-  changeTabScreen = () => 
-    Navigation.startTabBasedApp({
-      tabs: [
-        {
-          screen: 'Main', 
-          icon: require('assets/images/icTabHome.png'),
-          selectedIcon: require('assets/images/icTabHomePre.png'),
-          navigatorStyle: { navBarHidden: true },
-          iconInsets: { bottom: -60 },
-        },
-        {
-          screen: 'History', 
-          icon: require('assets/images/icTabProfile.png'),
-          selectedIcon: require('assets/images/icTabProfilePre.png'),
-          navigatorStyle: { navBarHidden: true },
-        },
-        {
-          screen: 'Appeal', 
-          icon: require('assets/images/icTabPlace.png'),
-          selectedIcon: require('assets/images/icTabPlacePre.png'),
-          navigatorStyle: { navBarHidden: true },
-        },
-        {
-          screen: 'Message', 
-          icon: require('assets/images/icTabDm.png'),
-          selectedIcon: require('assets/images/icTabDmPre.png'),
-          navigatorStyle: { navBarHidden: true },
-        },
-        {
-          screen: 'Menus', 
-          icon: require('assets/images/icTabSetting.png'),
-          selectedIcon: require('assets/images/icTabSettingPre.png'),
-          navigatorStyle: { navBarHidden: true },
-        },
-      ],
-      appStyle: {
-        tabBarHidden: true,
-      },
-      tabsStyle: {
-        tabBarHidden: true,
-      },
-    });
+  moveLogin = () => this.props.navigator.push({
+    screen: 'Login', 
+    passProps: this.props.navigator,
+  });
 
   render = () => (
     <Landing 
@@ -89,11 +41,10 @@ class Page extends Component {
 }
 
 const mapStateToProps = state => ({
+  user: state.user.user,
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: user => dispatch(loginUser(user)),
-  checkAuthStateChanged: callback => dispatch(checkAuthStateChanged(callback)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

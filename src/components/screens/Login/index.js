@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import Screen from 'atoms/Screen';
 import Logo from 'atoms/Logo';
 import CloseButton from 'systems/CloseButton';
+import Loading from 'systems/Loading';
 import LoginSelect from './LoginSelect';
 import EmailLogin from './EmailLogin';
 import PropTypes from 'prop-types';
@@ -35,9 +36,18 @@ export default class Login extends Component {
               onForgot={this.props.onForgot}
               requestButton={this.props.requestButton}
               fogotPassword={this.props.fogotPassword}
+              email={this.props.email} 
+              onEmailChange={this.props.onEmailChange}
+              onEmailFocus={this.props.onEmailFocus}
+              onEmailBlur={this.props.onEmailBlur}
+              password={this.props.password} 
+              onPasswordChange={this.props.onPasswordChange}
+              onPasswordFocus={this.props.onPasswordFocus}
+              onPasswordBlur={this.props.onPasswordBlur}
             />
         }
       </View>
+      { this.props.isLoading ? <Loading /> : null }
     </Screen>
   );
 }
@@ -55,6 +65,7 @@ Login.defaultProps = {
   fogotPassword: '비밀번호를 잊어버렸어요.',
   requestButton: '로그인',
   isEntered: true,
+  isLoading: false,
 };
 
 Login.propTypes = {
@@ -70,5 +81,6 @@ Login.propTypes = {
   fogotPassword: PropTypes.string,
   requestButton: PropTypes.string,
   isEntered: PropTypes.bool,
+  isLoading: PropTypes.bool,
 };
 

@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import firebase from 'utils/firebase';
+import firebase from 'lib/firebase';
 
 const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -26,24 +26,24 @@ function* loginWithProvider(provider) {
 }
 
 function* loginWithEmailProvider(action) {
-  const email = action.payload.email;
-  const password = action.payload.password;
+  const { email } = action.payload;
+  const { password } = action.payload;
 
   try {
-    const user = yield auth.signInWithEmailAndPassword(email, password);
-    yield put({ type: 'LOGIN_USER_REQUEST', payload: user });
+    yield auth.signInWithEmailAndPassword(email, password);
+    yield put({ type: 'LOGIN_USER', payload: auth.currentUser });
   } catch (e) {
     yield put({ type: 'LOGIN_USER_FAILED', payload: e.message });
   }
 }
 
 function* createWithEmailProvider(action) {
-  const email = action.payload.email;
-  const password = action.payload.password;
+  const { email } = action.payload;
+  const { password } = action.payload;
 
   try {
-    const user = yield auth.createUserWithEmailAndPassword(email, password);
-    yield put({ type: 'CREATE_EMAIL_USER', payload: user });
+    yield auth.createUserWithEmailAndPassword(email, password);
+    yield put({ type: 'CREATED_EMAIL_USER', payload: auth.currentUser });
   } catch (e) {
     yield put({ type: 'CREATE_EMAIL_USER_FAILED', payload: e.message });
   }
@@ -57,13 +57,11 @@ function logoutUser() {
   return auth.signOut();
 }
 
-function* authSagas() {
-  yield takeEvery('LOGIN_GOOGLE_USER_REQUEST', () => loginWithProvider(googleProvider));
-  yield takeEvery('LOGIN_FACEBOOK_USER_REQUEST', () => loginWithProvider(facebookProvider));
-  yield takeEvery('LOGIN_EMAIL_USER_REQUEST', loginWithEmailProvider);
-  yield takeEvery('CREATE_EMAIL_USER_REQUEST', createWithEmailProvider);
+export default function* authSagas() {
+  yield takeEvery('LOGIN_GOOGLE_USER', () => loginWithProvider(googleProvider));
+  yield takeEvery('LOGIN_FACEBOOK_USER', () => loginWithProvider(facebookProvider));
+  yield takeEvery('LOGIN_EMAIL_USER', loginWithEmailProvider);
+  yield takeEvery('CREATE_EMAIL_USER', createWithEmailProvider);
   yield takeEvery('CHECK_AUTH_STATE_CHANGED', checkAuthStateChanged);
   yield takeEvery('LOGOUT_USER', logoutUser);
 }
-
-export default authSagas;

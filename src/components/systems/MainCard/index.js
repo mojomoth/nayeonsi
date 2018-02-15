@@ -17,7 +17,7 @@ export default class MainCard extends Component {
         </View>
       </Button>
 
-      <View style={styles.iconBox}>
+      <View style={styles.iconBox} pointerEvents="none">
         { this.props.isSecret ? 
           <View style={styles.icon}><SecretIcon style={styles.secret} /></View> 
         : null }

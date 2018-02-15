@@ -135,6 +135,7 @@ export default class Content extends Component {
         isComplete={this.props.phone.isComplete}
         isFocus={this.props.phone.isFocus}
         isButton={false}
+        keyboardType={'phone-pad'}
       />
     </View>
   );

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import MakeAppeal from 'screens/MakeAppeal';
 import SelectPopup from 'popups/SelectPopup';
@@ -390,11 +391,22 @@ class Page extends Component {
       smoke: this.props.smoke,
       drink: this.props.drink,
       phone: this.props.phone,
-      ...this.state,
+      location: this.state.location.text,
+      school: this.state.school.text,
+      job: this.state.job.text,
+      attraction: this.state.attraction.text,
+      character: this.state.character.text,
+      like: this.state.like.text,
+      want: this.state.want.text,
+      play: this.state.play.text,
+      message: this.state.message.text,
     },
   });  
 
-  onCloseModal = () => this.props.navigator.dismissModal();
+  onCloseModal = () => {
+    this.props.navigator.dismissModal();
+    Keyboard.dismiss();
+  };
 
   mergeSelectedItem = (items, selectedItem) => {
     const selectedItems = [];
@@ -409,7 +421,7 @@ class Page extends Component {
     }
 
     return selectedItems.join(', ');
-  }
+  };
 
   openSelectPopup = (title, data, onSelected, contentHeight = null, isCloseButton = true) => 
     this.props.navigator.showModal({

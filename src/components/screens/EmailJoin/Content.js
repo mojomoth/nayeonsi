@@ -13,7 +13,15 @@ export default class Content extends Component {
     <View style={styles.content}>
       <InputWrapper style={styles.emailWrapper}>
         <MailIcon />
-        <TextInput style={styles.textInput} placeholder="이메일" />
+        <TextInput 
+          style={styles.textInput} 
+          placeholder="이메일" 
+          value={this.props.email} 
+          onChangeText={this.props.onEmailChange}
+          onFocus={this.props.onEmailFocus}
+          onBlur={this.props.onEmailBlur}
+          keyboardType={'email-address'}
+        />
       </InputWrapper>
 
       { this.props.isEmailAlarm ? 
@@ -22,7 +30,15 @@ export default class Content extends Component {
 
       <InputWrapper style={styles.passwordWrapper}>
         <LockIcon />
-        <TextInput style={styles.textInput} placeholder="비밀번호" />
+        <TextInput 
+          style={styles.textInput} 
+          placeholder="비밀번호" 
+          value={this.props.password} 
+          onChangeText={this.props.onPasswordChange}
+          onFocus={this.props.onPasswordFocus}
+          onBlur={this.props.onPasswordBlur}
+          secureTextEntry
+        />
       </InputWrapper>
         
       { this.props.isPasswordAlarm ? 
@@ -35,9 +51,13 @@ export default class Content extends Component {
 Content.defaultProps = {
   isEmailAlarm: false,
   isPasswordAlarm: false,
+  emailAlarm: '',
+  passwordAlarm: '',
 };
 
 Content.propTypes = {
   isEmailAlarm: PropTypes.bool,
   isPasswordAlarm: PropTypes.bool,
+  emailAlarm: PropTypes.string,
+  passwordAlarm: PropTypes.string,
 };

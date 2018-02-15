@@ -2,51 +2,89 @@ const DEFAULT_STATE = {
   uid: null,
   name: '',
   email: '',
-  profileImageUrl: '',
-  isLoggingIn: false, // 로그인 진행중일 떄 진행중 표시를 하기 위한 Flag
-  errorState: '', // 로그인 중에 문제가 생겼습니다 라고 알리기 위한 Flag
+  isProgress: false,
+  isError: false,
+  error: '',
+  state: null,
 };
 
-const authReducer = (state = DEFAULT_STATE, action) => {
-  if (action.type === 'LOGIN_USER_REQUEST') {
-    return {
-      ...state,
-      isLoggingIn: true,
-      errorState: false,
-    };
-  }
+export default (state = DEFAULT_STATE, { type, payload }) => {
+  switch (type) {
+    case 'LOGIN_EMAIL_USER':
+      return {
+        ...state,
+        uid: null,
+        isProgress: true,
+        isError: false,
+        error: '',
+        state: type,
+      };
 
-  if (action.type === 'LOGIN_USER_FAILED') {
-    return {
-      ...state,
-      isLoggingIn: false,
-      errorState: true,
-    };
-  }
+    case 'LOGIN_USER_FAILED':
+      return {
+        ...state,
+        uid: null,
+        isProgress: false,
+        isError: true,
+        error: payload,
+        state: type,
+      };
 
-  if (action.type === 'LOGIN_USER') {
-    return {
-      ...state,
-      uid: action.payload.uid,
-      name: action.payload.displayName,
-      email: action.payload.email,
-      profileImageUrl: action.payload.photoURL,
-      isLoggingIn: false,
-    };
+    case 'LOGIN_USER':
+      return {
+        ...state,
+        uid: payload.uid,
+        name: payload.displayName,
+        email: payload.email,
+        isProgress: false,
+        isError: false,
+        error: '',
+        state: type,
+      };
+
+    case 'CREATE_EMAIL_USER':
+      return {
+        ...state,
+        uid: null,
+        isProgress: true,
+        isError: false,
+        error: '',
+        state: type,
+      };
+    
+    case 'CREATE_EMAIL_USER_FAILED':
+      return {
+        ...state,
+        uid: null,
+        isProgress: false,
+        isError: true,
+        error: payload,
+        state: type,
+      };
+
+    case 'CREATED_EMAIL_USER':
+      return {
+        ...state,
+        uid: payload.uid,
+        name: payload.displayName,
+        email: payload.email,
+        isProgress: false,
+        isError: false,
+        error: '',
+        state: type,
+      };
+
+    case 'LOGOUT_USER':
+      return {
+        ...state,
+        uid: null,
+        isProgress: false,
+        isError: false,
+        error: '',
+        state: type,
+      };
+
+    default:
+      return state;
   }
-  
-  if (action.type === 'LOGOUT_USER') {
-    return {
-      ...state,
-      uid: null,
-      name: '',
-      profileImageUrl: '',
-      email: '',
-    };
-  }
-  return {
-    ...state,
-  };
 };
-
-export default authReducer;

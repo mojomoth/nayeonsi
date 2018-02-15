@@ -1,19 +1,11 @@
-import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import registerScreens from './screens';
 import store from 'store';
 import { persistStore } from 'redux-persist';
+import { startMainScreen } from 'lib/navigator';
 
-// registerScreens(store.store, Provider);
-
-// Navigation.startSingleScreenApp({
-//   screen: {
-//     screen: 'Landing', // unique ID registered with Navigation.registerScreen
-//     navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-//     navigatorButtons: {}, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-//     passProps: { persistor: store.persistor },
-//   },
-// });
+// registerScreens(store, Provider);
+// startMainScreen();
 
 persistStore(
   store, 
@@ -21,14 +13,6 @@ persistStore(
   () => {
     registerScreens(store, Provider);
 
-    Navigation.startSingleScreenApp({
-      screen: {
-        screen: 'Landing', // unique ID registered with Navigation.registerScreen
-        navigatorStyle: {}, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-        navigatorButtons: {}, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-      },
-    });
+    startMainScreen();
   },
 );
-
-// .purge();

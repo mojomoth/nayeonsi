@@ -1,13 +1,13 @@
 export const loginGoogleUser = () => ({
-  type: 'LOGIN_GOOGLE_USER_REQUEST',
+  type: 'LOGIN_GOOGLE_USER',
 });
 
 export const loginFacebookUser = () => ({
-  type: 'LOGIN_FACEBOOK_USER_REQUEST',
+  type: 'LOGIN_FACEBOOK_USER',
 });
 
 export const loginEmailUser = (email, password) => ({
-  type: 'LOGIN_EMAIL_USER_REQUEST',
+  type: 'LOGIN_EMAIL_USER',
   payload: {
     email, 
     password,
@@ -15,7 +15,7 @@ export const loginEmailUser = (email, password) => ({
 });
 
 export const createEmailUser = (email, password) => ({
-  type: 'CREATE_EMAIL_USER_REQUEST',
+  type: 'CREATE_EMAIL_USER',
   payload: {
     email, 
     password,

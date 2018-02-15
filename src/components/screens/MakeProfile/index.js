@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import Screen from 'atoms/Screen';
 import Header from 'systems/JoinHeader';
+import Loading from 'systems/Loading';
 import Content from './Content';
 import Footer from './Footer';
 import PropTypes from 'prop-types';
@@ -41,6 +42,7 @@ export default class MakeProfile extends Component {
           buttonLabel={this.props.buttonLabel}
         />
       </ScrollView>
+      { this.props.isLoading ? <Loading /> : null }
     </Screen>
   );
 }
@@ -50,6 +52,7 @@ MakeProfile.defaultProps = {
   buttonLabel: '다음',
   step: '1/3',
   isBackButton: true,
+  isLoading: false,
   onPress: () => {},
   onBack: () => {},
 };
@@ -59,6 +62,7 @@ MakeProfile.propTypes = {
   buttonLabel: PropTypes.string,
   step: PropTypes.string,
   isBackButton: PropTypes.bool,
+  isLoading: PropTypes.bool,
   onPress: PropTypes.func,
   onBack: PropTypes.func,
 };

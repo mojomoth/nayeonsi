@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
+    alignSelf: 'center',
   },
   alarmLabel: {
     color: COLOR,

@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { PixelRatio } from 'constants/size';
+import { COLOR } from 'constants/color';
 import Dimensions from 'Dimensions';
 
 const { width } = Dimensions.get('window');
@@ -25,6 +26,9 @@ const styles = StyleSheet.create({
   loginButton: {
     width: 374 * PixelRatio,
     marginBottom: 26.7 * PixelRatio,
+  },
+  alarmLabel: {
+    color: COLOR,
   },
 });
 

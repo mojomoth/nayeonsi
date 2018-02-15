@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import MakeProfile from 'screens/MakeProfile';
 import SelectPopup from 'popups/SelectPopup';
@@ -16,7 +17,7 @@ class Page extends Component {
       isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
     },
     year: { 
-      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
+      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', isBlur: false,
     },
     sex: { 
       isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
@@ -50,7 +51,16 @@ class Page extends Component {
     screen: 'JoinAppeal', 
     passProps: {
       navigator: this.props.navigator,
-      ...this.state,
+      nickname: this.state.nickname.text,
+      year: this.state.year.text,
+      sex: this.state.sex.text,
+      tall: this.state.tall.text,
+      shape: this.state.shape.text,
+      blood: this.state.blood.text,
+      religion: this.state.religion.text,
+      smoke: this.state.smoke.text,
+      drink: this.state.drink.text,
+      phone: this.state.phone.text,
     },
   });  
 
@@ -145,6 +155,7 @@ class Page extends Component {
       },
     });
     this.onCloseModal();
+    Keyboard.dismiss();
   };
     
   onSexBlur = () => 
@@ -403,7 +414,10 @@ class Page extends Component {
     this.onCloseModal();
   };
 
-  onCloseModal = () => this.props.navigator.dismissModal();
+  onCloseModal = () => {
+    this.props.navigator.dismissModal();
+    Keyboard.dismiss();
+  };
 
   openSelectPopup = (title, data, onSelected, contentHeight = null, isCloseButton = true) => 
     this.props.navigator.showModal({

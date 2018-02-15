@@ -22,6 +22,12 @@ const styles = StyleSheet.create({
     borderColor: NAVIGATION_BORDER_COLOR,
     backgroundColor: NAVIGATION_BACKGROUND_COLOR,
   },
+  button: {
+    flex: 1,
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   homeIcon: {
     width: 31.5 * PixelRatio,
     resizeMode: 'contain',

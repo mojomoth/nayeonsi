@@ -108,12 +108,14 @@ const styles = StyleSheet.create({
   inputWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingTop: PixelRatio * 10,
     borderBottomWidth: PixelRatio * 0.7,
   },
   textInput: {
     fontFamily: FONT,
     color: INPUT_TEXT_COLOR,
     fontSize: PixelRatio * 16.7,
+    alignSelf: 'center',
   },
   selectOption: {
     height: PixelRatio * 60,
