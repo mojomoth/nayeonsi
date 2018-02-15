@@ -21,7 +21,7 @@ class Page extends Component {
   };
 
   complete = isUser => (
-    isUser ? this.moveMain() : this.moveLogin()
+    !isUser ? this.moveMain() : this.moveLogin()
   );
 
   moveMain = () => this.props.navigator.switchToTab({
@@ -31,6 +31,7 @@ class Page extends Component {
   moveLogin = () => this.props.navigator.push({
     screen: 'Login', 
     passProps: this.props.navigator,
+    overrideBackPress: true,
   });
 
   render = () => (

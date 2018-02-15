@@ -73,7 +73,7 @@ class Page extends Component {
     console.log(this.props.uid);
     // this.props.fetchTest();
 
-  }
+  };
 
   onLogin = () => this.setState({ isEntered: false });
 
