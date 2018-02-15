@@ -21,7 +21,7 @@ class Page extends Component {
   };
 
   complete = isUser => (
-    !isUser ? this.moveMain() : this.moveLogin()
+    isUser ? this.moveMain() : this.moveLogin()
   );
 
   moveMain = () => this.props.navigator.switchToTab({
