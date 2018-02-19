@@ -29,7 +29,18 @@ class Page extends Component {
 
   onBack = () => this.props.navigator.pop();
 
-  onPress = () => this.join();
+  onPress = () => {
+    const isValid = this.state.picture1 !== null
+      && this.state.picture2 !== null
+      && this.state.picture3 !== null;
+
+    if (!isValid) {
+      Alert.alert('회원가입', '필수 사진을 올려주세요.');
+      return;
+    }
+
+    this.join();
+  }
 
   onPress1 = () => this.getImagePicker(source => this.setState({ picture1: source }));
   onPress2 = () => this.getImagePicker(source => this.setState({ picture2: source }));

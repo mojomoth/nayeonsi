@@ -8,7 +8,7 @@ import MainContainer from 'systems/MainContainer';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
-const image = require('assets/images/temp.png');
+// const image = require('assets/images/temp.png');
 
 export default class Menus extends Component {
   render = () => (
@@ -24,13 +24,13 @@ export default class Menus extends Component {
       menu={5}
     >
       <View style={styles.content}>
-        <Image source={image} style={styles.image} />
+        {/* <Image source={image} style={styles.image} /> */}
 
         <View style={styles.textBox}>
           <Label style={[styles.text1, styles.red]} text={'현재 개발중 입니다. (Alpha v1.0)'} />
         </View>
         <View style={styles.buttonBox}>
-          <FilledButton style={styles.tempButton}>
+          <FilledButton onPress={this.props.onPress} style={styles.tempButton}>
             <LockIcon style={styles.tempIcon} />
             <FilledButtonLabel style={styles.tempLabel}>{'로그아웃'}</FilledButtonLabel>
           </FilledButton>
@@ -47,6 +47,7 @@ Menus.defaultProps = {
   alarmCount: 10,
   onAlarm: () => {},
   onPoint: () => {},
+  onPress: () => {},
 };
 
 Menus.propTypes = {
@@ -56,4 +57,5 @@ Menus.propTypes = {
   alarmCount: PropTypes.number,
   onAlarm: PropTypes.func,
   onPoint: PropTypes.func,
+  onPress: PropTypes.func,
 };

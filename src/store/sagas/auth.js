@@ -28,12 +28,14 @@ function* loginWithProvider(provider) {
 function* loginWithEmailProvider(action) {
   const { email } = action.payload;
   const { password } = action.payload;
-
+console.log("@@@@");
   try {
     yield auth.signInWithEmailAndPassword(email, password);
     yield put({ type: 'LOGIN_USER', payload: auth.currentUser });
+    console.log(auth.currentUser);
   } catch (e) {
     yield put({ type: 'LOGIN_USER_FAILED', payload: e.message });
+    console.log(e.message);
   }
 }
 

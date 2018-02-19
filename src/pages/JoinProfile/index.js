@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Keyboard } from 'react-native';
+import { Alert, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import MakeProfile from 'screens/MakeProfile';
 import SelectPopup from 'popups/SelectPopup';
@@ -47,22 +47,39 @@ class Page extends Component {
 
   onBack = () => this.props.navigator.pop();
 
-  onPress = () => this.props.navigator.push({
-    screen: 'JoinAppeal', 
-    passProps: {
-      navigator: this.props.navigator,
-      nickname: this.state.nickname.text,
-      year: this.state.year.text,
-      sex: this.state.sex.text,
-      tall: this.state.tall.text,
-      shape: this.state.shape.text,
-      blood: this.state.blood.text,
-      religion: this.state.religion.text,
-      smoke: this.state.smoke.text,
-      drink: this.state.drink.text,
-      phone: this.state.phone.text,
-    },
-  });  
+  onPress = () => {
+    const isValid = this.state.nickname.isComplete 
+    && this.state.year.isComplete
+    && this.state.sex.isComplete
+    && this.state.tall.isComplete
+    && this.state.shape.isComplete
+    && this.state.blood.isComplete
+    && this.state.religion.isComplete
+    && this.state.smoke.isComplete
+    && this.state.drink.isComplete;
+
+    if (!isValid) {
+      Alert.alert('회원가입', '프로필을 완성해주세요.');
+      return;
+    }
+
+    this.props.navigator.push({
+      screen: 'JoinAppeal', 
+      passProps: {
+        navigator: this.props.navigator,
+        nickname: this.state.nickname.text,
+        year: this.state.year.text,
+        sex: this.state.sex.text,
+        tall: this.state.tall.text,
+        shape: this.state.shape.text,
+        blood: this.state.blood.text,
+        religion: this.state.religion.text,
+        smoke: this.state.smoke.text,
+        drink: this.state.drink.text,
+        phone: this.state.phone.text,
+      },
+    });  
+  };
 
   onNicknameChange = (text) => { 
     const isComplete = text.length >= MIN_NICKNAME;

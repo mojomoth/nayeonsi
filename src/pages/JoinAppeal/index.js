@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Keyboard } from 'react-native';
+import { Alert, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import MakeAppeal from 'screens/MakeAppeal';
 import SelectPopup from 'popups/SelectPopup';
@@ -376,31 +376,47 @@ class Page extends Component {
 
   onBack = () => this.props.navigator.pop();
 
-  onPress = () => this.props.navigator.push({
-    screen: 'JoinAlbum', 
-    passProps: {
-      navigator: this.props.navigator,
-      nickname: this.props.nickname,
-      year: this.props.year,
-      sex: this.props.sex,
-      tall: this.props.tall,
-      shape: this.props.shape,
-      blood: this.props.blood,
-      religion: this.props.religion,
-      smoke: this.props.smoke,
-      drink: this.props.drink,
-      phone: this.props.phone,
-      location: this.state.location.text,
-      school: this.state.school.text,
-      job: this.state.job.text,
-      attraction: this.state.attraction.text,
-      character: this.state.character.text,
-      like: this.state.like.text,
-      want: this.state.want.text,
-      play: this.state.play.text,
-      message: this.state.message.text,
-    },
-  });  
+  onPress = () => {
+    const isValid = this.state.location.isComplete 
+      && this.state.school.isComplete
+      && this.state.job.isComplete
+      && this.state.attraction.isComplete
+      && this.state.character.isComplete
+      && this.state.like.isComplete
+      && this.state.want.isComplete
+      && this.state.play.isComplete;
+
+    if (!isValid) {
+      Alert.alert('회원가입', '프로필을 완성해주세요.');
+      return;
+    }
+
+    this.props.navigator.push({
+      screen: 'JoinAlbum', 
+      passProps: {
+        navigator: this.props.navigator,
+        nickname: this.props.nickname,
+        year: this.props.year,
+        sex: this.props.sex,
+        tall: this.props.tall,
+        shape: this.props.shape,
+        blood: this.props.blood,
+        religion: this.props.religion,
+        smoke: this.props.smoke,
+        drink: this.props.drink,
+        phone: this.props.phone,
+        location: this.state.location.text,
+        school: this.state.school.text,
+        job: this.state.job.text,
+        attraction: this.state.attraction.text,
+        character: this.state.character.text,
+        like: this.state.like.text,
+        want: this.state.want.text,
+        play: this.state.play.text,
+        message: this.state.message.text,
+      },
+    });  
+  }
 
   onCloseModal = () => {
     this.props.navigator.dismissModal();

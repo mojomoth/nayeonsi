@@ -4,7 +4,7 @@ import Screen from 'atoms/Screen';
 import Logo from 'atoms/Logo';
 import styles from './styles';
 
-export const ANIMATE_TIME = 0;
+export const ANIMATE_TIME = 2000;
 
 export default class Landing extends Component {
   state = {
@@ -26,7 +26,7 @@ export default class Landing extends Component {
       <Animated.View 
         style={{
           ...this.props.style,
-          // opacity: this.state.fadeAnim,
+          opacity: this.state.fadeAnim,
         }}
       >
         <Logo ref={this.logo} />

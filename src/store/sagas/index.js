@@ -6,5 +6,6 @@ import test from './test';
 export default function* root() {
   yield spawn(auth);
   yield spawn(user);
+  // yield spawn(card);
   yield spawn(test);
 }
