@@ -57,7 +57,6 @@ class Page extends Component {
     });
 
     const data = [
-      { key: '해외', selected: this.state.school.text === '해외' },
       { key: '해외 전문대', selected: this.state.school.text === '해외 전문대' },
       { key: '해외 대학교', selected: this.state.school.text === '해외 대학교' },
       { key: '중학교', selected: this.state.school.text === '중학교' },

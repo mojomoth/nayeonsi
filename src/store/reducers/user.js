@@ -7,6 +7,7 @@ const DEFAULT_STATE = {
   history_appeal: [],
   state: null,
   isProgress: false,
+  point: 0,
 };
 
 export default (state = DEFAULT_STATE, action) => {

@@ -109,22 +109,20 @@ class Page extends Component {
       ...data,
     });
 
-    if (data.location && data.sex) {
-      await firebase.database().ref('location')
-        .child(data.location).child(data.sex).child(uid).set(true);  
-    }
+    const key = await firebase.database().ref('users').push().key;
+    await firebase.database().ref('user_links').child(uid).set(key);
+    await this.joinUser(key, data);
+  };
 
-    if (data.sex) {
-      await firebase.database().ref('genders').child(data.sex).child(uid).set(true);
-
-      if (data.attraction) {
-        for (const item of data.attraction.split(', ')) {
-          await firebase.database().ref('genders').child(data.sex).child('attractions')
-            .child(item).set(true);
-
-          await firebase.database().ref('attractions').child(item).child(uid).set(true);
-        }
-      }
+  joinUser = async (key, data) => {
+    await firebase.database().ref('users').child(key).set(data);
+    await firebase.database().ref('nicknames').child(data.nickname).set({ key });
+    await firebase.database().ref('genders').child(data.sex).child(key).set(true);
+    await firebase.database().ref('locations').child(data.location).child(data.sex).child(key).set(true);
+    
+    for (const item of data.attraction.split(', ')) {
+      await firebase.database().ref('gender_attractions').child(data.sex).child(item).set(true);
+      await firebase.database().ref('attractions').child(item).child(data.sex).child(key).set(true);
     }
   };
 
