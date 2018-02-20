@@ -5,12 +5,10 @@ import SubTitleLabel from 'atoms/SubTitleLabel';
 import styles from './styles';
 
 export default class Header extends Component {
-  render() {
-    return (
-      <View style={styles.header}>
-        <TitleLabel style={styles.titleLabel} text={this.props.text} />
-        <SubTitleLabel style={styles.subTitleLabel} text={this.props.subText} />
-      </View>
-    );
-  }
+  render = () => (
+    <View style={styles.header}>
+      <TitleLabel style={styles.titleLabel} text={this.props.text} />
+      <SubTitleLabel style={styles.subTitleLabel} text={this.props.subText} />
+    </View>
+  );
 }

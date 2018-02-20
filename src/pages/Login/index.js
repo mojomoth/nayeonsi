@@ -23,15 +23,10 @@ class Page extends Component {
       Alert.alert('회원가입', nextProps.error);
     }
 
-    if (nextProps.authState === 'LOGIN_USER') {
-      this.props.getUser(nextProps.uid);
-    }
-
     if (nextProps.userState === 'SET_USER') {
       const { user } = nextProps;
 
       if (user) {
-        this.moveMain();
         this.props.navigator.pop();
       } else {
         this.moveJoinProfile();
@@ -69,10 +64,6 @@ class Page extends Component {
 
   onFacebook = () => {
     Alert.alert('개발중', '현재개발중입니다\n' + this.props.test.uid+ '\n'+this.props.uid+ '\n'+this.props.testData);
-    console.log(this.props.user);
-    console.log(this.props.uid);
-    // this.props.fetchTest();
-
   };
 
   onLogin = () => this.setState({ isEntered: false });
@@ -81,7 +72,7 @@ class Page extends Component {
     const { email } = this.state;
     const { password } = this.state;
 
-    this.props.loginEmailUser(email, password);
+    this.props.loginEmailUser(email, password); // ! > LOGIN_USER
   };
 
   onSendPassword = () => Alert.alert('개발중', '현재개발중입니다');
@@ -94,10 +85,6 @@ class Page extends Component {
       navigator: this.props.navigator,
       popup: <PasswordSendPopup onConfirm={this.onSendPassword} onCancel={this.onCloseModal} />,
     },
-  });
-
-  moveMain = () => this.props.navigator.switchToTab({
-    tabIndex: 1,
   });
 
   moveJoin = () => this.props.navigator.push({

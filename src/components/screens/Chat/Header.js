@@ -8,7 +8,7 @@ import styles from './styles';
 export default class Header extends ProfileHeader {
   right = () => (
     <View style={styles.iconBox}>
-      <Button>
+      <Button onPress={this.props.onMore}>
         <View style={styles.icon}>
           <MoreIcon style={styles.more} />
         </View>

@@ -7,12 +7,11 @@ import { startMainScreen } from 'lib/navigator';
 // registerScreens(store, Provider);
 // startMainScreen();
 
-persistStore(
-  store, 
-  null, 
-  () => {
+// persistStore(
+//   store, 
+//   null, 
+//   () => {
     registerScreens(store, Provider);
-
     startMainScreen();
-  },
-);
+//   },
+// );

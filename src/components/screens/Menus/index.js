@@ -23,19 +23,6 @@ export default class Menus extends Component {
       navigator={this.props.navigator} 
       menu={5}
     >
-      <View style={styles.content}>
-        {/* <Image source={image} style={styles.image} /> */}
-
-        <View style={styles.textBox}>
-          <Label style={[styles.text1, styles.red]} text={'현재 개발중 입니다. (Alpha v1.0)'} />
-        </View>
-        <View style={styles.buttonBox}>
-          <FilledButton onPress={this.props.onPress} style={styles.tempButton}>
-            <LockIcon style={styles.tempIcon} />
-            <FilledButtonLabel style={styles.tempLabel}>{'로그아웃'}</FilledButtonLabel>
-          </FilledButton>
-        </View>
-      </View>
     </MainContainer>
   );
 }

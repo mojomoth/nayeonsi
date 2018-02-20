@@ -18,6 +18,4 @@ function* fetchBoardsSaga() {
 }
 
 export default function* watchBoard() {
-  yield takeEvery(actions.FETCH_TEST, testSaga);
-  yield takeEvery(actions.FETCH_BOARDS, fetchBoardsSaga);
 }

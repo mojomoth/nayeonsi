@@ -9,7 +9,7 @@ export default class Header extends Component {
   render = () => (
     <View style={styles.header}>
       <Label style={styles.headerLabel} text={this.props.label} />
-      <Button>
+      <Button onPress={this.props.onPress} style={styles.trashButton}>
         <TrashIcon style={styles.headerTrash} type="red" />
       </Button>
     </View>

@@ -7,6 +7,23 @@ import Header from './Header';
 import styles from './styles';
 
 export default class History extends Component {
+  getCardInfo = (item) => {
+    const age = parseInt((new Date).getFullYear()) - parseInt(item.year) + 1;
+    return `${age}세, ${item.job}`;
+  }
+
+  getCardImage = item => ({ uri: item.images[0] });
+
+  getCardData = (datas, isRemove) => {
+    const list = [];
+    for (const data of datas) {
+      data.isRemove = isRemove;
+      list.push(data);
+    }
+
+    return list;
+  };
+
   render = () => (
     <MainContainer 
       title={this.props.title}
@@ -15,28 +32,55 @@ export default class History extends Component {
       alarmCount={this.props.alarmCount}
       onAlarm={this.props.onAlarm}
       onPoint={this.props.onPoint}
-      isUnderline={true}
+      isLoading={this.props.isLoading}
       navigator={this.props.navigator} 
       menu={2}
+      isUnderline
     >
       <View style={styles.cards}>
-        <Header label={'나를 좋아하는 사람'} />
+        <Header label={'나를 좋아한 연애카드'} onPress={this.props.onRemoveLikeMe} />
         <FlatList
           style={styles.list}
           columnWrapperStyle={styles.listContainer}
           numColumns={3}
-          data={this.props.data}
-          renderItem={({ item }) => 
-            <Card style={styles.card} text={item.key} selected={item.selected} />}
+          data={this.getCardData(this.props.likeMe, this.props.isRemoveLikeMe)}
+          renderItem={({ item }) => (
+            <Card
+              key={item.key}
+              data={item}
+              name={item.nickname}
+              info={this.getCardInfo(item)}
+              source={this.getCardImage(item)}
+              isSecret={item.isSecret}
+              isTop={item.isTop}
+              isLocation={item.isLocation}
+              isRemove={item.isRemove}
+              onPress={() => this.props.onPress(item)}
+              onDelete={() => this.props.onDelete(item, 'me')}
+              style={styles.card} 
+            />)}
         />
-        <Header label={'주변에서 어필을 보낸사람'} />
+        <Header label={'내가 좋아하는 연애카드'} onPress={this.props.onRemoveLikeYou} />
         <FlatList
           style={styles.list}
           columnWrapperStyle={styles.listContainer}
           numColumns={3}
-          data={this.props.data}
-          renderItem={({ item }) => 
-            <Card style={styles.card} text={item.key} selected={item.selected} />}
+          data={this.getCardData(this.props.likeYou, this.props.isRemoveLikeYou)}
+          renderItem={({ item }) => (
+            <Card
+              key={item.key}
+              data={item}
+              name={item.nickname}
+              info={this.getCardInfo(item)}
+              source={this.getCardImage(item)}
+              isSecret={item.isSecret}
+              isTop={item.isTop}
+              isLocation={item.isLocation}
+              isRemove={item.isRemove}
+              onPress={() => this.props.onPress(item)}
+              onDelete={() => this.props.onDelete(item, 'you')}
+              style={styles.card} 
+            />)}
         />
       </View>
     </MainContainer>
@@ -45,7 +89,7 @@ export default class History extends Component {
 
 History.defaultProps = {
   title: '지난 연애 목록',
-  alarm: '알람ㅋㅋㅋㅋ',
+  alarm: '',
   point: 2155,
   alarmCount: 10,
   onAlarm: () => {},

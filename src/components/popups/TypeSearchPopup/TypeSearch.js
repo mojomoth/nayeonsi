@@ -7,26 +7,26 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 export default class TypeSearch extends Component {
-  render() {
-    return (
-      <ListOption>
-        <View style={styles.optionLeft}>
-          <Label style={styles.typeLabel} text={this.props.text} />
-        </View>
-        <View style={styles.optionRight}>
-          <SearchButton text={this.props.buttonText} />
-        </View>
-      </ListOption>
-    );
-  }
+  render = () => (
+    <ListOption>
+      <View style={styles.optionLeft}>
+        <Label style={styles.typeLabel} text={this.props.text} />
+      </View>
+      <View style={styles.optionRight}>
+        <SearchButton text={this.props.buttonText} onPress={this.props.onPress} />
+      </View>
+    </ListOption>
+  );
 }
 
 TypeSearch.defaultProps = {
   text: '연애타입',
   buttonText: '찾기',
+  onPress: () => {},
 };
 
 TypeSearch.propTypes = {
   text: PropTypes.string,
   buttonText: PropTypes.string,
+  onPress: PropTypes.func,
 };

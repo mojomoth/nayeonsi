@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
     borderColor: CARD_BORDER_COLOR,
     overflow: 'hidden',
   },
+  picture: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
   iconBox: {
     position: 'absolute',
     top: (SIZE - 22) * PixelRatio,
@@ -63,10 +68,21 @@ const styles = StyleSheet.create({
   },
   location: {
   },
-  trashBox: {
+  trashButton: {
     position: 'absolute',
+    left: 0,
+    top: 0,
     width: SIZE * PixelRatio,
     height: SIZE * PixelRatio,
+    borderRadius: 3.3 * PixelRatio,
+    overflow: 'hidden',
+  },
+  trashBox: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: '100%',
+    height: '100%',
     backgroundColor: CARD_DELETE_BACKGROUND_COLOR,
     opacity: 0.4,
   },

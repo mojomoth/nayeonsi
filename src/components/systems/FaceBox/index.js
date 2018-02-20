@@ -15,7 +15,7 @@ export default class FaceBox extends Component {
       <Image 
         style={[styles, this.props.style]}
         resizeMode="cover"
-        source={{ uri: this.props.uri }}
+        source={this.props.source}
       />
     );
   };
@@ -23,11 +23,15 @@ export default class FaceBox extends Component {
 
 FaceBox.defaultProps = {
   size: 80,
-  uri: 'https://s-media-cache-ak0.pinimg.com/736x/43/cd/6e/43cd6e82491bf130d97624c198ee1a3f--funny-movie-quotes-funny-movies.jpg',
+  source: null,
 };
 
 FaceBox.propTypes = {
   size: PropTypes.number,
-  uri: PropTypes.string,
+  source: PropTypes.oneOfType([
+    PropTypes.shape({
+      uri: PropTypes.string,
+    }), 
+    PropTypes.number]),
 };
 

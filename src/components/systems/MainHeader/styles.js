@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: 48.7 * PixelRatio,
     borderColor: BORDER_HEADER_COLOR,
+    paddingTop: 10 * PixelRatio,
+    paddingBottom: 10 * PixelRatio,
   },
   alarmBox: {
     flex: 1,

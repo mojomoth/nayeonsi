@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
   icon: {
     paddingHorizontal: 20 * PixelRatio,
   },
+  iconBack: {
+    paddingHorizontal: 10 * PixelRatio,
+  },
   iconBox: {
     flex: 1,
     flexDirection: 'row',

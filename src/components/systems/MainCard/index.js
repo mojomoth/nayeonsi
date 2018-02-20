@@ -13,7 +13,7 @@ export default class MainCard extends Component {
     <View style={[styles.card, this.props.style]}>
       <Button onPress={this.props.onPress}>
         <View style={styles.pictureBox}>
-          <Image source={this.props.source} />
+          <Image style={styles.picture} source={this.props.source} />
         </View>
       </Button>
 
@@ -51,6 +51,10 @@ MainCard.propTypes = {
   isSecret: PropTypes.bool,
   isTop: PropTypes.bool,
   isNearby: PropTypes.bool,
-  source: PropTypes.node,
+  source: PropTypes.oneOfType([
+    PropTypes.shape({
+      uri: PropTypes.string,
+    }), 
+    PropTypes.number]),
   onPress: PropTypes.func,
 };

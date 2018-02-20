@@ -103,7 +103,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     width,
-    paddingTop: 10 * PixelRatio,
   },
   inputWrapper: {
     flexDirection: 'row',

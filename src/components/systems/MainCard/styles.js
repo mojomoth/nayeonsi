@@ -23,6 +23,11 @@ const styles = StyleSheet.create({
     borderColor: CARD_BORDER_COLOR,
     overflow: 'hidden',
   },
+  picture: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
   iconBox: {
     position: 'absolute',
     top: (SIZE - 31) * PixelRatio,

@@ -27,6 +27,13 @@ export default (state = DEFAULT_STATE, action) => {
         isProgress: false,
       };
 
+    case 'FINISH_USER':
+      return {
+        ...state,
+        state: action.type,
+        isProgress: false,
+      };
+
     case 'GET_TARGET_USER':
       return {
         ...state,

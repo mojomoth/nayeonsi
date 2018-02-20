@@ -14,16 +14,26 @@ export default class Message extends Component {
       alarmCount={this.props.alarmCount}
       onAlarm={this.props.onAlarm}
       onPoint={this.props.onPoint}
-      isUnderline={true}
+      isLoading={this.props.isLoading}
       navigator={this.props.navigator} 
       menu={4}
+      isUnderline
     >
       <View style={styles.messages}>
         <FlatList
           style={styles.list}
           data={this.props.data}
-          renderItem={({ item }) => 
-            <Room style={styles.room} selected={item.selected} />}
+          renderItem={({ item }) => (
+            <Room 
+              style={styles.room} 
+              selected={item.selected} 
+              name={item.name}
+              text={item.text}
+              date={item.date}
+              source={item.source}
+              isOpened={item.isOpened}
+              onPress={() => this.props.onPress(item)}
+            />)}
         />
       </View>
     </MainContainer>
@@ -32,21 +42,11 @@ export default class Message extends Component {
 
 Message.defaultProps = {
   title: '메세지',
-  alarm: '알람ㅋㅋㅋㅋ',
+  alarm: '',
   point: 2155,
   alarmCount: 10,
   onAlarm: () => {},
   onPoint: () => {},
-  data: [
-    { key: 'Devin', selected: false },
-    { key: 'Jackson', selected: true },
-    { key: 'James', selected: false },
-    { key: 'Joel', selected: false },
-    { key: 'John', selected: false },
-    { key: 'Jillian', selected: false },
-    { key: 'Jimmy', selected: false },
-    { key: 'Julie', selected: false },
-  ],
 };
 
 Message.propTypes = {

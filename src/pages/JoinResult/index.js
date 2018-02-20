@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BackHandler, Alert } from 'react-native';
-import { Navigation } from 'react-native-navigation';
 import JoinResult from 'screens/JoinResult';
+import { getUser } from 'store/actions/user';
 
 class Page extends Component {
   static navigatorStyle = {
@@ -17,15 +17,8 @@ class Page extends Component {
   onBack = () => this.props.navigator.pop();
 
   onPress = () => {
-    Navigation.startSingleScreenApp({
-      screen: {
-        screen: 'Landing', // unique ID registered with Navigation.registerScreen
-        navigatorStyle: {
-        }, // override the navigator style for the screen, see "Styling the navigator" below (optional)
-        navigatorButtons: {}, // override the nav buttons for the screen, see "Adding buttons to the navigator" below (optional)
-        
-      },
-    });
+    this.props.navigator.popToRoot();
+    this.props.getUser(this.props.uid);
   };
 
   render = () => (
@@ -37,9 +30,11 @@ class Page extends Component {
 }
 
 const mapStateToProps = state => ({
+  uid: state.auth.uid,
 });
 
 const mapDispatchToProps = dispatch => ({
+  getUser: uid => dispatch(getUser(uid)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

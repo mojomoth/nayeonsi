@@ -17,7 +17,7 @@ export default class Info extends Component {
         <Label style={styles.infoLabel} text={this.props.info2} />
       </View>
       <View style={styles.rightSide}>
-        <LikeButton />
+        <LikeButton onPress={this.props.onPress} />
         <View style={styles.innerIcons}>
           <InfoIcon style={styles.locationIcon}>
             <LocationIcon style={[styles.innerIcon, styles.locationIcon]} />

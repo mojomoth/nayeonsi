@@ -9,22 +9,14 @@ import TrashIcon from 'icons/Trash';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
-export default class MainCard extends Component {
+export default class Card extends Component {
   render = () => (
     <View style={[styles.card, this.props.style]}>
       <Button onPress={this.props.onPress}>
         <View style={styles.pictureBox}>
-          <Image source={this.props.source} />
+          <Image style={styles.picture} source={this.props.source} />
         </View>
       </Button>
-
-      { this.props.isDelete ? 
-        <Button onPress={this.props.onDelete}>
-          <View style={styles.trashBox} />
-          <TrashIcon style={styles.trash} />
-        </Button>
-        : null
-      }
 
       <View style={styles.iconBox} pointerEvents="none">
         { this.props.isSecret ? 
@@ -40,28 +32,40 @@ export default class MainCard extends Component {
 
       <Label style={styles.nameLabel} text={this.props.name} />
       <Label style={styles.infoLabel} text={this.props.info} />
+
+      { this.props.isRemove ? 
+        <Button onPress={this.props.onDelete} style={styles.trashButton}>
+          <View style={styles.trashBox} />
+          <TrashIcon style={styles.trash} />
+        </Button>
+        : null
+      }
     </View>
   );
 }
 
-MainCard.defaultProps = {
+Card.defaultProps = {
   name: '프로필이름',
   info: '00세, 서울',
   isSecret: true,
   isTop: true,
   isNearby: true,
-  isDelete: false,
+  isRemove: false,
   source: null,
   onPress: () => {},
 };
 
-MainCard.propTypes = {
+Card.propTypes = {
   name: PropTypes.string,
   info: PropTypes.string,
   isSecret: PropTypes.bool,
   isTop: PropTypes.bool,
   isNearby: PropTypes.bool,
-  isDelete: PropTypes.bool,
-  source: PropTypes.node,
+  isRemove: PropTypes.bool,
+  source: PropTypes.oneOfType([
+    PropTypes.shape({
+      uri: PropTypes.string,
+    }), 
+    PropTypes.number]),
   onPress: PropTypes.func,
 };

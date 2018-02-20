@@ -5,12 +5,10 @@ import MagnifyingGlass from 'icons/MagnifyingGlass';
 import styles from './styles';
 
 export default class SearchButton extends Component {
-  render() {
-    return (
-      <FilledButton style={styles.searchButton}>
-        <FilledButtonLabel style={styles.searchButtonLabel}>{this.props.text}</FilledButtonLabel>
-        <MagnifyingGlass />
-      </FilledButton>
-    );
-  }
+  render = () => (
+    <FilledButton style={styles.searchButton} onPress={this.props.onPress}>
+      <FilledButtonLabel style={styles.searchButtonLabel}>{this.props.text}</FilledButtonLabel>
+      {/* <MagnifyingGlass /> */}
+    </FilledButton>
+  );
 }

@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 import Landing, { ANIMATE_TIME } from 'screens/Landing';
+import { checkAuthStateChanged, loginUser } from 'store/actions/auth';
 import { getUser } from 'store/actions/user';
-import { getTodayCard } from 'store/actions/card';
+import { getCards, getHistories, requestTodayCard } from 'store/actions/card';
+import { getMatches } from 'store/actions/chat';
 import firebase from 'lib/firebase';
 
-const TIME_GAP = 1000 * 60 * 60;
+const TIME_GAP = 1000 * 60 * 60 * 4;
+const database = firebase.database();
 
 class Page extends Component {
   static navigatorStyle = {
@@ -20,17 +23,24 @@ class Page extends Component {
 
   componentDidMount = () => {
     this.landing.fade(1, ANIMATE_TIME);
-console.log(this.props.uid);
-    setTimeout(this.complete, ANIMATE_TIME, this.props.uid);
-  };
+    console.log("uid : " + this.props.uid);
+    setTimeout(this.checkAuthState, ANIMATE_TIME);
+  }
 
   componentWillReceiveProps = (nextProps) => { 
-    if (nextProps.state === 'SET_USER') {
-      this.moveMain();
-
-      const database = firebase.database();
-      const { key, sex } = nextProps.user;
-
+    console.log(nextProps.userState + " " + nextProps.cardState);
+    if (nextProps.userState === 'SET_USER') {
+      const { user } = nextProps;
+      console.log(user);
+      if (user === null) {
+        this.moveLogin();
+        this.moveJoinProfile();
+        return;
+      }
+      console.log("&&&&&&&&&&&&&&");
+      const { key, sex } = user;
+      const targetGender = sex === '남자' ? '여자' : '남자';
+   
       database.ref('/cards').child(key)
         .child('today_update').once('value')
         .then((snap) => {
@@ -38,20 +48,53 @@ console.log(this.props.uid);
           const currentTime = Date.now();
 
           if (updateTime === null || currentTime >= updateTime + TIME_GAP) {
-            Alert.alert("요청!");
-            const targetGender = sex === '남자' ? '여자' : '남자';
-            this.props.getTodayCard(key, targetGender);
+            this.props.requestTodayCard(key, targetGender);
+          } else {
+            console.log("get 2222");
+            this.card(key);
           }
         });
+    } else if (nextProps.userState === 'FINISH_USER' && nextProps.cardState === 'RESPONSE_TODAY_CARD') {
+      const { key } = this.props.user;
+      console.log(key);
+      this.card(key);
+    } else if (nextProps.userState === 'FINISH_USER' && nextProps.cardState === 'FINISH_CARDS') {
+      this.moveMain();
     }
   };
 
-  complete = isUid => (
-    isUid ? this.mainAction() : this.moveLogin()
-  );
+  card = (key) => {
+    database.ref('cards').child(key).on('value', (snap) => {
+      const data = snap.val();
+      if (data !== null) {
+        this.props.getCards(data);
+      }
+    });
 
-  mainAction = async () => {
-    this.props.getUser(this.props.uid);
+    database.ref('likes').child(key).on('value', (snap) => {
+      const data = snap.val();
+      if (data !== null) {
+        this.props.getHistories(data);
+      }
+    });
+    
+    database.ref('matches').child(key).on('value', (snap) => {
+      const data = snap.val();
+      if (data !== null) {
+        this.props.getMatches(data);
+      }
+    });
+  };
+
+  checkAuthState = () => {
+    this.props.checkAuthStateChanged((user) => {
+      if (user) {
+        this.props.loginUser(user);
+        this.props.getUser(user.uid);
+      } else {
+        this.moveLogin();
+      }
+    });
   };
 
   moveMain = () => this.props.navigator.switchToTab({
@@ -64,9 +107,15 @@ console.log(this.props.uid);
     overrideBackPress: true,
   });
 
+  moveJoinProfile = () => this.props.navigator.push({
+    screen: 'JoinProfile', 
+    passProps: this.props.navigator,
+  });
+
   render = () => (
     <Landing 
       ref={(ref) => { this.landing = ref; }} 
+      isLoading={this.props.isProgress}
     />
   );
 }
@@ -74,12 +123,19 @@ console.log(this.props.uid);
 const mapStateToProps = state => ({
   uid: state.auth.uid,
   user: state.user.user,
-  state: state.user.state,
+  userState: state.user.state,
+  cardState: state.card.state,
+  isProgress: state.user.isProgress,
 });
 
 const mapDispatchToProps = dispatch => ({
+  loginUser: user => dispatch(loginUser(user)),
+  checkAuthStateChanged: callback => dispatch(checkAuthStateChanged(callback)),
   getUser: uid => dispatch(getUser(uid)),
-  getTodayCard: (key, targetGender) => dispatch(getTodayCard(key, targetGender)),
+  getCards: data => dispatch(getCards(data)),
+  getHistories: data => dispatch(getHistories(data)),
+  getMatches: data => dispatch(getMatches(data)),
+  requestTodayCard: (key, targetGender) => dispatch(requestTodayCard(key, targetGender)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

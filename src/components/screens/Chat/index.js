@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, FlatList } from 'react-native';
 import Screen from 'atoms/Screen';
+import Loading from 'systems/Loading';
 import Header from './Header';
 import TextBox from './TextBox';
 import InputBox from './InputBox';
@@ -10,16 +11,26 @@ import styles from './styles';
 export default class Chat extends Component {
   render = () => (
     <Screen style={styles.chat}>
-      <Header />
+      <Header 
+        onBack={this.props.onBack}
+        onMore={this.props.onMore}
+        source={this.props.source}
+        name={this.props.name}
+      />
       <View style={styles.boxes}>
         <FlatList
+          inverted
           style={styles.list}
           data={this.props.data}
           renderItem={({ item }) => 
             (<TextBox 
+              key={item.key}
               style={styles.room} 
               isFace={item.isFace} 
               isTime={item.isTime} 
+              text={item.text}
+              time={item.time}
+              source={item.source}
               type={item.type} 
               selected={item.selected} 
             />)
@@ -27,8 +38,15 @@ export default class Chat extends Component {
         />
       </View>
       <View style={styles.inputContainer}>
-        <InputBox />
+        <InputBox  
+          onPress={this.props.onWrite}
+          text={this.props.text}  
+          onChangeText={this.props.onChangeText}
+          onFocus={this.props.onFocusText}
+          onBlur={this.props.onBlurText}
+        />
       </View>
+      { this.props.isLoading ? <Loading /> : null }
     </Screen>
   );
 }

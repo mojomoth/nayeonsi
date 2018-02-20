@@ -26,23 +26,32 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 4.3 * PixelRatio,
   },
   backBox: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'flex-start',
   },
-  icon: {
-    paddingHorizontal: 20 * PixelRatio,
-  },
-  iconBox: {
+  moreBox: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
+  back: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    backgroundColor: '#000',
+  },
+  iconBox: {
+    paddingHorizontal: 20 * PixelRatio,
+    paddingVertical: 5 * PixelRatio,
+  },
   album: {
     width,
     height: 414 * PixelRatio,
+    margin: 0,
+    padding: 0,
   },
   albumDot: {
     width: 9.3 * PixelRatio,
@@ -64,6 +73,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 19.7 * PixelRatio,
+    overflow: 'visible',
+  },
+  rightSide: {
+    overflow: 'visible',
   },
   nameLabel: {
     fontSize: 20 * PixelRatio,
@@ -190,6 +203,17 @@ const styles = StyleSheet.create({
     borderRadius: 15 * PixelRatio,
     borderWidth: 0.7 * PixelRatio,
     borderColor: GRAY_COLOR,
+  },
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#333',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
 });
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Animated } from 'react-native';
 import Screen from 'atoms/Screen';
 import Logo from 'atoms/Logo';
+import Loading from 'systems/Loading';
 import styles from './styles';
 
 export const ANIMATE_TIME = 2000;
@@ -31,6 +32,7 @@ export default class Landing extends Component {
       >
         <Logo ref={this.logo} />
       </Animated.View>
+      { this.props.isLoading ? <Loading /> : null }
     </Screen>
   );
 }

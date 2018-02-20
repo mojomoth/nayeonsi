@@ -13,26 +13,39 @@ export default class Profile extends Component {
   render = () => (
     <Screen style={styles.profile}>
       <ScrollView>
-        <Album />
-        <FloatingHeader />
+        <Album 
+          images={this.props.images}
+        />
+        <FloatingHeader 
+          onBack={this.props.onBack}
+          onMore={this.props.onMore}
+        />
         <Info 
-          name={'헤더타이틀'}
-          info1={'저는요'}
-          info2={'직업'}
-          isNearby={true}
-          isTop={true}
+          name={this.props.name}
+          info1={this.props.info1}
+          info2={this.props.info2}
+          isNearby={this.props.isNearby}
+          isTop={this.props.isTop}
+          onPress={this.props.onPress}
         />
         <About 
-          message={'헤더타이틀'}
-          about={'저는요'}
-          job={'직업'}
-          school={'학교'}
-          religion={'종교'}
-          drink={'음주'}
-          smoke={'흡연'}
-          blood={'혈액형'}
+          message={this.props.message}
+          tall={this.props.tall}
+          shape={this.props.shape}
+          job={this.props.job}
+          school={this.props.school}
+          religion={this.props.religion}
+          drink={this.props.drink}
+          smoke={this.props.smoke}
+          blood={this.props.blood}
         />
-        <Appeal />
+        <Appeal
+          data1={this.props.data1}
+          data2={this.props.data2}
+          data3={this.props.data3}
+          data4={this.props.data4}
+          data5={this.props.data5}
+        />
       </ScrollView>
     </Screen>
   );

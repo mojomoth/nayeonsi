@@ -13,7 +13,7 @@ const FACE_SIZE = 40;
 export default class ProfileHeader extends Component {
   right = () => (
     <View style={styles.iconBox}>
-      <Button>
+      <Button onPress={this.props.onMore}>
         <View style={styles.icon}>
           <MoreIcon style={styles.more} />
         </View>
@@ -24,14 +24,14 @@ export default class ProfileHeader extends Component {
   render = () => (
     <View style={styles.header}>
       <View style={styles.backBox}>
-        <Button>
-          <View style={styles.icon}>
+        <Button onPress={this.props.onBack}>
+          <View style={styles.iconBack}>
             <BackIcon style={styles.back} />
           </View>
         </Button>
       </View>
       <View style={styles.faceBox}>
-        <FaceBox size={FACE_SIZE} style={styles.face} />
+        <FaceBox size={FACE_SIZE} style={styles.face} source={this.props.source} />
         <Label style={styles.name} text={this.props.name} />
       </View>
       

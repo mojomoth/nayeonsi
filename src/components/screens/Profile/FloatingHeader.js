@@ -9,17 +9,17 @@ export default class FloatingHeader extends Component {
   render = () => (
     <View style={styles.floatingHeader}>
       <View style={styles.backBox}>
-        <Button>
-          <View style={styles.icon}>
-            <BackIcon type="white" style={styles.back} />
+        <Button onPress={this.props.onBack}>
+          <View style={styles.iconBox}>
+            <BackIcon type="white" />
           </View>
         </Button>
       </View>
       
-      <View style={styles.iconBox}>
-        <Button>
-          <View style={styles.icon}>
-            <MoreIcon type="white" style={styles.more} />
+      <View style={styles.moreBox}>
+        <Button onPress={this.props.onMore}>
+          <View style={styles.iconBox}>
+            {/* <MoreIcon type="white" style={styles.more} /> */}
           </View>
         </Button>
       </View>

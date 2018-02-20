@@ -22,9 +22,10 @@ export default class Appeal extends Component {
       alarmCount={this.props.alarmCount}
       onAlarm={this.props.onAlarm}
       onPoint={this.props.onPoint}
-      isUnderline={true}
       navigator={this.props.navigator} 
+      isLoading={this.props.isLoading}
       menu={3}
+      isUnderline
     >
       <View style={styles.content}>
         <View style={styles.imageBox}>
@@ -44,22 +45,22 @@ export default class Appeal extends Component {
           </View>
         </View>
         <View style={styles.buttonBox}>
-          <FilledButton style={styles.secretButton}>
+          <FilledButton style={styles.secretButton} onPress={this.props.onSecret}>
             <SecretIcon style={styles.secretIcon} type="big" />
             <FilledButtonLabel style={styles.secretLabel}>{this.props.secretButton}</FilledButtonLabel>
           </FilledButton>
 
-          <FilledButton style={styles.appealButton}>
+          <FilledButton style={styles.appealButton} onPress={this.props.onAppeal}>
             <PaperPlaneIcon style={styles.appealIcon} />
             <FilledButtonLabel style={styles.appealLabel}>{this.props.appealButton}</FilledButtonLabel>
           </FilledButton>
 
-          <FilledButton style={styles.likeButton}>
+          <FilledButton style={styles.likeButton} onPress={this.props.onLike}>
             <HeartIcon style={styles.likeIcon} type="small" />
             <FilledButtonLabel style={styles.likeLabel}>{this.props.likeButton}</FilledButtonLabel>
           </FilledButton>
 
-          <Button>
+          <Button onPress={this.props.onAbout}>
             <Label style={styles.aboutAppeal} text={'내 주변 어필이 무엇인가요?'} />
           </Button>
         </View>
@@ -70,7 +71,7 @@ export default class Appeal extends Component {
 
 Appeal.defaultProps = {
   title: '내 주변 어필',
-  alarm: '알람ㅋㅋㅋㅋ',
+  alarm: '',
   point: 2155,
   alarmCount: 10,
   onAlarm: () => {},

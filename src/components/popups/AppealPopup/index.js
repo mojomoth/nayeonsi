@@ -24,13 +24,13 @@ export default class AppealPopup extends BasicPopup {
 
   footer = () => (
     <Footer  
-      point={this.props.point}
+      point={this.props.likePoint}
       aboutSecret={this.props.aboutSecret}
       secretButton={this.props.secretButton}
       appealButton={this.props.appealButton}
       cancelButton={this.props.cancelButton}
-      onSecret={this.props.onConfirm}
-      onAppeal={this.props.onConfirm}
+      onSecret={this.props.onSecret}
+      onAppeal={this.props.onAppeal}
       onCancel={this.props.onCancel}
       enabledSecret={this.props.enabledConfirm}
       enabledAppeal={this.props.enabledConfirm}
@@ -38,21 +38,20 @@ export default class AppealPopup extends BasicPopup {
     />
   );
 
-  render() {
-    return (
-      <Panel style={styles.panel}>
-        {this.header()}
-        {this.content()}
-        {this.footer()}
-      </Panel>
-    );
-  }
+  render = () => (
+    <Panel style={styles.panel}>
+      {this.header()}
+      {this.content()}
+      {this.footer()}
+    </Panel>
+  );
 }
 
 AppealPopup.defaultProps = {
   name: '불멸의이순신님',
   text: ' 님을\n좋아하세요?',
   point: 0,
+  likePoint: 0,
   aboutAppeal: '서로 좋아요를 보내면 대화를\n시작 할 수 있어요.',
   aboutSecret: '시크릿 어필은 상대방에게 프로필사진을 숨기고 보냅니다.',
   secretButton: '시크릿 어필하기',
@@ -70,6 +69,7 @@ AppealPopup.propTypes = {
   name: PropTypes.string,
   text: PropTypes.string,
   point: PropTypes.number,
+  likePoint: PropTypes.number,
   aboutAppeal: PropTypes.string,
   aboutSecret: PropTypes.string,
   secretButton: PropTypes.string,

@@ -83,7 +83,7 @@ class Page extends Component {
       onPasswordBlur={this.onPasswordBlur}
       isEmailAlarm={this.state.isEmailAlarm}
       isPasswordAlarm={this.state.isPasswordAlarm}
-      emailAlarm="올바른 이메일을 입력하세요."
+      emailAlarm={`올바른 이메일을 입력하세요.`}
       passwordAlarm={`패스워드는 ${MIN_PASSWORD_LENGTH}자 이상이어야 합니다.`}
       isLoading={this.props.isProgress}
     />

@@ -12,8 +12,11 @@ export default class InputBox extends Component {
       <TextInput 
         style={styles.textInput} 
         placeholder={this.props.label} 
-        text={this.props.text} 
-        multiline={true}
+        value={this.props.text}  
+        onChangeText={this.props.onChangeText}
+        onFocus={this.props.onFocusText}
+        onBlur={this.props.onBlurText}
+        multiline
       />
       <Button onPress={this.props.onPress}>
         <View style={this.props.inputArea}>

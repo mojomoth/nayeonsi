@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 28 * PixelRatio,
-    paddingBottom: 14 * PixelRatio,
-    paddingHorizontal: 20 * PixelRatio,
+    paddingTop: 25 * PixelRatio,
+    paddingLeft: 20 * PixelRatio,
+    paddingRight: 6 * PixelRatio,
     borderTopWidth: 0.7 * PixelRatio,
     borderBottomWidth: 0.7 * PixelRatio,
     borderColor: HISTORY_HEADER_BORDER_COLOR,
@@ -34,6 +34,9 @@ const styles = StyleSheet.create({
     paddingVertical: 27 * PixelRatio,
   },
   listContainer: {
+  },
+  trashButton: {
+    padding: 14 * PixelRatio,
   },
   card: {
     marginHorizontal: 10 * PixelRatio,

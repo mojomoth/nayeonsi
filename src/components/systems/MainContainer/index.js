@@ -4,6 +4,7 @@ import Screen from 'atoms/Screen';
 import Header from 'systems/MainHeader';
 import Alarm from 'systems/AlarmPanel';
 import Navigation from 'systems/MainNavigation';
+import Loading from 'systems/Loading';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
@@ -37,6 +38,7 @@ export default class MainContainer extends Component {
         navigator={this.props.navigator} 
         menu={this.props.menu}
       />
+      { this.props.isLoading ? <Loading /> : null }
     </Screen>
   );
 }
@@ -49,6 +51,7 @@ MainContainer.defaultProps = {
   point: 2155,
   alarmCount: 10,
   isScroll: true,
+  isLoading: false,
   onAlarm: () => {},
   onPoint: () => {},
 };
@@ -61,6 +64,7 @@ MainContainer.propTypes = {
   point: PropTypes.number,
   alarmCount: PropTypes.number,
   isScroll: PropTypes.bool,
+  isLoading: PropTypes.bool,
   onAlarm: PropTypes.func,
   onPoint: PropTypes.func,
 };

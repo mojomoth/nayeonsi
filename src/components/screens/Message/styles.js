@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { PixelRatio } from 'constants/size';
 import { 
+  COLOR,
   ROOM_NAME_COLOR,
   ROOM_TEXT_COLOR,
   ROOM_INFO_COLOR,
@@ -40,6 +41,11 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 13.3 * PixelRatio,
     color: ROOM_TEXT_COLOR,
+  },
+  openText: {
+    flex: 1,
+    fontSize: 13.3 * PixelRatio,
+    color: COLOR,
   },
   info: {
     fontSize: 13.3 * PixelRatio,
