@@ -50,7 +50,8 @@ export default class Content extends Component {
           {this.subPicture(true, '필수', this.props.picture2, this.props.onPress2, this.props.onDelete2)}
           {this.subPicture(true, '필수', this.props.picture3, this.props.onPress3, this.props.onDelete3)}
         </View>
-
+      </View>
+      <View style={styles.boxes}>
         <View style={styles.smallBoxes2}>
           {this.subPicture(false, '', this.props.picture4, this.props.onPress4, this.props.onDelete4)}
           {this.subPicture(false, '', this.props.picture5, this.props.onPress5, this.props.onDelete5)}

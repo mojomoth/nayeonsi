@@ -14,7 +14,11 @@ export default class Card extends Component {
     <View style={[styles.card, this.props.style]}>
       <Button onPress={this.props.onPress}>
         <View style={styles.pictureBox}>
-          <Image style={styles.picture} source={this.props.source} />
+          <Image 
+            style={styles.picture} 
+            resizeMethod="resize"
+            source={this.props.source} 
+          />
         </View>
       </Button>
 

@@ -40,6 +40,7 @@ export default class History extends Component {
       <View style={styles.cards}>
         <Header label={'나를 좋아한 연애카드'} onPress={this.props.onRemoveLikeMe} />
         <FlatList
+          removeClippedSubviews
           style={styles.list}
           columnWrapperStyle={styles.listContainer}
           numColumns={3}
@@ -62,6 +63,7 @@ export default class History extends Component {
         />
         <Header label={'내가 좋아하는 연애카드'} onPress={this.props.onRemoveLikeYou} />
         <FlatList
+          removeClippedSubviews
           style={styles.list}
           columnWrapperStyle={styles.listContainer}
           numColumns={3}

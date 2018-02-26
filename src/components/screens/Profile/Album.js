@@ -9,7 +9,12 @@ export default class Album extends Component {
     let key = 0;
     for (const data of datas) {
       elements.push((
-        <Image key={key} style={styles.image} source={{ uri: data }} />
+        <Image 
+          key={key} 
+          style={styles.image} 
+          source={{ uri: data }} 
+          resizeMethod="resize"
+        />
       ));
 
       key += 1;

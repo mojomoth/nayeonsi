@@ -42,7 +42,10 @@ export default class PictureBox extends Component {
     return (
       <View>
         <View style={pictureStyle}>
-          <Image style={styles.picture} source={this.props.picture} />
+          <Image 
+            style={styles.picture} 
+            source={this.props.picture} 
+          />
         </View>
         <Button onPress={this.props.onDelete} style={styles.deleteButton}>
           <DeleteIcon />

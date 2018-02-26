@@ -13,12 +13,11 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     width,
+    marginBottom: 40 * PixelRatio,
   },
   boxes: {
     paddingLeft: 20 * PixelRatio,
     paddingRight: 20 * PixelRatio,
-    paddingTop: 20 * PixelRatio,
-    paddingBottom: 20 * PixelRatio,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
@@ -27,6 +26,7 @@ const styles = StyleSheet.create({
     backgroundColor: CONTENT_HEADER_BACKGROUND_COLOR,
     borderColor: CONTENT_HEADER_BORDER_COLOR,
     borderBottomWidth: 0.7 * PixelRatio,
+    marginBottom: 20 * PixelRatio,
   },
   contentHeaderLabel: {
     textAlign: 'center',

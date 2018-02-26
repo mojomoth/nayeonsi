@@ -25,7 +25,10 @@ export default class MainContainer extends Component {
         : null
       }
       { this.props.isScroll ? 
-        <ScrollView contentContainerStyle={styles.scroll}>
+        <ScrollView 
+          contentContainerStyle={styles.scroll}
+          removeClippedSubviews
+        >
           {this.props.children}
         </ScrollView>
         :

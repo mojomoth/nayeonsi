@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 import Landing, { ANIMATE_TIME } from 'screens/Landing';
 import { checkAuthStateChanged, loginUser } from 'store/actions/auth';
@@ -28,16 +27,15 @@ class Page extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => { 
-    console.log(nextProps.userState + " " + nextProps.cardState);
     if (nextProps.userState === 'SET_USER') {
       const { user } = nextProps;
-      console.log(user);
+      
       if (user === null) {
         this.moveLogin();
         this.moveJoinProfile();
         return;
       }
-      console.log("&&&&&&&&&&&&&&");
+      
       const { key, sex } = user;
       const targetGender = sex === '남자' ? '여자' : '남자';
    
@@ -50,13 +48,11 @@ class Page extends Component {
           if (updateTime === null || currentTime >= updateTime + TIME_GAP) {
             this.props.requestTodayCard(key, targetGender);
           } else {
-            console.log("get 2222");
             this.card(key);
           }
         });
     } else if (nextProps.userState === 'FINISH_USER' && nextProps.cardState === 'RESPONSE_TODAY_CARD') {
       const { key } = this.props.user;
-      console.log(key);
       this.card(key);
     } else if (nextProps.userState === 'FINISH_USER' && nextProps.cardState === 'FINISH_CARDS') {
       this.moveMain();

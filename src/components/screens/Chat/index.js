@@ -20,6 +20,7 @@ export default class Chat extends Component {
       <View style={styles.boxes}>
         <FlatList
           inverted
+          removeClippedSubviews
           style={styles.list}
           data={this.props.data}
           renderItem={({ item }) => 

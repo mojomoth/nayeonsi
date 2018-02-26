@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import { connect } from 'react-redux';
 import MakeAlbum from 'screens/MakeAlbum';
 import firebase from 'lib/firebase';
@@ -55,26 +55,11 @@ class Page extends Component {
   onDelete5 = () => this.setState({ picture5: null });
 
   getImagePicker = (callback) => {
-    const options = {
-      title: IMAGE_PICKER_TITLE,
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-    
-    ImagePicker.showImagePicker(options, (response) => {
-      if (response.didCancel) {
-        //
-      } else if (response.error) {
-        Alert.alert(IMAGE_PICKER_TITLE, `오류발생: ${response.error}`);
-      } else {
-        // const source = { uri: response.uri };
-    
-        // You can also display the image using data:
-        const source = { uri: `data:image/jpeg;base64,${response.data}` };
-        callback(source);
-      }
+    ImagePicker.openPicker({
+      includeBase64: true,
+    }).then((image) => {
+      const source = { uri: `data:image/jpeg;base64,${image.data}` };
+      callback(source);
     });
   };
 

@@ -21,6 +21,7 @@ export default class Message extends Component {
     >
       <View style={styles.messages}>
         <FlatList
+          removeClippedSubviews
           style={styles.list}
           data={this.props.data}
           renderItem={({ item }) => (

@@ -15,6 +15,7 @@ export default class FaceBox extends Component {
       <Image 
         style={[styles, this.props.style]}
         resizeMode="cover"
+        resizeMethod="resize"
         source={this.props.source}
       />
     );
