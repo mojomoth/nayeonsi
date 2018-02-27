@@ -15,7 +15,7 @@ class Page extends Component {
       navigator={this.props.navigator}
       alarm={this.props.alarm}
       alarmCount={this.props.alarmCount}
-      onBack={this.props.onBack}
+      onBack={this.onBack}
     />
   );
 }

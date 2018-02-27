@@ -10,7 +10,7 @@ export default class PointUsePopup extends BasicPopup {
   content = () => <Content point={this.props.point} />;
   footer = () => (
     <Footer  
-      point={this.props.point}
+      point={this.props.usePoint}
       confirmButton={this.props.confirmButton}
       cancelButton={this.props.cancelButton}
       onConfirm={this.props.onConfirm}
@@ -20,20 +20,19 @@ export default class PointUsePopup extends BasicPopup {
     />
   );
 
-  render() {
-    return (
-      <Panel style={styles.panel}>
-        {this.header()}
-        {this.content()}
-        {this.footer()}
-      </Panel>
-    );
-  }
+  render = () => (
+    <Panel style={styles.panel}>
+      {this.header()}
+      {this.content()}
+      {this.footer()}
+    </Panel>
+  );
 }
 
 PointUsePopup.defaultProps = {
   title: '보유포인트',
   point: 0,
+  usePoint: 0,
   confirmButton: '포인트사용',
   cancelButton: '취소',
   onConfirm: () => {},
@@ -45,6 +44,7 @@ PointUsePopup.defaultProps = {
 PointUsePopup.propTypes = {
   title: PropTypes.string,
   point: PropTypes.number,
+  usePoint: PropTypes.number,
   confirmButton: PropTypes.string,
   cancelButton: PropTypes.string,
   onPress: PropTypes.func,

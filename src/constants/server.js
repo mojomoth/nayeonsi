@@ -6,5 +6,5 @@ export const LOCATION_APPEAL = 'https://us-central1-nayeonsi-stonewhales.cloudfu
 export const LOCATION_SECRET_APPEAL = 'https://us-central1-nayeonsi-stonewhales.cloudfunctions.net/locationSecretAppeal';
 export const LOCATION_LIKE_YOU = 'https://us-central1-nayeonsi-stonewhales.cloudfunctions.net/locationLikeYou';
 export const OPEN_CHAT = 'https://us-central1-nayeonsi-stonewhales.cloudfunctions.net/openChat';
-export const GET_POINT = 'https://us-central1-nayeonsi-stonewhales.cloudfunctions.net/getPoint';
+export const CHARGE_POINT = 'https://us-central1-nayeonsi-stonewhales.cloudfunctions.net/chargePoint';
 

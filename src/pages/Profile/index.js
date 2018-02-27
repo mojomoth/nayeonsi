@@ -3,6 +3,9 @@ import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 import Profile from 'screens/Profile';
 import AppealPopup from 'popups/AppealPopup';
+import PointUsePopup from 'popups/PointUsePopup';
+import BasicPopup from 'popups/BasicPopup';
+import { setPoint } from 'store/actions/user';
 import { requestLikeYou, requestSecretAppeal } from 'store/actions/card';
 
 class Page extends Component {
@@ -16,18 +19,25 @@ class Page extends Component {
   onCloseModal = () => this.props.navigator.dismissModal();
 
   onSecret = () => {
-    this.props.requestSecretAppeal(this.props.user.key, this.props.you);
     this.onCloseModal();
-    
-    Alert.alert('시크릿어필', `${this.props.nickname} 님에게 시크릿 어필했습니다!`);
+    this.openPointUsePopup(this.props.costs.secret, this.sendSecret);
   }
 
-  onAppeal = () => {
-    this.props.requestLikeYou(this.props.user.key, this.props.you);
+  onLike = () => {
     this.onCloseModal();
-
-    Alert.alert('좋아요', `${this.props.nickname} 님을 좋아합니다!`);
+    this.openPointUsePopup(this.props.costs.like, this.sendLike);
   }
+
+  onShop = () => this.props.navigator.push({
+    screen: 'Shop', 
+    passProps: this.props.navigator,
+    overrideBackPress: true,
+  });
+
+  onMoveShop = () => {
+    this.onCloseModal();
+    this.onShop();
+  };
 
   onPress = () => this.props.navigator.showModal({
     screen: 'Modal', 
@@ -35,13 +45,69 @@ class Page extends Component {
       popup: <AppealPopup 
         name={this.props.nickname}
         point={this.props.point}
-        likePoint={0}
+        likePoint={this.props.costs.like}
         onSecret={this.onSecret}
-        onAppeal={this.onAppeal}
+        onAppeal={this.onLike}
         onCancel={this.onCloseModal}
       />,
     },
   });
+
+  openPointUsePopup = (usePoint, onConfiem) => this.props.navigator.showModal({
+    screen: 'Modal', 
+    passProps: {
+      popup: <PointUsePopup 
+        point={this.props.point}
+        usePoint={usePoint}
+        onConfirm={onConfiem}
+        onCancel={this.onCloseModal} 
+      />,
+    },
+  });
+  
+  openNotEnoughPointPopup = () => this.props.navigator.showModal({
+    screen: 'Modal', 
+    passProps: {
+      popup: <BasicPopup 
+        title="포인트가 부족합니다."
+        text="상점으로 이동해서 포인트를 충전해주세요."
+        buttonText="상점으로 이동"
+        onPress={this.onMoveShop}
+      />,
+    },
+  });
+
+  sendSecret = () => {
+    if (this.props.point < this.props.costs.secret) {
+      this.onCloseModal();
+      this.openNotEnoughPointPopup();
+      return;
+    }
+
+    // set to client
+    this.props.setPoint({ point: this.props.point - this.props.costs.secret });
+
+    this.props.requestSecretAppeal(this.props.user.key, this.props.you);
+    this.onCloseModal();
+    
+    Alert.alert('시크릿어필', `${this.props.nickname} 님에게 시크릿 어필했습니다!`);
+  };
+
+  sendLike = () => {
+    if (this.props.point < this.props.costs.like) {
+      this.onCloseModal();
+      this.openNotEnoughPointPopup();
+      return;
+    }
+
+    // set to client
+    this.props.setPoint({ point: this.props.point - this.props.costs.like });
+
+    this.props.requestLikeYou(this.props.user.key, this.props.you);
+    this.onCloseModal();
+
+    Alert.alert('좋아요', `${this.props.nickname} 님을 좋아합니다!`);
+  };
 
   render = () => {
     const age = parseInt((new Date).getFullYear()) - parseInt(this.props.year) + 1;
@@ -85,9 +151,12 @@ class Page extends Component {
 
 const mapStateToProps = state => ({
   user: state.user.user,
+  point: state.user.point,
+  costs: state.user.costs,
 });
 
 const mapDispatchToProps = dispatch => ({
+  setPoint: data => dispatch(setPoint(data)),
   requestLikeYou: (key, you) => dispatch(requestLikeYou(key, you)),
   requestSecretAppeal: (key, you) => dispatch(requestSecretAppeal(key, you)),
   

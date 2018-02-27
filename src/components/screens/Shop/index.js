@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import Screen from 'atoms/Screen';
 import SubHeader from 'systems/SubHeader';
+import Loading from 'systems/Loading';
 import Point from './Point';
 import Item from './Item';
 import styles from './styles';
@@ -30,6 +31,7 @@ export default class Shop extends Component {
         <Item point="80" discount="15% off" cost="$ 8.99" onPress={() => this.props.onPress(80)} />
         <Item point="35" discount="" cost="$ 4.49" onPress={() => this.props.onPress(35)} />
       </ScrollView>
+      { this.props.isLoading ? <Loading /> : null }
     </Screen>
   );
 }

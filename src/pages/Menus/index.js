@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 import Menus from 'screens/Menus';
 import { logoutUser } from 'store/actions/auth';
@@ -8,17 +9,41 @@ class Page extends Component {
     navBarHidden: true,
   };
 
-  onLogout = () => {
-    this.props.logoutUser();
-    this.props.navigator.switchToTab({
-      tabIndex: 0,
-    });
-    this.props.navigator.push({
-      screen: 'Login', 
-      passProps: this.props.navigator,
-      overrideBackPress: true,
-    });
-  };
+  onProfile = () => this.props.navigator.push({
+    screen: 'ProfileSetting', 
+    passProps: this.props.navigator,
+    overrideBackPress: true,
+  });
+  
+  onShop = () => this.props.navigator.push({
+    screen: 'Shop', 
+    passProps: this.props.navigator,
+    overrideBackPress: true,
+  });
+  
+  onSetting = () => this.props.navigator.push({
+    screen: 'Setting', 
+    passProps: this.props.navigator,
+    overrideBackPress: true,
+  });
+  
+  onNotice = () => this.props.navigator.push({
+    screen: 'Notice', 
+    passProps: this.props.navigator,
+    overrideBackPress: true,
+  });
+  
+  onEvent = () => this.props.navigator.push({
+    screen: 'Event', 
+    passProps: this.props.navigator,
+    overrideBackPress: true,
+  });
+
+  onHelp = () => Alert.alert('내 메뉴', '준비중 입니다.');
+  onSupport = () => Alert.alert('내 메뉴', '준비중 입니다.');
+
+  getImage = () => ({ uri: this.props.user.images[0] });
+  getPoint = () => `보유 포인트 ${this.props.point}`;
 
   render = () => (
     <Menus
@@ -27,6 +52,17 @@ class Page extends Component {
       alarm={this.props.alarm}
       isLoading={this.props.isProgress}
       onLogout={this.onLogout}
+      source={this.getImage()}
+      name={this.props.user.nickname}
+      pointLabel={this.getPoint()}
+      onProfile={this.onProfile}
+      onShop={this.onShop}
+      onSetting={this.onSetting}
+      onNotice={this.onNotice}
+      onEvent={this.onEvent}
+      onHelp={this.onHelp}
+      onSupport={this.onSupport}
+      onPoint={this.onShop}
     />
   );
 }

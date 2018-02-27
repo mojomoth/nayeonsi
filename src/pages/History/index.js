@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import History from 'screens/History';
-import { removeHistory } from 'store/actions/card';
+import { setHistories, removeHistory } from 'store/actions/card';
 
 class Page extends Component {
   static navigatorStyle = {
@@ -23,10 +23,36 @@ class Page extends Component {
     }); 
   };
 
-  onDelete = (data, category) => this.props.removeHistory(this.props.user.key, category, data.key);
+  onDelete = (data, category) => {
+    const cards = { 
+      you: this.props.likeYou,
+      me: this.props.likeMe,
+    };
+
+    const list = cards[category];
+    for (const item of list) {
+      if (item.key === data.key) {
+        const index = list.indexOf(item);
+        list.splice(index, 1);
+        break;
+      }
+    }
+  
+    // remove to client
+    this.props.setHistories(cards);
+
+    // remove to firebase
+    this.props.removeHistory(this.props.user.key, category, data.key);
+  };
 
   onRemoveLikeMe = () => this.setState({ isRemoveLikeMe: !this.state.isRemoveLikeMe });
   onRemoveLikeYou = () => this.setState({ isRemoveLikeYou: !this.state.isRemoveLikeYou });
+
+  onShop = () => this.props.navigator.push({
+    screen: 'Shop', 
+    passProps: this.props.navigator,
+    overrideBackPress: true,
+  });
 
   render = () => (
     <History
@@ -41,6 +67,7 @@ class Page extends Component {
       onRemoveLikeYou={this.onRemoveLikeYou}
       onPress={this.onPress}
       onDelete={this.onDelete}
+      onPoint={this.onShop}
       isLoading={this.props.isProgress}
     />
   );
@@ -56,6 +83,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  setHistories: data => dispatch(setHistories(data)),
   removeHistory: (key, category, cardKey) => dispatch(removeHistory(key, category, cardKey)),
 });
 

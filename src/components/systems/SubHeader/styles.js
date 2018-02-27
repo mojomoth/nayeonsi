@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  backButton: {
+    paddingHorizontal: 20 * PixelRatio,
+    paddingVertical: 10 * PixelRatio,
+  },
 });
 
 export default styles;

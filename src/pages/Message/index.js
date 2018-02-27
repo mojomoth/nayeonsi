@@ -44,6 +44,12 @@ class Page extends Component {
     }
   };
 
+  onShop = () => this.props.navigator.push({
+    screen: 'Shop', 
+    passProps: this.props.navigator,
+    overrideBackPress: true,
+  });
+
   getRooms = (data) => {
     const datas = [];
     
@@ -81,6 +87,7 @@ class Page extends Component {
       isLoading={this.props.isProgress || this.state.isLoading}
       data={this.getRooms(this.props.rooms)}
       onPress={this.onPress}
+      onPoint={this.onShop}
     />
   );
 }

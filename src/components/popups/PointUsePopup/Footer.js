@@ -8,26 +8,24 @@ import PointButtonLabel from './PointButtonLabel';
 import styles from './styles';
 
 export default class Footer extends Component {
-  render() {
-    return (
-      <View style={styles.footer}>
-        <FilledButton 
-          style={styles.button} 
-          onPress={this.props.onConfirm}
-          enabled={this.props.enabledConfirm}
-        >
-          <FilledButtonLabel>{this.props.confirmButton}</FilledButtonLabel>
-          <PointButtonLabel point={this.props.point} />
-        </FilledButton>
+  render = () => (
+    <View style={styles.footer}>
+      <FilledButton 
+        style={styles.button} 
+        onPress={this.props.onConfirm}
+        enabled={this.props.enabledConfirm}
+      >
+        <FilledButtonLabel>{this.props.confirmButton}</FilledButtonLabel>
+        <PointButtonLabel point={this.props.point} />
+      </FilledButton>
 
-        <OutlineButton 
-          style={styles.button} 
-          onPress={this.props.onCancel}
-          enabled={this.props.enabledCancel}
-        >
-          <OutlineButtonLabel>{this.props.cancelButton}</OutlineButtonLabel>
-        </OutlineButton>
-      </View>
-    );
-  }
+      <OutlineButton 
+        style={styles.button} 
+        onPress={this.props.onCancel}
+        enabled={this.props.enabledCancel}
+      >
+        <OutlineButtonLabel>{this.props.cancelButton}</OutlineButtonLabel>
+      </OutlineButton>
+    </View>
+  );
 }

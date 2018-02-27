@@ -18,7 +18,7 @@ import Notice from 'pages/Notice';
 import Event from 'pages/Event';
 import Setting from 'pages/Setting';
 import ProfileSetting from 'pages/ProfileSetting';
-import Store from 'pages/Store';
+import Shop from 'pages/Shop';
 
 // screen related book keeping
 const registerScreens = (store, Provider) => {
@@ -41,7 +41,7 @@ const registerScreens = (store, Provider) => {
   Navigation.registerComponent('Event', () => Event, store, Provider);
   Navigation.registerComponent('Setting', () => Setting, store, Provider);
   Navigation.registerComponent('ProfileSetting', () => ProfileSetting, store, Provider);
-  Navigation.registerComponent('Store', () => Store, store, Provider);
+  Navigation.registerComponent('Shop', () => Shop, store, Provider);
 };
 
 export default registerScreens;

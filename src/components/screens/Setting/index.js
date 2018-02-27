@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import Screen from 'atoms/Screen';
 import SubHeader from 'systems/SubHeader';
@@ -25,23 +25,27 @@ export default class Setting extends Component {
         removeClippedSubviews
       >
         <View style={styles.top}>
-          <View style={styles.topLeft}><GPS onPress={this.props.onGPS} isActivate={this.props.isGPS} /></View>
-          <View style={styles.topRight}><Alarm onPress={this.props.onAlarm} isActivate={this.props.isAlarm} /></View>
+          <View style={styles.topLeft}>
+            <GPS onPress={this.props.onGPS} isActivate={this.props.isGPS} />
+          </View>
+          <View style={styles.topRight}>
+            <Alarm onPress={this.props.onAlarm} isActivate={this.props.isAlarm} />
+          </View>
         </View>
 
         <View style={styles.box}>
-          <SwitchItem text="소개" onPress={this.props.onMeet} enabled={this.props.isMeet} />
+          <SwitchItem text="소개" onPress={this.props.onMeet} isActivate={this.props.isMeet} />
         </View>
         
         <Label style={styles.infoLabel} text="비활성 시 소개를 받을 수 없으며, 상대방에게도 소개되지 않습니다." />
         
         <View style={styles.box}>
-          <SwitchItem text="알림 소리 및 진동" onPress={this.props.onAlarm} enabled={this.props.isNoti} />
-          <SwitchItem text="오늘의 연애 알림" onPress={this.props.onToday} enabled={this.props.isToday} />
-          <SwitchItem text="좋아요 알림" onPress={this.props.onLike} enabled={this.props.isLike} />
-          <SwitchItem text="어필 알림" onPress={this.props.onAppeal} enabled={this.props.isAppeal} />
-          <SwitchItem text="연결 성사 알림" onPress={this.props.onConnect} enabled={this.props.isConnect} />
-          <SwitchItem text="대화 알림" onPress={this.props.onChat} enabled={this.props.isChat} />
+          <SwitchItem text="알림 소리 및 진동" onPress={this.props.onNoti} isActivate={this.props.isNoti} />
+          <SwitchItem text="오늘의 연애 알림" onPress={this.props.onToday} isActivate={this.props.isToday} />
+          <SwitchItem text="좋아요 알림" onPress={this.props.onLike} isActivate={this.props.isLike} />
+          <SwitchItem text="어필 알림" onPress={this.props.onAppeal} isActivate={this.props.isAppeal} />
+          <SwitchItem text="연결 성사 알림" onPress={this.props.onConnect} isActivate={this.props.isConnect} />
+          <SwitchItem text="대화 알림" onPress={this.props.onChat} isActivate={this.props.isChat} />
         </View>
 
         <View style={styles.box}>

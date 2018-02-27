@@ -19,6 +19,13 @@ export const getHistories = data => ({
   },
 });
 
+export const setHistories = data => ({
+  type: 'SET_HISTORIES',
+  payload: {
+    ...data,
+  },
+});
+
 export const removeHistory = (key, category, cardKey) => ({
   type: 'REMOVE_HISTORY',
   payload: {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Landing, { ANIMATE_TIME } from 'screens/Landing';
 import { checkAuthStateChanged, loginUser } from 'store/actions/auth';
-import { getUser } from 'store/actions/user';
+import { getUser, getPoint, getCosts } from 'store/actions/user';
 import { getCards, getHistories, requestTodayCard } from 'store/actions/card';
 import { getMatches } from 'store/actions/chat';
 import firebase from 'lib/firebase';
@@ -28,6 +28,7 @@ class Page extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => { 
+    console.log(nextProps);
     if (nextProps.userState === 'SET_USER') {
       const { user } = nextProps;
       
@@ -49,34 +50,48 @@ class Page extends Component {
           if (updateTime === null || currentTime >= updateTime + TIME_GAP) {
             this.props.requestTodayCard(key, targetGender);
           } else {
-            this.card(key);
+            this.connect(key);
           }
         });
     } else if (nextProps.userState === 'FINISH_USER' && nextProps.cardState === 'RESPONSE_TODAY_CARD') {
       const { key } = this.props.user;
-      this.card(key);
-    } else if (nextProps.userState === 'FINISH_USER' && nextProps.cardState === 'FINISH_CARDS') {
+      this.connect(key);
+    } else if (nextProps.userState === 'FINISH_POINT' && nextProps.cardState === 'FINISH_HISTORIES') {
       startMainScreen();
       this.moveMain();
     }
   };
 
-  card = (key) => {
-    database.ref('cards').child(key).on('value', (snap) => {
+  connect = async (key) => {
+    await database.ref('costs').on('value', (snap) => {
+      const data = snap.val();
+      if (data !== null) {
+        this.props.getCosts(data);
+      }
+    });
+
+    await database.ref('points').child(key).on('value', (snap) => {
+      const data = snap.val();
+      if (data !== null) {
+        this.props.getPoint(data);
+      }
+    });
+
+    await database.ref('cards').child(key).on('value', (snap) => {
       const data = snap.val();
       if (data !== null) {
         this.props.getCards(data);
       }
     });
 
-    database.ref('likes').child(key).on('value', (snap) => {
+    await database.ref('likes').child(key).on('value', (snap) => {
       const data = snap.val();
       if (data !== null) {
         this.props.getHistories(data);
       }
     });
     
-    database.ref('matches').child(key).on('value', (snap) => {
+    await database.ref('matches').child(key).on('value', (snap) => {
       const data = snap.val();
       if (data !== null) {
         this.props.getMatches(data);
@@ -86,6 +101,7 @@ class Page extends Component {
 
   checkAuthState = () => {
     this.props.checkAuthStateChanged((user) => {
+      console.log(user);
       if (user) {
         this.props.loginUser(user);
         this.props.getUser(user.uid);
@@ -130,6 +146,8 @@ const mapDispatchToProps = dispatch => ({
   loginUser: user => dispatch(loginUser(user)),
   checkAuthStateChanged: callback => dispatch(checkAuthStateChanged(callback)),
   getUser: uid => dispatch(getUser(uid)),
+  getCosts: data => dispatch(getCosts(data)),
+  getPoint: data => dispatch(getPoint(data)),
   getCards: data => dispatch(getCards(data)),
   getHistories: data => dispatch(getHistories(data)),
   getMatches: data => dispatch(getMatches(data)),

@@ -23,14 +23,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    marginLeft: 16.7 * PixelRatio,
+    paddingLeft: 16.7 * PixelRatio,
   },
   pointBox: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'baseline',
     justifyContent: 'flex-end',
-    marginRight: 16.7 * PixelRatio,
+    paddingRight: 16.7 * PixelRatio,
+    paddingVertical: 3 * PixelRatio,
   },
   pointLabel: {
     position: 'relative',
