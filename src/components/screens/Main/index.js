@@ -48,7 +48,7 @@ export default class Main extends Component {
         onPoint={this.props.onPoint}
         isUnderline={false}
         navigator={this.props.navigator} 
-        menu={1}
+        menu={0}
       >
         <View style={styles.cards}>
           {this.cards(this.props.data)}

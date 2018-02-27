@@ -16,7 +16,7 @@ export default class Message extends Component {
       onPoint={this.props.onPoint}
       isLoading={this.props.isLoading}
       navigator={this.props.navigator} 
-      menu={4}
+      menu={3}
       isUnderline
     >
       <View style={styles.messages}>

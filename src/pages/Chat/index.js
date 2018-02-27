@@ -105,6 +105,7 @@ class Page extends Component {
         infoData.text = `${time.getFullYear()}.${time.getMonth() + 1}.${time.getDate()} ${this.getDayOfTheWeek(time.getDay())}`;
         infoData.type = 0;
         datas.push(infoData);
+        messageKey += 1;
       }
 
       data.type = key === this.props.user.key ? 1 : 2;

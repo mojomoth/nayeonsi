@@ -16,7 +16,7 @@ const database = firebase.database();
 function* getCards(action) {
   const { data } = action.payload;
   const cards = [];
-console.log(data);
+
   if (data.today !== null && data.today !== undefined) {
     for (const d of Object.keys(data.today)) {
       const snap = yield database.ref('/users').child(d).once('value');

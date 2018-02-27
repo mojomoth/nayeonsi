@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import registerScreens from './screens';
 import store from 'store';
 import { persistStore } from 'redux-persist';
-import { startMainScreen } from 'lib/navigator';
+import { startMainScreen, startLandingScreen } from 'lib/navigator';
 
 // registerScreens(store, Provider);
 // startMainScreen();
@@ -12,6 +12,6 @@ import { startMainScreen } from 'lib/navigator';
 //   null, 
 //   () => {
     registerScreens(store, Provider);
-    startMainScreen();
+    startLandingScreen();
 //   },
 // );

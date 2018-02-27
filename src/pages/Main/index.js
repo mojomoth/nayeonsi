@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Alert } from 'react-native';
 import Main from 'screens/Main';
 import TypeSearchPopup from 'popups/TypeSearchPopup';
 import { getAttractions, requestTypeCard } from 'store/actions/card';

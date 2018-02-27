@@ -6,6 +6,7 @@ import { getUser } from 'store/actions/user';
 import { getCards, getHistories, requestTodayCard } from 'store/actions/card';
 import { getMatches } from 'store/actions/chat';
 import firebase from 'lib/firebase';
+import { startMainScreen, startLandingScreen } from 'lib/navigator';
 
 const TIME_GAP = 1000 * 60 * 60 * 4;
 const database = firebase.database();
@@ -55,6 +56,7 @@ class Page extends Component {
       const { key } = this.props.user;
       this.card(key);
     } else if (nextProps.userState === 'FINISH_USER' && nextProps.cardState === 'FINISH_CARDS') {
+      startMainScreen();
       this.moveMain();
     }
   };

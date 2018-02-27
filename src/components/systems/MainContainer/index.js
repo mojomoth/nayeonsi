@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
 import Screen from 'atoms/Screen';
 import Header from 'systems/MainHeader';
+import SubHeader from 'systems/SubHeader';
 import Alarm from 'systems/AlarmPanel';
 import Navigation from 'systems/MainNavigation';
 import Loading from 'systems/Loading';
@@ -11,15 +12,24 @@ import styles from './styles';
 export default class MainContainer extends Component {
   render = () => (
     <Screen style={styles.screen}>
-      <Header 
-        style={styles.header} 
-        isUnderline={this.props.isUnderline} 
-        title={this.props.title}
-        point={this.props.point}
-        alarm={this.props.alarmCount}
-        onAlarm={this.props.onAlarm}
-        onPoint={this.props.onPoint}
-      />
+      { this.props.isMain ? 
+        <Header 
+          style={styles.header} 
+          isUnderline={this.props.isUnderline} 
+          title={this.props.title}
+          point={this.props.point}
+          alarm={this.props.alarmCount}
+          onAlarm={this.props.onAlarm}
+          onPoint={this.props.onPoint}
+        />
+      :
+        <SubHeader
+          style={styles.header}
+          isUnderline={this.props.isUnderline} 
+          title={this.props.title}
+          onBack={this.props.onBack}
+        />
+      }
       { this.props.alarm !== null && this.props.alarm !== '' ?
         <Alarm text={this.props.alarm} />
         : null
@@ -37,10 +47,13 @@ export default class MainContainer extends Component {
         </View>
       }
 
-      <Navigation 
-        navigator={this.props.navigator} 
-        menu={this.props.menu}
-      />
+      { this.props.isNavigation ? 
+        <Navigation 
+          navigator={this.props.navigator} 
+          menu={this.props.menu}
+        />
+        : null
+      }
       { this.props.isLoading ? <Loading /> : null }
     </Screen>
   );
@@ -54,9 +67,12 @@ MainContainer.defaultProps = {
   point: 2155,
   alarmCount: 10,
   isScroll: true,
+  isNavigation: true,
   isLoading: false,
+  isMain: true,
   onAlarm: () => {},
   onPoint: () => {},
+  onBack: () => {},
 };
 
 MainContainer.propTypes = {
@@ -67,8 +83,11 @@ MainContainer.propTypes = {
   point: PropTypes.number,
   alarmCount: PropTypes.number,
   isScroll: PropTypes.bool,
+  isNavigation: PropTypes.bool,
+  isMain: PropTypes.bool,
   isLoading: PropTypes.bool,
   onAlarm: PropTypes.func,
   onPoint: PropTypes.func,
+  onBack: PropTypes.func,
 };
 

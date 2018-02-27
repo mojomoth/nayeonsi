@@ -13,12 +13,6 @@ export const startMainScreen = () =>
   Navigation.startTabBasedApp({
     tabs: [
       {
-        screen: 'Landing', 
-        icon: require('assets/images/icTabSetting.png'),
-        selectedIcon: require('assets/images/icTabSettingPre.png'),
-        navigatorStyle: { navBarHidden: true },
-      },
-      {
         screen: 'Main', 
         icon: require('assets/images/icTabHome.png'),
         selectedIcon: require('assets/images/icTabHomePre.png'),
@@ -45,8 +39,8 @@ export const startMainScreen = () =>
       },
       {
         screen: 'Menus', 
-        icon: require('assets/images/icTabSetting.png'),
-        selectedIcon: require('assets/images/icTabSettingPre.png'),
+        icon: require('assets/images/icTabHome.png'),
+        selectedIcon: require('assets/images/icTabHomePre.png'),
         navigatorStyle: { navBarHidden: true },
       },
     ],

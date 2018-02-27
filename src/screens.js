@@ -14,6 +14,11 @@ import Message from 'pages/Message';
 import Menus from 'pages/Menus';
 import Profile from 'pages/Profile';
 import Chat from 'pages/Chat';
+import Notice from 'pages/Notice';
+import Event from 'pages/Event';
+import Setting from 'pages/Setting';
+import ProfileSetting from 'pages/ProfileSetting';
+import Store from 'pages/Store';
 
 // screen related book keeping
 const registerScreens = (store, Provider) => {
@@ -32,6 +37,11 @@ const registerScreens = (store, Provider) => {
   Navigation.registerComponent('Menus', () => Menus, store, Provider);
   Navigation.registerComponent('Profile', () => Profile, store, Provider);
   Navigation.registerComponent('Chat', () => Chat, store, Provider);
+  Navigation.registerComponent('Notice', () => Notice, store, Provider);
+  Navigation.registerComponent('Event', () => Event, store, Provider);
+  Navigation.registerComponent('Setting', () => Setting, store, Provider);
+  Navigation.registerComponent('ProfileSetting', () => ProfileSetting, store, Provider);
+  Navigation.registerComponent('Store', () => Store, store, Provider);
 };
 
 export default registerScreens;

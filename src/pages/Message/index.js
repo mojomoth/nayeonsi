@@ -20,7 +20,7 @@ class Page extends Component {
       return;
     }
 
-    if (nextProps.chatState === 'SET_CHAT') {
+    if (nextProps.chatState === 'FINISH_CHAT') {
       this.setState({ isLoading: false });
 
       this.props.navigator.push({

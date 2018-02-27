@@ -24,7 +24,7 @@ export default class Appeal extends Component {
       onPoint={this.props.onPoint}
       navigator={this.props.navigator} 
       isLoading={this.props.isLoading}
-      menu={3}
+      menu={2}
       isUnderline
     >
       <View style={styles.content}>
@@ -45,11 +45,6 @@ export default class Appeal extends Component {
           </View>
         </View>
         <View style={styles.buttonBox}>
-          <FilledButton style={styles.secretButton} onPress={this.props.onSecret}>
-            <SecretIcon style={styles.secretIcon} type="big" />
-            <FilledButtonLabel style={styles.secretLabel}>{this.props.secretButton}</FilledButtonLabel>
-          </FilledButton>
-
           <FilledButton style={styles.appealButton} onPress={this.props.onAppeal}>
             <PaperPlaneIcon style={styles.appealIcon} />
             <FilledButtonLabel style={styles.appealLabel}>{this.props.appealButton}</FilledButtonLabel>
@@ -58,6 +53,11 @@ export default class Appeal extends Component {
           <FilledButton style={styles.likeButton} onPress={this.props.onLike}>
             <HeartIcon style={styles.likeIcon} type="small" />
             <FilledButtonLabel style={styles.likeLabel}>{this.props.likeButton}</FilledButtonLabel>
+          </FilledButton>
+
+          <FilledButton style={styles.secretButton} onPress={this.props.onSecret}>
+            <SecretIcon style={styles.secretIcon} type="big" />
+            <FilledButtonLabel style={styles.secretLabel}>{this.props.secretButton}</FilledButtonLabel>
           </FilledButton>
 
           <Button onPress={this.props.onAbout}>

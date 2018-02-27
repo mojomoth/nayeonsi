@@ -3,7 +3,11 @@ import { PixelRatio } from 'constants/size';
 import { 
   COLOR,
   BLACK_COLOR,
-  FONT_TEXT_COLOR,
+  WHITE_COLOR,
+  BORDER_BOTTOM_COLOR,
+  MENUS_BACKGROUND_COLOR,
+  MENUS_FONT_COLOR,
+  MENUS_SUB_FONT_COLOR,
 } from 'constants/color';
 import Dimensions from 'Dimensions';
 
@@ -11,47 +15,77 @@ const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   content: {
-    justifyContent: 'flex-start',
+    backgroundColor: MENUS_BACKGROUND_COLOR,
   },
-  image: {
+  profileBox: {
     width,
-    height: 478 * PixelRatio,
-    resizeMode: 'contain',
-  },
-  buttonBox: {
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    padding: 33.3 * PixelRatio,
+    borderBottomWidth: 0.7 * PixelRatio,
+    borderColor: BORDER_BOTTOM_COLOR,
+    backgroundColor: WHITE_COLOR,
   },
-  red: {
-    color: COLOR,
-  },
-  black: {
+  profileName: {
+    fontSize: 16.8 * PixelRatio,
     color: BLACK_COLOR,
+    marginVertical: 9.3 * PixelRatio,
   },
-  gray: {
-    color: FONT_TEXT_COLOR,
+  profileButton: {
+    width: 93.3 * PixelRatio,
+    height: 23.3 * PixelRatio,
   },
-  text1: {
-    fontSize: 15.6 * PixelRatio,
-    lineHeight: 23.6 * PixelRatio,
+  profileButtonLabel: {
+    fontSize: 13.2 * PixelRatio,
   },
-  textBox: {
-    flex: 1,
+  menuBox: {
+    width,
+    marginTop: 10 * PixelRatio,
+    borderTopWidth: 0.7 * PixelRatio,
+    borderColor: BORDER_BOTTOM_COLOR,
+    backgroundColor: WHITE_COLOR,
+  },
+  menuButton: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 20 * PixelRatio,
+    paddingVertical: 15 * PixelRatio,
+    borderBottomWidth: 0.7 * PixelRatio,
+    borderColor: BORDER_BOTTOM_COLOR,
+  },
+  menuLeft: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  menuRight: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  menuRound: {
+    width: 26.7 * PixelRatio,
+    height: 26.7 * PixelRatio,
+    marginRight: 9.7 * PixelRatio,
+    borderRadius: 26.7 * 0.5 * PixelRatio,
+    backgroundColor: COLOR,
     justifyContent: 'center',
-    marginTop: 10 * PixelRatio,
-    marginBottom: 10 * PixelRatio,
+    alignItems: 'center',
   },
-  tempButton: {
-    width: 374 * PixelRatio,
+  menuLabel: {
+    alignSelf: 'center',
+    fontSize: 17 * PixelRatio,
+    lineHeight: 28 * PixelRatio,
+    color: MENUS_FONT_COLOR,
   },
-  tempLabel: {
-    fontSize: 18 * PixelRatio,
+  menuSubLabel: {
+    fontSize: 14 * PixelRatio,
+    color: MENUS_SUB_FONT_COLOR,
   },
-  tempIcon: {
-    marginRight: 10 * PixelRatio,
-    tintColor: '#FFFFFF',
+  menuArrow: {
+    marginLeft: 13 * PixelRatio,
   },
 });
 

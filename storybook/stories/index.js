@@ -48,11 +48,31 @@ import Appeal from 'screens/Appeal';
 import Message from 'screens/Message';
 import Chat from 'screens/Chat';
 import Profile from 'screens/Profile';
+import Menus from 'screens/Menus';
+import Notice from 'screens/Notice';
+import Event from 'screens/Event';
+import Shop from 'screens/Shop';
+import Setting from 'screens/Setting';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Wrapper')} />);
 
-storiesOf('Sceen', module)
+storiesOf('Screen', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .add('Shop', () => (
+    <Shop />
+  ))
+  .add('Setting', () => (
+    <Setting />
+  ))
+  .add('Notice', () => (
+    <Notice />
+  ))
+  .add('Event', () => (
+    <Event />
+  ))
+  .add('Menus', () => (
+    <Menus />
+  ))
   .add('Profile', () => (
     <Profile />
   ))

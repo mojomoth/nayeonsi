@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   view: {
+    flex: 1,
     width,
     alignItems: 'center',
     justifyContent: 'center',

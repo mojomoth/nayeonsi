@@ -34,7 +34,7 @@ export default class History extends Component {
       onPoint={this.props.onPoint}
       isLoading={this.props.isLoading}
       navigator={this.props.navigator} 
-      menu={2}
+      menu={1}
       isUnderline
     >
       <View style={styles.cards}>
