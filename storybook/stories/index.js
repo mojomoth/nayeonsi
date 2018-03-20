@@ -23,6 +23,7 @@ import TextInput from 'atoms/TextInput';
 import MailIcon from 'icons/Mail';
 import Navigation from 'systems/MainNavigation';
 import MainContainer from 'systems/MainContainer';
+import AppealResult from 'systems/AppealResult';
 
 import BasicPopup from 'popups/BasicPopup';
 import SelectPopup from 'popups/SelectPopup';
@@ -53,11 +54,19 @@ import Notice from 'screens/Notice';
 import Event from 'screens/Event';
 import Shop from 'screens/Shop';
 import Setting from 'screens/Setting';
+import Withdraw from 'screens/Withdraw';
+import ProfileSetting from 'screens/ProfileSetting';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Wrapper')} />);
 
 storiesOf('Screen', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .add('ProfileSetting', () => (
+    <ProfileSetting />
+  ))
+  .add('Withdraw', () => (
+    <Withdraw />
+  ))
   .add('Shop', () => (
     <Shop />
   ))
@@ -159,6 +168,9 @@ storiesOf('Navigation', module)
   ))
   .add('MainContainer', () => (
     <MainContainer />
+  ))
+  .add('AppealResult', () => (
+    <AppealResult />
   )); 
   
 storiesOf('Button', module)

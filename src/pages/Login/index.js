@@ -3,6 +3,7 @@ import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 import Login from 'screens/Login';
 import PasswordSendPopup from 'popups/PasswordSendPopup';
+import BasicPopup from 'popups/BasicPopup';
 import { loginEmailUser } from 'store/actions/auth';
 import { getUser } from 'store/actions/user';
 import { fetchTest } from 'store/actions/test';
@@ -20,7 +21,17 @@ class Page extends Component {
 
   componentWillReceiveProps = (nextProps) => { 
     if (nextProps.authState === 'LOGIN_USER_FAILED') {
-      Alert.alert('회원가입', nextProps.error);
+      this.props.navigator.showModal({
+        screen: 'Modal', 
+        passProps: {
+          popup: <BasicPopup 
+            title="로그인실패"
+            text="아이디/비밀번호를 확인해주세요."
+            buttonText="확인"
+            onPress={this.onCloseModal}
+          />,
+        },
+      });
     }
 
     if (nextProps.userState === 'SET_USER') {
