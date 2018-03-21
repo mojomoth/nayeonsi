@@ -10,6 +10,16 @@ const DEFAULT_STATE = {
 
 export default (state = DEFAULT_STATE, { type, payload }) => {
   switch (type) {
+    case 'INITIALIZE_AUTH':
+      return {
+        ...state,
+        uid: null,
+        isProgress: false,
+        isError: false,
+        error: '',
+        state: '',
+      };
+
     case 'LOGIN_EMAIL_USER':
       return {
         ...state,
@@ -81,6 +91,31 @@ export default (state = DEFAULT_STATE, { type, payload }) => {
         isProgress: false,
         isError: false,
         error: '',
+        state: type,
+      };
+
+    case 'CHANGE_PASSWORD':
+      return {
+        ...state,
+        isProgress: true,
+        isError: false,
+        state: type,
+      };
+
+    case 'CHANGE_PASSWORD_FAILED':
+      return {
+        ...state,
+        isProgress: false,
+        isError: true,
+        error: payload,
+        state: type,
+      };
+
+    case 'CHANGE_PASSWORD_COMPLETE':
+      return {
+        ...state,
+        isProgress: false,
+        isError: false,
         state: type,
       };
 

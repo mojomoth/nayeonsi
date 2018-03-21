@@ -51,6 +51,19 @@ function* createWithEmailProvider(action) {
   }
 }
 
+function* changePassword(action) {
+  const { password, newPassword } = action.payload;
+
+  const credential = firebase.auth.EmailAuthProvider.credential(auth.currentUser.email, password);
+  try {
+    yield auth.currentUser.reauthenticateWithCredential(credential);
+    yield auth.currentUser.updatePassword(newPassword);
+    yield put({ type: 'CHANGE_PASSWORD_COMPLETE' });
+  } catch (e) {
+    yield put({ type: 'CHANGE_PASSWORD_FAILED', payload: e.message });
+  }
+}
+
 function checkAuthStateChanged(action) {
   auth.onAuthStateChanged(action.payload);
 }
@@ -66,4 +79,5 @@ export default function* authSagas() {
   yield takeEvery('CREATE_EMAIL_USER', createWithEmailProvider);
   yield takeEvery('CHECK_AUTH_STATE_CHANGED', checkAuthStateChanged);
   yield takeEvery('LOGOUT_USER', logoutUser);
+  yield takeEvery('CHANGE_PASSWORD', changePassword);
 }

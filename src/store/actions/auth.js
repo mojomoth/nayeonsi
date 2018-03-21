@@ -37,3 +37,15 @@ export const loginUser = user => ({
 export const logoutUser = () => ({
   type: 'LOGOUT_USER',
 });
+
+export const changePassword = (password, newPassword) => ({
+  type: 'CHANGE_PASSWORD',
+  payload: {
+    password,
+    newPassword,
+  },
+});
+
+export const initializeAuth = () => ({
+  type: 'INITIALIZE_AUTH',
+});

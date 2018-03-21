@@ -7,7 +7,15 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 export default class PasswordChangePopup extends BasicPopup {
-  content = () => <Content data={this.props.data} />;
+  content = () => (
+    <Content 
+      data={this.props.data} 
+      onChangeCurrentPassword={this.props.onChangeCurrentPassword}
+      onChangeNewPassword={this.props.onChangeNewPassword}
+      onChangeRepeatPassword={this.props.onChangeRepeatPassword}
+    />
+  );
+
   footer = () => (
     <Footer  
       confirmButton={this.props.confirmButton}
@@ -19,15 +27,13 @@ export default class PasswordChangePopup extends BasicPopup {
     />
   );
 
-  render() {
-    return (
-      <Panel style={styles.panel}>
-        {this.header()}
-        {this.content()}
-        {this.footer()}
-      </Panel>
-    );
-  }
+  render = () => (
+    <Panel style={styles.panel}>
+      {this.header()}
+      {this.content()}
+      {this.footer()}
+    </Panel>
+  );
 }
 
 PasswordChangePopup.defaultProps = {

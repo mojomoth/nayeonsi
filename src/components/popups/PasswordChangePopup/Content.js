@@ -7,24 +7,37 @@ import ArrowIcon from 'icons/Arrow';
 import styles from './styles';
 
 export default class Content extends Component {
-  render() {
-    return (
-      <View style={styles.content}>
-        <InputWrapper style={styles.wrapper}>
-          <LockIcon />
-          <TextInput style={styles.textInput} placeholder="현재 비밀번호" />
-        </InputWrapper>
+  render = () => (
+    <View style={styles.content}>
+      <InputWrapper style={styles.wrapper}>
+        <LockIcon />
+        <TextInput 
+          style={styles.textInput} 
+          onChangeText={this.props.onChangeCurrentPassword} 
+          placeholder="현재 비밀번호" 
+          secureTextEntry
+        />
+      </InputWrapper>
 
-        <InputWrapper style={styles.wrapper}>
-          <ArrowIcon />
-          <TextInput style={styles.textInput} placeholder="변경될 비밀번호" />
-        </InputWrapper>
+      <InputWrapper style={styles.wrapper}>
+        <ArrowIcon />
+        <TextInput 
+          style={styles.textInput} 
+          onChangeText={this.props.onChangeNewPassword} 
+          placeholder="변경될 비밀번호" 
+          secureTextEntry
+        />
+      </InputWrapper>
 
-        <InputWrapper style={styles.wrapper}>
-          <ArrowIcon />
-          <TextInput style={styles.textInput} placeholder="변경될 비밀번호 확인" />
-        </InputWrapper>
-      </View>
-    );
-  }
+      <InputWrapper style={styles.wrapper}>
+        <ArrowIcon />
+        <TextInput 
+          style={styles.textInput} 
+          onChangeText={this.props.onChangeRepeatPassword} 
+          placeholder="변경될 비밀번호 확인" 
+          secureTextEntry
+        />
+      </InputWrapper>
+    </View>
+  );
 }

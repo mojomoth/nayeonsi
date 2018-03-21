@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 import EmailJoin from 'screens/EmailJoin';
+import BasicPopup from 'popups/BasicPopup';
 import { isEmail } from 'utils/validator';
 import { createEmailUser } from 'store/actions/auth';
 
@@ -21,7 +21,7 @@ class Page extends Component {
 
   componentWillReceiveProps = (nextProps) => { 
     if (nextProps.state === 'CREATE_EMAIL_USER_FAILED') {
-      Alert.alert('회원가입', nextProps.error);
+      this.openPopup('회원가입', nextProps.error);
     }
 
     if (nextProps.state === 'CREATED_EMAIL_USER') {
@@ -58,6 +58,23 @@ class Page extends Component {
 
   onPasswordFocus = () => {};
   onPasswordBlur = () => {};
+
+  onCloseModal = () => {
+    this.props.navigator.dismissModal({ animationType: 'fade' });
+  };
+
+  openPopup = (title, text) => this.props.navigator.showModal({
+    screen: 'Modal', 
+    animationType: 'fade',
+    passProps: {
+      popup: <BasicPopup 
+        title={title}
+        text={text}
+        buttonText="확인"
+        onPress={this.onCloseModal}
+      />,
+    },
+  });
 
   nextStep = () => this.props.navigator.push({
     screen: 'JoinProfile', 

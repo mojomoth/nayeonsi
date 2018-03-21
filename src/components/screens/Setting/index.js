@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { ScrollView, View, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import Screen from 'atoms/Screen';
-import SubHeader from 'systems/SubHeader';
 import Label from 'atoms/Label';
+import SubHeader from 'systems/SubHeader';
+import Loading from 'systems/Loading';
 import GPS from './GPS';
 import Alarm from './Alarm';
 import SwitchItem from './SwitchItem';
@@ -81,6 +82,7 @@ export default class Setting extends Component {
           <Label style={styles.versionLabel} text={this.props.version} />
         </View>
       </ScrollView>
+      { this.props.isLoading ? <Loading /> : null }
     </Screen>
   );
 }
