@@ -49,3 +49,12 @@ export const changePassword = (password, newPassword) => ({
 export const initializeAuth = () => ({
   type: 'INITIALIZE_AUTH',
 });
+
+export const withdraw = (uid, key, user) => ({
+  type: 'WITHDRAW',
+  payload: {
+    uid,
+    key,
+    user,
+  },
+});

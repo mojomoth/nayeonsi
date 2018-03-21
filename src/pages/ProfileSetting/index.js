@@ -921,7 +921,6 @@ class Page extends Component {
     if (this.state.picture1) {
       if (this.state.picture1.uri.indexOf('http') > -1) {
         const base64Data = await this.uriToBase64(this.state.picture1.uri);
-        console.log(base64Data);
         const url = await this.uploadImage(base64Data, 'image/jpeg');
         data.push(url);
       } else {

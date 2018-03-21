@@ -5,6 +5,8 @@ const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
+const database = firebase.database();
+
 function* loginWithProvider(provider) {
   try {
     const user = yield auth.signInWithPopup(provider);
@@ -55,6 +57,7 @@ function* changePassword(action) {
   const { password, newPassword } = action.payload;
 
   const credential = firebase.auth.EmailAuthProvider.credential(auth.currentUser.email, password);
+  
   try {
     yield auth.currentUser.reauthenticateWithCredential(credential);
     yield auth.currentUser.updatePassword(newPassword);
@@ -62,6 +65,40 @@ function* changePassword(action) {
   } catch (e) {
     yield put({ type: 'CHANGE_PASSWORD_FAILED', payload: e.message });
   }
+}
+
+function* withdraw(action) {
+  const { uid, key, user } = action.payload;
+  const { email } = auth.currentUser;
+
+  try {
+    auth.currentUser.delete();
+  } catch (e) {
+    yield put({ type: 'WITHDRAW_FAILED', payload: e.message });
+  }
+
+  yield database.ref('widthdraw').child(email).set({
+    key: user,
+    time: Date.now(),
+  });
+
+  yield database.ref('/users').child(key).remove();
+  yield database.ref('/modify_users').child(key).remove();
+  yield database.ref('/cards').child(key).remove();
+  yield database.ref('/genders').child(user.gender).child(key).remove();
+  yield database.ref('/locations').child(user.location).child(key).remove();
+  yield database.ref('/likes').child(key).remove();
+  yield database.ref('/matches').child(key).remove();
+  yield database.ref('/points').child(key).remove();
+
+  for (const attraction of user.attraction.split(', ')) {
+    yield database.ref('/attractions').child(attraction).child(user.gender).child(key).remove();
+  }
+
+  yield database.ref('/nicknames').child(user.nickname).remove();
+  yield database.ref('/user_links').child(uid).remove();
+
+  yield put({ type: 'WITHDRAW_COMPLETE' });
 }
 
 function checkAuthStateChanged(action) {
@@ -80,4 +117,5 @@ export default function* authSagas() {
   yield takeEvery('CHECK_AUTH_STATE_CHANGED', checkAuthStateChanged);
   yield takeEvery('LOGOUT_USER', logoutUser);
   yield takeEvery('CHANGE_PASSWORD', changePassword);
+  yield takeEvery('WITHDRAW', withdraw);
 }

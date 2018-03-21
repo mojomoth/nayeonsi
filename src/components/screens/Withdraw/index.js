@@ -38,7 +38,6 @@ export default class Widthdraw extends Component {
           onBlur={this.props.onBlur} 
           onFocus={this.props.onFocus} 
           onChangeText={this.props.onChangeText} 
-          onPress={this.props.onPress} 
           isAlarm={this.props.isAlarm}
           isComplete={this.props.isComplete}
           isFocus={this.props.isFocus}
@@ -59,11 +58,9 @@ export default class Widthdraw extends Component {
 Widthdraw.defaultProps = {
   title: '서비스 탈퇴',
   onBack: () => {},
-  point: 120,
 };
 
 Widthdraw.propTypes = {
   title: PropTypes.string,
   onBack: PropTypes.func,
-  point: PropTypes.number,
 };

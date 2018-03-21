@@ -86,7 +86,7 @@ function* setAttractions() {
 function* getHistories(action) {
   const { data } = action.payload;
   const cards = { you: [], me: [] };
-console.log('11111111');
+
   if (data.you !== null && data.you !== undefined) {
     for (const d of Object.keys(data.you)) {
       const snap = yield database.ref('/users').child(d).once('value');
@@ -98,7 +98,7 @@ console.log('11111111');
       cards.you.push(user);
     }
   }
-  console.log('22222');
+  
   if (data.me !== null && data.me !== undefined) {
     for (const d of Object.keys(data.me)) {
       const snap = yield database.ref('/users').child(d).once('value');
@@ -110,7 +110,7 @@ console.log('11111111');
       cards.me.push(user);
     }
   }
-  console.log('33333');
+  
   yield put({ type: 'SET_HISTORIES', payload: cards });
 }
 

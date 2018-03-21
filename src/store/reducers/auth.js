@@ -119,6 +119,31 @@ export default (state = DEFAULT_STATE, { type, payload }) => {
         state: type,
       };
 
+    case 'WITHDRAW':
+      return {
+        ...state,
+        isProgress: true,
+        isError: false,
+        state: type,
+      };
+
+    case 'WITHDRAW_FAILED':
+      return {
+        ...state,
+        isProgress: false,
+        isError: true,
+        error: payload,
+        state: type,
+      };
+
+    case 'WITHDRAW_COMPLETE':
+      return {
+        ...state,
+        isProgress: false,
+        isError: false,
+        state: type,
+      };
+
     default:
       return state;
   }
