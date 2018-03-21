@@ -132,7 +132,7 @@ class Page extends Component {
 const mapStateToProps = state => ({
   point: state.user.point,
   user: state.user.user,
-  costs: state.user.costs,
+  costs: state.app.costs,
   cards: state.card.cards,
   attractions: state.card.attractions,
   isProgress: state.card.isProgress,

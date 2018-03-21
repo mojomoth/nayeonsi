@@ -38,7 +38,6 @@ export default (state = DEFAULT_STATE, action) => {
       };
 
     case 'SET_NOTICE':
-    console.log(action.payload);
       return {
         ...state,
         notice: action.payload,

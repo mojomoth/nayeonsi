@@ -155,7 +155,7 @@ class Page extends Component {
 const mapStateToProps = state => ({
   user: state.user.user,
   point: state.user.point,
-  costs: state.user.costs,
+  costs: state.app.costs,
 });
 
 const mapDispatchToProps = dispatch => ({
