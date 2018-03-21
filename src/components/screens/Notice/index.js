@@ -27,6 +27,9 @@ export default class Notice extends Component {
           data={this.props.data}
           renderItem={({ item }) => (
             <Article
+              title={item.title}
+              text={item.text}
+              time={item.time}
             />)}
         />
       </View>

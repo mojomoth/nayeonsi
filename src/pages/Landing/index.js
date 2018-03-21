@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Landing, { ANIMATE_TIME } from 'screens/Landing';
 import { checkAuthStateChanged, loginUser } from 'store/actions/auth';
-import { getCosts } from 'store/actions/app';
+import { getCosts, getNotice, getEvent } from 'store/actions/app';
 import { getUser, getPoint, finishPoint } from 'store/actions/user';
 import { getCards, finishCards, getHistories, requestTodayCard } from 'store/actions/card';
 import { getMatches } from 'store/actions/chat';
@@ -107,6 +107,20 @@ class Page extends Component {
         this.props.getMatches(data);
       }
     });
+    
+    await database.ref('notice').on('value', (snap) => {
+      const data = snap.val();
+      if (data !== null) {
+        this.props.getNotice(data);
+      }
+    });
+    
+    await database.ref('event').on('value', (snap) => {
+      const data = snap.val();
+      if (data !== null) {
+        this.props.getEvent(data);
+      }
+    });
   };
 
   checkAuthState = () => {
@@ -163,6 +177,8 @@ const mapDispatchToProps = dispatch => ({
   finishCards: data => dispatch(finishCards(data)),
   getHistories: data => dispatch(getHistories(data)),
   getMatches: data => dispatch(getMatches(data)),
+  getNotice: data => dispatch(getNotice(data)),
+  getEvent: data => dispatch(getEvent(data)),
   requestTodayCard: (key, targetGender) => dispatch(requestTodayCard(key, targetGender)),
 });
 

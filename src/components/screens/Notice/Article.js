@@ -8,7 +8,7 @@ export default class Article extends Component {
   render = () => (
     <View style={styles.article}>
       <Label style={styles.title} text={this.props.title} />
-      <Label style={styles.date} text={this.props.date} />
+      <Label style={styles.date} text={this.props.time} />
       <Label style={styles.text} text={this.props.text} />
     </View>
   );
