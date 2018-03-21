@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Alert } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import { connect } from 'react-redux';
 import MakeAlbum from 'screens/MakeAlbum';
+import BasicPopup from 'popups/BasicPopup';
 import firebase from 'lib/firebase';
 import RNFetchBlob from 'react-native-fetch-blob';
 
@@ -24,6 +24,7 @@ class Page extends Component {
     picture3: null,
     picture4: null,
     picture5: null,
+    picture6: null,
     isLoading: false,
   };
 
@@ -35,7 +36,7 @@ class Page extends Component {
       && this.state.picture3 !== null;
 
     if (!isValid) {
-      Alert.alert('회원가입', '필수 사진을 올려주세요.');
+      this.openPopup('회원가입', '필수 사진을 올려주세요.');
       return;
     }
 
@@ -47,12 +48,18 @@ class Page extends Component {
   onPress3 = () => this.getImagePicker(source => this.setState({ picture3: source }));
   onPress4 = () => this.getImagePicker(source => this.setState({ picture4: source }));
   onPress5 = () => this.getImagePicker(source => this.setState({ picture5: source }));
+  onPress6 = () => this.getImagePicker(source => this.setState({ picture6: source }));
 
   onDelete1 = () => this.setState({ picture1: null });
   onDelete2 = () => this.setState({ picture2: null });
   onDelete3 = () => this.setState({ picture3: null });
   onDelete4 = () => this.setState({ picture4: null });
   onDelete5 = () => this.setState({ picture5: null });
+  onDelete6 = () => this.setState({ picture6: null });
+
+  onCloseModal = () => {
+    this.props.navigator.dismissModal({ animationType: 'fade' });
+  };
 
   getImagePicker = (callback) => {
     ImagePicker.openPicker({
@@ -62,6 +69,19 @@ class Page extends Component {
       callback(source);
     });
   };
+
+  openPopup = (title, text) => this.props.navigator.showModal({
+    screen: 'Modal', 
+    animationType: 'fade',
+    passProps: {
+      popup: <BasicPopup 
+        title={title}
+        text={text}
+        buttonText="확인"
+        onPress={this.onCloseModal}
+      />,
+    },
+  });
 
   join = async () => {
     const data = {
@@ -99,11 +119,7 @@ class Page extends Component {
   };
 
   write = async (data) => {
-    const uid = this.props.uid;
-
-    await firebase.database().ref('users').child(uid).set({
-      ...data,
-    });
+    const { uid } = this.props;
 
     const key = await firebase.database().ref('users').push().key;
     await firebase.database().ref('user_links').child(uid).set(key);
@@ -150,6 +166,11 @@ class Page extends Component {
       data.push(url);
     }
 
+    if (this.state.picture6) {
+      const url = await this.uploadImage(this.state.picture6.uri.split(',')[1], 'image/jpeg');
+      data.push(url);
+    }
+
     return data;
   };
 
@@ -189,16 +210,19 @@ class Page extends Component {
       onPress3={this.onPress3}
       onPress4={this.onPress4}
       onPress5={this.onPress5}
+      onPress6={this.onPress6}
       onDelete1={this.onDelete1}
       onDelete2={this.onDelete2}
       onDelete3={this.onDelete3}
       onDelete4={this.onDelete4}
       onDelete5={this.onDelete5}
+      onDelete6={this.onDelete6}
       picture1={this.state.picture1}
       picture2={this.state.picture2}
       picture3={this.state.picture3}
       picture4={this.state.picture4}
       picture5={this.state.picture5}
+      picture6={this.state.picture6}
       isLoading={this.state.isLoading}
     />
   );

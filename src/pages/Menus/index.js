@@ -3,17 +3,26 @@ import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 import Menus from 'screens/Menus';
 import { logoutUser } from 'store/actions/auth';
+import { getModifyUser } from 'store/actions/user';
 
 class Page extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
 
-  onProfile = () => this.props.navigator.push({
-    screen: 'ProfileSetting', 
-    passProps: this.props.navigator,
-    overrideBackPress: true,
-  });
+  componentWillReceiveProps = (nextProps) => { 
+    if (nextProps.userState === 'FINISH_MODIFY_USER') {
+      this.props.navigator.push({
+        screen: 'ProfileSetting', 
+        passProps: this.props.navigator,
+        overrideBackPress: true,
+      });
+    }
+  }
+
+  onProfile = () => {
+    this.props.getModifyUser(this.props.user.key);
+  };
   
   onShop = () => this.props.navigator.push({
     screen: 'Shop', 
@@ -70,10 +79,13 @@ class Page extends Component {
 const mapStateToProps = state => ({
   point: state.user.point,
   user: state.user.user,
+  userState: state.user.state,
+  isProgress: state.user.isProgress,
 });
 
 const mapDispatchToProps = dispatch => ({
   logoutUser: () => dispatch(logoutUser()),
+  getModifyUser: key => dispatch(getModifyUser(key)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

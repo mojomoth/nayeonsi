@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { PixelRatio } from 'constants/size';
-import { COLOR } from 'constants/color';
+import { COLOR, LIGHTGRAY_COLOR } from 'constants/color';
 
 const styles = StyleSheet.create({
   button: {
@@ -10,6 +10,11 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     alignSelf: 'center',
+  },
+  placeholder: {
+    flex: 1,
+    alignSelf: 'center',
+    color: LIGHTGRAY_COLOR,
   },
   alarmLabel: {
     color: COLOR,

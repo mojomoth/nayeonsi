@@ -29,15 +29,16 @@ export default class Menus extends Component {
       navigator={this.props.navigator} 
       menu={4}
       isScroll={false}
+      isLoading={this.props.isLoading}
       isUnderline
     >
       <ScrollView style={styles.content} removeClippedSubviews>
         <View style={styles.profileBox}>
           <FaceBox size={SIZE} style={styles.face} source={this.props.source} />
           <Label style={styles.profileName} text={this.props.name} />
-          {/* <OutlineButton style={styles.profileButton} onPress={this.props.onProfile}>
+          <OutlineButton style={styles.profileButton} onPress={this.props.onProfile}>
             <OutlineButtonLabel style={styles.profileButtonLabel}>프로필 보기</OutlineButtonLabel>
-          </OutlineButton> */}
+          </OutlineButton>
         </View>
         <View style={styles.menuBox}>
           <Menu 

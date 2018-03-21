@@ -19,7 +19,8 @@ export default class Event extends Component {
       alarmCount={this.props.alarmCount}
       navigator={this.props.navigator} 
       menu={4}
-      isUnderline
+      isUnderline   
+      isLoading={this.props.isLoading}
       isScroll={false}
       isMain={false}
       onBack={this.props.onBack}

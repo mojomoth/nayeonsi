@@ -5,6 +5,13 @@ export const getCards = data => ({
   },
 });
 
+export const finishCards = data => ({
+  type: 'FINISH_CARDS',
+  payload: {
+    data,
+  },
+});
+
 export const getAttractions = data => ({
   type: 'GET_ATTRACTIONS',
   payload: {

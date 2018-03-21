@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Alert, Keyboard } from 'react-native';
+import { Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import MakeProfile from 'screens/MakeProfile';
+import BasicPopup from 'popups/BasicPopup';
 import SelectPopup from 'popups/SelectPopup';
 
 const MIN_NICKNAME = 4;
@@ -14,34 +15,34 @@ class Page extends Component {
 
   state = {
     nickname: { 
-      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
+      isFocus: false, isAlarm: false, isComplete: false, text: '',
     },
     year: { 
-      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', isBlur: false,
+      isFocus: false, isAlarm: false, isComplete: false, text: '',
     },
     sex: { 
-      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
+      isFocus: false, isAlarm: false, isComplete: false, text: '',
     },
     tall: { 
-      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
+      isFocus: false, isAlarm: false, isComplete: false, text: '',
     },
     shape: { 
-      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
+      isFocus: false, isAlarm: false, isComplete: false, text: '',
     },
     blood: { 
-      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
+      isFocus: false, isAlarm: false, isComplete: false, text: '',
     },
     religion: { 
-      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
+      isFocus: false, isAlarm: false, isComplete: false, text: '',
     },
     smoke: { 
-      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
+      isFocus: false, isAlarm: false, isComplete: false, text: '',
     },
     drink: { 
-      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
+      isFocus: false, isAlarm: false, isComplete: false, text: '',
     },
     phone: { 
-      isFocus: false, isAlarm: false, isComplete: false, text: '', alarm: '', 
+      isFocus: false, isAlarm: false, isComplete: false, text: '',
     },
   };
 
@@ -56,10 +57,18 @@ class Page extends Component {
     && this.state.blood.isComplete
     && this.state.religion.isComplete
     && this.state.smoke.isComplete
-    && this.state.drink.isComplete;
+    && this.state.drink.isComplete
+    && this.state.phone.isComplete;
 
     if (!isValid) {
-      Alert.alert('회원가입', '프로필을 완성해주세요.');
+      if (this.state.nickname.isComplete === false) {
+        this.openPopup('회원가입', `닉네임을 ${MIN_NICKNAME}글자 이상 입력하세요`);
+      } else if (this.state.phone.isComplete === false) {
+        this.openPopup('회원가입', `연락처를 ${MIN_PHONE}글자 이상 입력하세요`);
+      } else {
+        this.openPopup('회원가입', '프로필을 완성해주세요.');
+      }
+
       return;
     }
 
@@ -172,7 +181,6 @@ class Page extends Component {
       },
     });
     this.onCloseModal();
-    Keyboard.dismiss();
   };
     
   onSexBlur = () => 
@@ -432,13 +440,29 @@ class Page extends Component {
   };
 
   onCloseModal = () => {
-    this.props.navigator.dismissModal();
+    this.props.navigator.dismissModal({ animationType: 'fade' });
     Keyboard.dismiss();
   };
 
-  openSelectPopup = (title, data, onSelected, contentHeight = null, isCloseButton = true) => 
+  openPopup = (title, text) => this.props.navigator.showModal({
+    screen: 'Modal', 
+    animationType: 'fade',
+    passProps: {
+      popup: <BasicPopup 
+        title={title}
+        text={text}
+        buttonText="확인"
+        onPress={this.onCloseModal}
+      />,
+    },
+  });
+
+  openSelectPopup = (title, data, onSelected, contentHeight = null, isCloseButton = true) => {
+    Keyboard.dismiss();
+
     this.props.navigator.showModal({
       screen: 'Modal', 
+      animationType: 'fade',
       passProps: {
         navigator: this.props.navigator,
         popup: <SelectPopup 
@@ -451,6 +475,7 @@ class Page extends Component {
         />,
       },
     });
+  };
 
   render = () => (
     <MakeProfile

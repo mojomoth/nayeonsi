@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { PixelRatio } from 'constants/size';
 import { 
   WHITE_COLOR,
+  BLACK_COLOR,
   GRAY_COLOR,
   CONTENT_HEADER_BACKGROUND_COLOR,
   CONTENT_HEADER_BORDER_COLOR,
@@ -25,6 +26,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: PROFILE_SETTING_BACKGROUND,
+  },
+  form: {
+    width,
   },
   content: {
     flex: 1,
@@ -90,6 +94,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  infoFocusHeader: {
+    width,
+    height: 56.7 * PixelRatio,
+    backgroundColor: PROFILE_SETTING_INFO_BACKGROUND,
+    borderColor: PROFILE_SETTING_INFO_BORDER,
+    borderTopWidth: 0.7 * PixelRatio,
+    borderBottomWidth: 0.7 * PixelRatio,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   infoHeaderLabel: {
     fontSize: 15.6 * PixelRatio,
     color: GRAY_COLOR,
@@ -100,6 +114,16 @@ const styles = StyleSheet.create({
   },
   buttonLabel: {
     fontSize: 19.8 * PixelRatio,
+  },
+  cover: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: BLACK_COLOR,
+    opacity: 0.5,
   },
 });
 

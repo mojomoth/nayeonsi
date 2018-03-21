@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BackHandler, Alert } from 'react-native';
+import { BackHandler } from 'react-native';
 import JoinResult from 'screens/JoinResult';
 import { getUser } from 'store/actions/user';
 

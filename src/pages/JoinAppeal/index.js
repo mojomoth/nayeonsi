@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Alert, Keyboard } from 'react-native';
+import { Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import MakeAppeal from 'screens/MakeAppeal';
+import BasicPopup from 'popups/BasicPopup';
 import SelectPopup from 'popups/SelectPopup';
 import ItemSelectPopup from 'popups/ItemSelectPopup';
 
@@ -387,7 +388,7 @@ class Page extends Component {
       && this.state.play.isComplete;
 
     if (!isValid) {
-      Alert.alert('회원가입', '프로필을 완성해주세요.');
+      this.openPopup('회원가입', '프로필을 완성해주세요.');
       return;
     }
 
@@ -419,9 +420,22 @@ class Page extends Component {
   }
 
   onCloseModal = () => {
-    this.props.navigator.dismissModal();
+    this.props.navigator.dismissModal({ animationType: 'fade' });
     Keyboard.dismiss();
   };
+
+  openPopup = (title, text) => this.props.navigator.showModal({
+    screen: 'Modal', 
+    animationType: 'fade',
+    passProps: {
+      popup: <BasicPopup 
+        title={title}
+        text={text}
+        buttonText="확인"
+        onPress={this.onCloseModal}
+      />,
+    },
+  });
 
   mergeSelectedItem = (items, selectedItem) => {
     const selectedItems = [];
@@ -438,9 +452,12 @@ class Page extends Component {
     return selectedItems.join(', ');
   };
 
-  openSelectPopup = (title, data, onSelected, contentHeight = null, isCloseButton = true) => 
+  openSelectPopup = (title, data, onSelected, contentHeight = null, isCloseButton = true) => {
+    Keyboard.dismiss();
+    
     this.props.navigator.showModal({
       screen: 'Modal', 
+      animationType: 'fade',
       passProps: {
         navigator: this.props.navigator,
         popup: <SelectPopup 
@@ -453,10 +470,14 @@ class Page extends Component {
         />,
       },
     });
+  };
 
-  openItemSelectPopup = (title, data, state, onSelected, contentHeight = null) => 
+  openItemSelectPopup = (title, data, state, onSelected, contentHeight = null) => {
+    Keyboard.dismiss();
+
     this.props.navigator.showModal({
       screen: 'Modal', 
+      animationType: 'fade',
       passProps: {
         navigator: this.props.navigator,
         popup: <ItemSelectPopup 
@@ -469,6 +490,7 @@ class Page extends Component {
         />,
       },
     });
+  };
 
   render = () => (
     <MakeAppeal

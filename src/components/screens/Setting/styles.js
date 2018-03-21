@@ -118,6 +118,11 @@ const styles = StyleSheet.create({
     lineHeight: 27 * PixelRatio,
     color: SETTING_FONT_COLOR,
   },
+  itemBoxFocusLabel: {
+    fontSize: 18 * PixelRatio,
+    lineHeight: 27 * PixelRatio,
+    color: COLOR,
+  },
   subBoxLabel: {
     fontSize: 15.3 * PixelRatio,
     color: SETTING_FONT_COLOR,

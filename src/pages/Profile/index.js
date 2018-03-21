@@ -16,7 +16,7 @@ class Page extends Component {
   onBack = () => this.props.navigator.pop();
   onMore = () => {};
 
-  onCloseModal = () => this.props.navigator.dismissModal();
+  onCloseModal = () => this.props.navigator.dismissModal({ animationType: 'fade' });
 
   onSecret = () => {
     this.onCloseModal();
@@ -41,6 +41,7 @@ class Page extends Component {
 
   onPress = () => this.props.navigator.showModal({
     screen: 'Modal', 
+    animationType: 'fade',
     passProps: {
       popup: <AppealPopup 
         name={this.props.nickname}
@@ -55,6 +56,7 @@ class Page extends Component {
 
   openPointUsePopup = (usePoint, onConfiem) => this.props.navigator.showModal({
     screen: 'Modal', 
+    animationType: 'fade',
     passProps: {
       popup: <PointUsePopup 
         point={this.props.point}
@@ -67,6 +69,7 @@ class Page extends Component {
   
   openNotEnoughPointPopup = () => this.props.navigator.showModal({
     screen: 'Modal', 
+    animationType: 'fade',
     passProps: {
       popup: <BasicPopup 
         title="포인트가 부족합니다."

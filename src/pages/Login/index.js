@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Alert } from 'react-native';
+import { Linking } from 'react-native';
 import { connect } from 'react-redux';
 import Login from 'screens/Login';
 import PasswordSendPopup from 'popups/PasswordSendPopup';
 import BasicPopup from 'popups/BasicPopup';
-import { loginEmailUser } from 'store/actions/auth';
+import { loginFacebookUser, loginEmailUser } from 'store/actions/auth';
 import { getUser } from 'store/actions/user';
 import { fetchTest } from 'store/actions/test';
 
@@ -21,17 +21,7 @@ class Page extends Component {
 
   componentWillReceiveProps = (nextProps) => { 
     if (nextProps.authState === 'LOGIN_USER_FAILED') {
-      this.props.navigator.showModal({
-        screen: 'Modal', 
-        passProps: {
-          popup: <BasicPopup 
-            title="로그인실패"
-            text="아이디/비밀번호를 확인해주세요."
-            buttonText="확인"
-            onPress={this.onCloseModal}
-          />,
-        },
-      });
+      this.openPopup('로그인 실패', '아이디/비밀번호를 확인해주세요.');
     }
 
     if (nextProps.userState === 'SET_USER') {
@@ -74,7 +64,7 @@ class Page extends Component {
   onPasswordBlur = () => {};
 
   onFacebook = () => {
-    Alert.alert('개발중', '현재개발중입니다\n' + this.props.test.uid+ '\n'+this.props.uid+ '\n'+this.props.testData);
+    this.props.loginFacebookUser();
   };
 
   onLogin = () => this.setState({ isEntered: false });
@@ -86,15 +76,47 @@ class Page extends Component {
     this.props.loginEmailUser(email, password); // ! > LOGIN_USER
   };
 
-  onSendPassword = () => Alert.alert('개발중', '현재개발중입니다');
+  onChangeSendEmail = (text) => {
+    this.sendEmail = text;
+  };
 
-  onCloseModal = () => this.props.navigator.dismissModal();
+  onSendEmail = () => {
+    const mail = this.sendEmail;
+    const subject = '[나연시] 비밀번호 변경 이메일 입니다.';
+    const body = "나연시에서 보내는 비밀번호 변경 메일 입니다.%0D%0A아래의 링크를 클릭하여 비밀번호를 변경해주세요.%0D%0A<a href='http://www.nayeonsi.com/changePassword'>비밀번호 변경 링크</a>%0D%0A%0D%0A(지속적인 스팸메일이 오는 경우 고객센터에 문의해주세요.)";
+
+    const link = `mailto:${mail}?&subject=${subject}&body=${body}`;
+    Linking.openURL(link);
+
+    this.onCloseModal();
+    this.openPopup('이메일전송', '임시 비밀번호를 이용하여\n비밀번호를 변경하는 메일을 전송했습니다.');
+  };
+
+  onCloseModal = () => this.props.navigator.dismissModal({ animationType: 'fade' });
 
   onForgot = () => this.props.navigator.showModal({
     screen: 'Modal', 
+    animationType: 'fade',
     passProps: {
       navigator: this.props.navigator,
-      popup: <PasswordSendPopup onConfirm={this.onSendPassword} onCancel={this.onCloseModal} />,
+      popup: <PasswordSendPopup 
+        onChangeText={this.onChangeSendEmail}
+        onConfirm={this.onSendEmail} 
+        onCancel={this.onCloseModal} 
+      />,
+    },
+  });
+
+  openPopup = (title, text) => this.props.navigator.showModal({
+    screen: 'Modal', 
+    animationType: 'fade',
+    passProps: {
+      popup: <BasicPopup 
+        title={title}
+        text={text}
+        buttonText="확인"
+        onPress={this.onCloseModal}
+      />,
     },
   });
 
@@ -147,6 +169,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  loginFacebookUser: () => dispatch(loginFacebookUser()),
   loginEmailUser: (email, password) => dispatch(loginEmailUser(email, password)),
   getUser: uid => dispatch(getUser(uid)),
   fetchTest: () => dispatch(fetchTest()),

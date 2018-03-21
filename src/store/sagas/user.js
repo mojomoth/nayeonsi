@@ -41,20 +41,24 @@ function* setPoint() {
   yield put({ type: 'FINISH_POINT' });
 }
 
-function* getCosts(action) {
-  const { data } = action.payload;
-  
-  yield put({ type: 'SET_COST', payload: data });
-}
-
-function* setCosts() {
-  yield put({ type: 'FINISH_COST' });
-}
-
 function* requestChargePoint(data) {
   const { key, point, action } = data.payload;
   const response = axios.get(`${CHARGE_POINT}?key=${key}&point=${point}&action=${action}`);
   yield put({ type: 'RESPONSE_LIKE_YOU', payload: response.data });
+}
+
+function* getModifyUser(action) {
+  const { key } = action.payload;
+
+  let user = null;
+  const snap = yield database.ref('modify_users').child(key).once('value');
+  user = snap.val();
+  
+  yield put({ type: 'SET_MODIFY_USER', payload: user });
+}
+
+function* setModifyUser() {
+  yield put({ type: 'FINISH_MODIFY_USER' });
 }
 
 export default function* userSagas() {
@@ -62,8 +66,8 @@ export default function* userSagas() {
   yield takeEvery('SET_USER', setUser);
   yield takeEvery('GET_POINT', getPoint);
   yield takeEvery('SET_POINT', setPoint);
-  yield takeEvery('GET_COSTS', getCosts);
-  yield takeEvery('SET_COSTS', setCosts);
   yield takeEvery('REQUEST_CHARGE_POINT', requestChargePoint);
+  yield takeEvery('GET_MODIFY_USER', getModifyUser);
+  yield takeEvery('SET_MODIFY_USER', setModifyUser);
 }
 

@@ -9,7 +9,12 @@ import styles from './styles';
 
 export default class PasswordSendPopup extends BasicPopup {
   header = () => <Header text={this.props.title} subText={this.props.subTitle} />;
-  content = () => <Content data={this.props.data} />;
+  content = () => (
+    <Content 
+      data={this.props.data} 
+      onChangeText={this.props.onChangeText}
+    />
+  );
   footer = () => (
     <Footer  
       confirmButton={this.props.confirmButton}

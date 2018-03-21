@@ -6,14 +6,19 @@ import Label from 'atoms/Label';
 import styles from './styles';
 
 export default class LabelItem extends Component {
-  render = () => (
-    <Button style={styles.itemBox} onPress={this.props.onPress}>
-      <Label style={styles.itemBoxLabel} text={this.props.text} />
-      <View style={styles.lebelRight}>
-        {this.props.children}
-      </View>
-    </Button>     
-  );
+  render = () => {
+    const labelStyle = this.props.isFocus ? 
+      styles.itemBoxFocusLabel : styles.itemBoxLabel;
+
+    return (
+      <Button style={styles.itemBox} onPress={this.props.onPress}>
+        <Label style={labelStyle} text={this.props.text} />
+        <View style={styles.lebelRight}>
+          {this.props.children}
+        </View>
+      </Button>     
+    );
+  };
 }
 
 LabelItem.defaultProps = {

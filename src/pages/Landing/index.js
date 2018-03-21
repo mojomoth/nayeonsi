@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Landing, { ANIMATE_TIME } from 'screens/Landing';
 import { checkAuthStateChanged, loginUser } from 'store/actions/auth';
-import { getUser, getPoint, getCosts } from 'store/actions/user';
-import { getCards, getHistories, requestTodayCard } from 'store/actions/card';
+import { getCosts } from 'store/actions/app';
+import { getUser, getPoint, finishPoint } from 'store/actions/user';
+import { getCards, finishCards, getHistories, requestTodayCard } from 'store/actions/card';
 import { getMatches } from 'store/actions/chat';
 import firebase from 'lib/firebase';
 import { startMainScreen, startLandingScreen } from 'lib/navigator';
@@ -50,19 +51,22 @@ class Page extends Component {
           if (updateTime === null || currentTime >= updateTime + TIME_GAP) {
             this.props.requestTodayCard(key, targetGender);
           } else {
-            this.connect(key);
+            this.asyncDefault(key);
           }
         });
     } else if (nextProps.userState === 'FINISH_USER' && nextProps.cardState === 'RESPONSE_TODAY_CARD') {
       const { key } = this.props.user;
-      this.connect(key);
-    } else if (nextProps.userState === 'FINISH_POINT' && nextProps.cardState === 'FINISH_HISTORIES') {
+      this.asyncDefault(key);
+    } else if (nextProps.userState === 'FINISH_POINT' && nextProps.cardState === 'FINISH_CARDS') {
+      const { key } = this.props.user;
+      this.asyncData(key);
+
       startMainScreen();
       this.moveMain();
     }
   };
 
-  connect = async (key) => {
+  asyncDefault = async (key) => {
     await database.ref('costs').on('value', (snap) => {
       const data = snap.val();
       if (data !== null) {
@@ -74,6 +78,8 @@ class Page extends Component {
       const data = snap.val();
       if (data !== null) {
         this.props.getPoint(data);
+      } else {
+        this.props.finishPoint();
       }
     });
 
@@ -81,9 +87,13 @@ class Page extends Component {
       const data = snap.val();
       if (data !== null) {
         this.props.getCards(data);
+      } else {
+        this.props.finishCards();
       }
     });
+  };
 
+  asyncData = async (key) => {
     await database.ref('likes').child(key).on('value', (snap) => {
       const data = snap.val();
       if (data !== null) {
@@ -148,7 +158,9 @@ const mapDispatchToProps = dispatch => ({
   getUser: uid => dispatch(getUser(uid)),
   getCosts: data => dispatch(getCosts(data)),
   getPoint: data => dispatch(getPoint(data)),
+  finishPoint: data => dispatch(finishPoint(data)),
   getCards: data => dispatch(getCards(data)),
+  finishCards: data => dispatch(finishCards(data)),
   getHistories: data => dispatch(getHistories(data)),
   getMatches: data => dispatch(getMatches(data)),
   requestTodayCard: (key, targetGender) => dispatch(requestTodayCard(key, targetGender)),

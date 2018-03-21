@@ -6,14 +6,16 @@ import MailIcon from 'icons/Mail';
 import styles from './styles';
 
 export default class Content extends Component {
-  render() {
-    return (
-      <View style={styles.content}>
-        <InputWrapper style={styles.wrapper}>
-          <MailIcon />
-          <TextInput style={styles.textInput} placeholder="이메일" />
-        </InputWrapper>
-      </View>
-    );
-  }
+  render = () => (
+    <View style={styles.content}>
+      <InputWrapper style={styles.wrapper}>
+        <MailIcon />
+        <TextInput 
+          onChangeText={this.props.onChangeText}
+          style={styles.textInput} 
+          placeholder="이메일" 
+        />
+      </InputWrapper>
+    </View>
+  );
 }

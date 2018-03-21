@@ -11,7 +11,8 @@ export default class Notice extends Component {
       title={this.props.title}
       alarm={this.props.alarm}
       alarmCount={this.props.alarmCount}
-      navigator={this.props.navigator} 
+      navigator={this.props.navigator}   
+      isLoading={this.props.isLoading}
       menu={4}
       isUnderline
       isScroll={false}

@@ -40,7 +40,12 @@ class Page extends Component {
     startLandingScreen();
   };
 
-  onDrop = () => Alert.alert('설정', '준비중 입니다.');
+  onDrop = () => this.props.navigator.push({
+    screen: 'Withdraw', 
+    passProps: this.props.navigator,
+    overrideBackPress: true,
+  });
+
   onAgreement = () => Alert.alert('설정', '준비중 입니다.');
   onPersonal = () => Alert.alert('설정', '준비중 입니다.');
   onLocationAgreement = () => Alert.alert('설정', '준비중 입니다.');

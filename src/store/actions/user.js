@@ -5,6 +5,13 @@ export const getUser = uid => ({
   },
 });
 
+export const finishUser = data => ({
+  type: 'FINISH_USER',
+  payload: {
+    data,
+  },
+});
+
 export const getTargetUser = uid => ({
   type: 'GET_TARGET_USER',
   payload: {
@@ -26,16 +33,16 @@ export const getPoint = data => ({
   },
 });
 
-export const getCosts = data => ({
-  type: 'GET_COSTS',
-  payload: {
-    data,
-  },
-});
-
 export const setPoint = data => ({
   type: 'SET_POINT',
   payload: data.point,
+});
+
+export const finishPoint = data => ({
+  type: 'FINISH_POINT',
+  payload: {
+    data,
+  },
 });
 
 export const requestChargePoint = (key, point, action) => ({
@@ -44,5 +51,12 @@ export const requestChargePoint = (key, point, action) => ({
     key,
     point,
     action,
+  },
+});
+
+export const getModifyUser = key => ({
+  type: 'GET_MODIFY_USER',
+  payload: {
+    key,
   },
 });

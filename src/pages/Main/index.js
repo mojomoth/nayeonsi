@@ -26,6 +26,7 @@ class Page extends Component {
 
       this.props.navigator.showModal({
         screen: 'Modal', 
+        animationType: 'fade',
         passProps: {
           popup: <TypeSearchPopup 
             onPress={this.openUsePoint}
@@ -72,7 +73,7 @@ class Page extends Component {
     overrideBackPress: true,
   });
   
-  onCloseModal = () => this.props.navigator.dismissModal();
+  onCloseModal = () => this.props.navigator.dismissModal({ animationType: 'fade' });
 
   onMoveShop = () => {
     this.onCloseModal();
@@ -89,6 +90,7 @@ class Page extends Component {
 
   openPointUsePopup = data => this.props.navigator.showModal({
     screen: 'Modal', 
+    animationType: 'fade',
     passProps: {
       popup: <PointUsePopup 
         point={this.props.point}
@@ -101,6 +103,7 @@ class Page extends Component {
   
   openNotEnoughPointPopup = () => this.props.navigator.showModal({
     screen: 'Modal', 
+    animationType: 'fade',
     passProps: {
       popup: <BasicPopup 
         title="포인트가 부족합니다."

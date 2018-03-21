@@ -61,12 +61,13 @@ class Page extends Component {
     this.onShop();
   };
 
-  onCloseModal = () => this.props.navigator.dismissModal();
+  onCloseModal = () => this.props.navigator.dismissModal({ animationType: 'fade' });
 
   calculateCost = cost => (cost * this.state.count);
 
   openPointUsePopup = (usePoint, onConfirm) => this.props.navigator.showModal({
     screen: 'Modal', 
+    animationType: 'fade',
     passProps: {
       popup: <PointUsePopup 
         point={this.props.point}
@@ -79,6 +80,7 @@ class Page extends Component {
   
   openNotEnoughPointPopup = () => this.props.navigator.showModal({
     screen: 'Modal', 
+    animationType: 'fade',
     passProps: {
       popup: <BasicPopup 
         title="포인트가 부족합니다."

@@ -24,6 +24,9 @@ export default class MakeAlbum extends MakeProfile {
       picture5={this.props.picture5}
       onPress5={this.props.onPress5}
       onDelete5={this.props.onDelete5}
+      picture6={this.props.picture6}
+      onPress6={this.props.onPress6}
+      onDelete6={this.props.onDelete6}
     />
   );
 }

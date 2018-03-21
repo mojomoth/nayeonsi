@@ -14,9 +14,10 @@ export default class Widthdraw extends Component {
   render = () => (
     <MainContainer 
       title={this.props.title}
-      alarm={''}
+      alarm=""
       alarmCount={0}
-      navigator={this.props.navigator} 
+      navigator={this.props.navigator}  
+      isLoading={this.props.isLoading}
       menu={4}
       isUnderline
       isNavigation={false}

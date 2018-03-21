@@ -1,5 +1,6 @@
 const DEFAULT_STATE = {
   user: null,
+  modifyUser: null,
   target: null,
   state: null,
   isProgress: false,
@@ -31,6 +32,28 @@ export default (state = DEFAULT_STATE, action) => {
         state: action.type,
         isProgress: false,
       };
+    
+    case 'GET_MODIFY_USER':
+      return {
+        ...state,
+        state: action.type,
+        isProgress: true,
+      };
+
+    case 'SET_MODIFY_USER':
+      return {
+        ...state,
+        modifyUser: action.payload,
+        state: action.type,
+        isProgress: false,
+      };
+
+    case 'FINISH_MODIFY_USER':
+      return {
+        ...state,
+        state: action.type,
+        isProgress: false,
+      };
 
     case 'GET_POINT':
       return {
@@ -40,7 +63,6 @@ export default (state = DEFAULT_STATE, action) => {
       };
 
     case 'SET_POINT':
-    console.log(action.payload);
       return {
         ...state,
         point: action.payload,
@@ -96,21 +118,6 @@ export default (state = DEFAULT_STATE, action) => {
       return {
         ...state,
         state: action.type,
-      };
-
-    case 'GET_COST':
-      return {
-        ...state,
-        state: action.type,
-        isProgress: true,
-      };
-
-    case 'SET_COST':
-      return {
-        ...state,
-        costs: action.payload,
-        state: action.type,
-        isProgress: false,
       };
 
     default:
