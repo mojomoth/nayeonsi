@@ -5,6 +5,7 @@ import com.facebook.react.ReactPackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import com.evollu.react.fcm.FIRMessagingPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +20,8 @@ public class MainApplication extends NavigationApplication {
   public List<ReactPackage> createAdditionalReactPackages() {
     return Arrays.<ReactPackage>asList(
       new RNFetchBlobPackage(),
-      new PickerPackage()
+      new PickerPackage(),
+      new FIRMessagingPackage()
     );
   }
 

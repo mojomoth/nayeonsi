@@ -8,6 +8,7 @@ import { getCards, finishCards, getHistories, requestTodayCard } from 'store/act
 import { getMatches } from 'store/actions/chat';
 import firebase from 'lib/firebase';
 import { startMainScreen, startLandingScreen } from 'lib/navigator';
+import { subscribe, registerListener } from 'lib/fcm';
 
 const TIME_GAP = 1000 * 60 * 60 * 4;
 const database = firebase.database();
@@ -129,6 +130,8 @@ class Page extends Component {
       if (user) {
         this.props.loginUser(user);
         this.props.getUser(user.uid);
+        subscribe(user.uid);
+        registerListener();
       } else {
         this.moveLogin();
       }

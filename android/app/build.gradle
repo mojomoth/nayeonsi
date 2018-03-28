@@ -148,6 +148,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fcm')
+    compile 'com.google.firebase:firebase-core:11.8.1' //this decides your firebase SDK version
+    compile 'com.google.firebase:firebase-messaging:11.8.1'
     compile project(':react-native-image-crop-picker')
     compile project(':react-native-fetch-blob')
     compile project(':react-native-config')
@@ -163,3 +166,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'

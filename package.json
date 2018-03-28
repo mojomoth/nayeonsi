@@ -26,6 +26,7 @@
     "react": "16.2.0",
     "react-native": "0.51",
     "react-native-config": "^0.11.5",
+    "react-native-fcm": "^14.1.2",
     "react-native-fetch-blob": "^0.10.8",
     "react-native-image-crop-picker": "^0.19.3",
     "react-native-navigation": "^1.1.349",

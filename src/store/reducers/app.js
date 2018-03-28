@@ -4,6 +4,15 @@ const DEFAULT_STATE = {
   costs: [],
   notice: [],
   event: [],
+  isGPS: false,
+  isAlarm: false,
+  isMeet: false,
+  isNoti: false,
+  isTodayNoti: false,
+  isLikeNoti: false,
+  isAppealNoti: false,
+  isMatchNoti: false,
+  isMessageNoti: false,
 };
 
 export default (state = DEFAULT_STATE, action) => {

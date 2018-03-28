@@ -6,6 +6,7 @@ import BasicPopup from 'popups/BasicPopup';
 import PasswordChangePopup from 'popups/PasswordChangePopup';
 import { logoutUser, changePassword, initializeAuth } from 'store/actions/auth';
 import { startLandingScreen } from 'lib/navigator';
+import { unsubscribe } from 'lib/fcm';
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -104,6 +105,7 @@ class Page extends Component {
 
   onLogout = () => {
     this.props.logoutUser();
+    unsubscribe(this.props.uid);
     startLandingScreen();
   };
 
@@ -172,6 +174,7 @@ class Page extends Component {
 const mapStateToProps = state => ({
   point: state.user.point,
   user: state.user.user,
+  uid: state.auth.uid,
   authState: state.auth.state,
   isProgress: state.auth.isProgress,
 });
