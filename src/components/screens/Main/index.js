@@ -45,6 +45,7 @@ export default class Main extends Component {
         point={this.props.point}
         alarmCount={this.props.alarmCount}
         onAlarm={this.props.onAlarm}
+        onCloseAlarm={this.props.onCloseAlarm}
         onPoint={this.props.onPoint}
         isUnderline={false}
         navigator={this.props.navigator} 

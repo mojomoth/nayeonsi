@@ -31,7 +31,7 @@ export default class MainContainer extends Component {
         />
       }
       { this.props.alarm !== null && this.props.alarm !== '' ?
-        <Alarm text={this.props.alarm} />
+        <Alarm text={this.props.alarm} onPress={this.props.onCloseAlarm} />
         : null
       }
       { this.props.isScroll ? 

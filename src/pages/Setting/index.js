@@ -5,8 +5,21 @@ import Setting from 'screens/Setting';
 import BasicPopup from 'popups/BasicPopup';
 import PasswordChangePopup from 'popups/PasswordChangePopup';
 import { logoutUser, changePassword, initializeAuth } from 'store/actions/auth';
+import { fixSetting } from 'store/actions/app';
 import { startLandingScreen } from 'lib/navigator';
-import { unsubscribe } from 'lib/fcm';
+import { 
+  subscribeToday,
+  subscribeLike,
+  subscribeAppeal,
+  subscribeMatch,
+  subscribeMessage,
+  unsubscribeToday,
+  unsubscribeLike,
+  unsubscribeAppeal,
+  unsubscribeMatch,
+  unsubscribeMessage,
+  unsubscribe,
+} from 'lib/fcm';
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -18,13 +31,13 @@ class Page extends Component {
   state = {
     isGPS: true,
     isAlarm: true,
-    isMeet: true,
-    isNoti: true,
-    isToday: true,
-    isLike: true,
-    isAppeal: true,
-    isConnect: true,
-    isChat: true,
+    isMeet: this.props.isMeet,
+    isNoti: this.props.isNoti,
+    isToday: this.props.isTodayNoti,
+    isLike: this.props.isLikeNoti,
+    isAppeal: this.props.isAppealNoti,
+    isConnect: this.props.isMatchNoti,
+    isChat: this.props.isMessageNoti,
   };
 
   componentWillReceiveProps = (nextProps) => { 
@@ -37,18 +50,73 @@ class Page extends Component {
     }
   };
 
-  onBack = () => this.props.navigator.pop();
+  onBack = () => {
+    this.props.fixSetting(
+      this.props.user.key,
+      {
+        isMeet: this.state.isMeet,
+        isNoti: this.state.isNoti,
+        isTodayNoti: this.state.isToday,
+        isLikeNoti: this.state.isLike,
+        isAppealNoti: this.state.isAppeal,
+        isMatchNoti: this.state.isConnect,
+        isMessageNoti: this.state.isChat,
+      },
+    );
+
+    this.props.navigator.pop();
+  };
 
   onGPS = () => this.setState({ isGPS: !this.state.isGPS });
   onAlarm = () => this.setState({ isAlarm: !this.state.isAlarm });
 
-  onMeet = () => this.setState({ isMeet: !this.state.isMeet });
-  onNoti = () => this.setState({ isNoti: !this.state.isNoti });
-  onToday = () => this.setState({ isToday: !this.state.isToday });
-  onLike = () => this.setState({ isLike: !this.state.isLike });
-  onAppeal = () => this.setState({ isAppeal: !this.state.isAppeal });
-  onConnect = () => this.setState({ isConnect: !this.state.isConnect });
-  onChat = () => this.setState({ isChat: !this.state.isChat });
+  onMeet = () => {
+    this.setState({ isMeet: !this.state.isMeet });
+  };
+
+  onNoti = () => {
+    this.setState({ isNoti: !this.state.isNoti });
+  };
+
+  onToday = () => {
+    this.setState({ isToday: !this.state.isToday });
+
+    const { key } = this.props.user;
+    if (!this.state.isToday) subscribeToday(key);
+    else unsubscribeToday(key);
+  };
+
+  onLike = () => {
+    this.setState({ isLike: !this.state.isLike });
+
+    const { key } = this.props.user;
+    if (!this.state.isLike) subscribeLike(key);
+    else unsubscribeLike(key);
+  };
+
+  onAppeal = () => {
+    this.setState({ isAppeal: !this.state.isAppeal });
+
+    const { key } = this.props.user;
+    if (!this.state.isAppeal) subscribeAppeal(key);
+    else unsubscribeAppeal(key);
+  };
+
+  onConnect = () => {
+    this.setState({ isConnect: !this.state.isConnect });
+
+    const { key } = this.props.user;
+    if (!this.state.isConnect) subscribeMatch(key);
+    else unsubscribeMatch(key);
+  };
+
+  onChat = () => {
+    this.setState({ isChat: !this.state.isChat });
+
+    const { key } = this.props.user;
+    if (!this.state.isChat) subscribeMessage(key);
+    else unsubscribeMessage(key);
+  };
 
   onCloseModal = () => {
     this.props.navigator.dismissModal({ animationType: 'fade' });
@@ -105,7 +173,15 @@ class Page extends Component {
 
   onLogout = () => {
     this.props.logoutUser();
-    unsubscribe(this.props.uid);
+    const { key } = this.props.user;
+    
+    unsubscribe(key);
+    unsubscribeToday(key);
+    unsubscribeLike(key);
+    unsubscribeAppeal(key);
+    unsubscribeMatch(key);
+    unsubscribeMessage(key);
+
     startLandingScreen();
   };
 
@@ -177,11 +253,19 @@ const mapStateToProps = state => ({
   uid: state.auth.uid,
   authState: state.auth.state,
   isProgress: state.auth.isProgress,
+  isMeet: state.app.isMeet,
+  isNoti: state.app.isNoti,
+  isTodayNoti: state.app.isTodayNoti,
+  isLikeNoti: state.app.isLikeNoti,
+  isAppealNoti: state.app.isAppealNoti,
+  isMatchNoti: state.app.isMatchNoti,
+  isMessageNoti: state.app.isMessageNoti,
 });
 
 const mapDispatchToProps = dispatch => ({
   initializeAuth: () => dispatch(initializeAuth()),
   logoutUser: () => dispatch(logoutUser()),
+  fixSetting: (key, data) => dispatch(fixSetting(key, data)),
   changePassword: (password, newPassword) => dispatch(changePassword(password, newPassword)),
 });
 

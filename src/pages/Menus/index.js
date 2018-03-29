@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Menus from 'screens/Menus';
 import { logoutUser } from 'store/actions/auth';
 import { getModifyUser } from 'store/actions/user';
+import { getSetting } from 'store/actions/app';
 
 class Page extends Component {
   static navigatorStyle = {
@@ -14,6 +15,12 @@ class Page extends Component {
     if (nextProps.userState === 'FINISH_MODIFY_USER') {
       this.props.navigator.push({
         screen: 'ProfileSetting', 
+        passProps: this.props.navigator,
+        overrideBackPress: true,
+      });
+    } else if (this.props.isSetting === false && nextProps.appState === 'FINISH_SETTING') {
+      this.props.navigator.push({
+        screen: 'Setting', 
         passProps: this.props.navigator,
         overrideBackPress: true,
       });
@@ -30,11 +37,7 @@ class Page extends Component {
     overrideBackPress: true,
   });
   
-  onSetting = () => this.props.navigator.push({
-    screen: 'Setting', 
-    passProps: this.props.navigator,
-    overrideBackPress: true,
-  });
+  onSetting = () => this.props.getSetting(this.props.user.key);
   
   onNotice = () => this.props.navigator.push({
     screen: 'Notice', 
@@ -80,12 +83,15 @@ const mapStateToProps = state => ({
   point: state.user.point,
   user: state.user.user,
   userState: state.user.state,
-  isProgress: state.user.isProgress,
+  appState: state.app.state,
+  isProgress: state.user.isProgress || state.app.isProgress,
+  isSetting: state.app.isSetting,
 });
 
 const mapDispatchToProps = dispatch => ({
   logoutUser: () => dispatch(logoutUser()),
   getModifyUser: key => dispatch(getModifyUser(key)),
+  getSetting: key => dispatch(getSetting(key)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

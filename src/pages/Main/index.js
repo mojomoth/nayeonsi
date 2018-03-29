@@ -5,6 +5,7 @@ import TypeSearchPopup from 'popups/TypeSearchPopup';
 import PointUsePopup from 'popups/PointUsePopup';
 import BasicPopup from 'popups/BasicPopup';
 import { setPoint } from 'store/actions/user';
+import { setAlarm } from 'store/actions/app';
 import { getAttractions, requestTypeCard } from 'store/actions/card';
 
 class Page extends Component {
@@ -18,7 +19,6 @@ class Page extends Component {
 
   componentWillReceiveProps = (nextProps) => { 
     if (nextProps.cardState === 'SET_ATTRACTIONS') {
-      
       const data = [];
       for (const attraction of nextProps.attractions) {
         data.push({ key: attraction, selected: false });
@@ -80,6 +80,8 @@ class Page extends Component {
     this.onShop();
   };
 
+  onCloseAlarm = () => this.props.setAlarm('');
+
   openUsePoint = (data) => {
     // close
     this.onCloseModal();
@@ -120,9 +122,11 @@ class Page extends Component {
       data={this.props.cards}
       point={this.props.point}
       alarm={this.props.alarm}
+      alarmCount={10}
       onPress={this.onPress}
       onPlus={this.onPlus}
       onAlarm={this.onAlarm}
+      onCloseAlarm={this.onCloseAlarm}
       onPoint={this.onShop}
       isLoading={this.props.isProgress || this.state.isLoading}
     />
@@ -137,12 +141,14 @@ const mapStateToProps = state => ({
   attractions: state.card.attractions,
   isProgress: state.card.isProgress,
   cardState: state.card.state,
+  alarm: state.app.alarm,
 });
 
 const mapDispatchToProps = dispatch => ({
   setPoint: data => dispatch(setPoint(data)),
   getAttractions: () => dispatch(getAttractions()),
   requestTypeCard: (key, type, targetGender) => dispatch(requestTypeCard(key, type, targetGender)),
+  setAlarm: text => dispatch(setAlarm(text)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Page);

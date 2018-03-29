@@ -45,6 +45,41 @@ function* setEvent() {
   yield put({ type: 'FINISH_EVENT' });
 }
 
+function* getSetting(action) {
+  const { key } = action.payload;
+
+  const snap = yield database.ref('/settings').child(key).once('value');
+  let setting = snap.val();
+
+  if (setting === null || setting === undefined) {
+    setting = {
+      isMeet: true,
+      isNoti: true,
+      isTodayNoti: true,
+      isLikeNoti: true,
+      isAppealNoti: true,
+      isMatchNoti: true,
+      isMessageNoti: true,
+    };
+
+    yield database.ref('/settings').child(key).set(setting);
+  }
+  
+  yield put({ type: 'SET_SETTING', payload: setting });
+}
+
+function* fixSetting(action) {
+  const { key, data } = action.payload;
+  
+  yield database.ref('/settings').child(key).set(data); 
+
+  yield put({ type: 'SET_SETTING', payload: data });
+}
+
+function* setSetting() {
+  yield put({ type: 'FINISH_SETTING' });
+}
+
 export default function* userSagas() {
   yield takeEvery('GET_COSTS', getCosts);
   yield takeEvery('SET_COSTS', setCosts);
@@ -52,4 +87,7 @@ export default function* userSagas() {
   yield takeEvery('SET_NOTICE', setNotice);
   yield takeEvery('GET_EVENT', getEvent);
   yield takeEvery('SET_EVENT', setEvent);
+  yield takeEvery('GET_SETTING', getSetting);
+  yield takeEvery('SET_SETTING', setSetting);
+  yield takeEvery('FIX_SETTING', fixSetting);
 }

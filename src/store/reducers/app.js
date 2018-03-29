@@ -1,11 +1,10 @@
 const DEFAULT_STATE = {
   state: null,
   isProgress: false,
+  isSetting: false,
   costs: [],
   notice: [],
   event: [],
-  isGPS: false,
-  isAlarm: false,
   isMeet: false,
   isNoti: false,
   isTodayNoti: false,
@@ -13,6 +12,7 @@ const DEFAULT_STATE = {
   isAppealNoti: false,
   isMatchNoti: false,
   isMessageNoti: false,
+  alarm: '',
 };
 
 export default (state = DEFAULT_STATE, action) => {
@@ -81,6 +81,50 @@ export default (state = DEFAULT_STATE, action) => {
         ...state,
         state: action.type,
         isProgress: false,
+      };
+
+    case 'GET_SETTING':
+      return {
+        ...state,
+        state: action.type,
+        isProgress: true,
+        isSetting: false,
+      };
+    
+    case 'FIX_SETTING':
+      return {
+        ...state,
+        state: action.type,
+        isProgress: true,
+        isSetting: true,
+      };
+
+    case 'SET_SETTING':
+      return {
+        ...state,
+        state: action.type,
+        isProgress: false,
+        isMeet: action.payload.isMeet,
+        isNoti: action.payload.isNoti,
+        isTodayNoti: action.payload.isTodayNoti,
+        isLikeNoti: action.payload.isLikeNoti,
+        isAppealNoti: action.payload.isAppealNoti,
+        isMatchNoti: action.payload.isMatchNoti,
+        isMessageNoti: action.payload.isMessageNoti,
+      };
+
+    case 'FINISH_SETTING':
+      return {
+        ...state,
+        state: action.type,
+        isProgress: false,
+      };
+
+    case 'SET_ALARM':
+      return {
+        ...state,
+        state: action.type,
+        alarm: action.payload.text,
       };
 
     default:
